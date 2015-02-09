@@ -1,0 +1,20 @@
+<template name="main">
+    {{> dashboard}}
+    
+    {{#contentFor "menu"}}
+        {{> menu}}
+    {{/contentFor}}
+    
+</template>
+
+
+<template name="refresh">
+    <div id="pullrefresh">
+        <div class="message">
+            <div id="pullrefresh-icon" class="icon arrow arrow-down"></div>
+            <span></span>
+        </div>
+    </div>
+</template>
+
+

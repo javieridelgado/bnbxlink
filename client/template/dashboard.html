@@ -1,0 +1,20 @@
+<template name="dashboard">
+    <div id="container" class="panel panel-default bnbdashboard">
+        <div class="bnbpanel">
+            <!-- for each panel, we should display them */-->
+            <ul class="list-group bnbdashboard">
+                <li class="list-group-item">
+                    <h4>Customers by City</h4> 
+                    {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
+                </li>
+
+                {{#each panels}}
+                <li class="list-group-item">
+                    <h4>{{name}}</h4> 
+                    {{{cachedHTML}}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</template>

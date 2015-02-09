@@ -1,0 +1,21 @@
+<template name="login">
+    <form class="form-signin">
+        <h2><img alt="Brand" src="http://www.bnetbuilders.com/images/logo_klein.png"></h2>
+        {{> loginMessages}}
+        <label for="inputUser" class="sr-only">Email address</label>
+        <input type="text" id="inputUser" class="form-control" placeholder="User id" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</template>
+
+<template name="loginMessages">
+    {{#if errorMessage}}
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        {{errorMessage}}
+    </div>
+    {{/if}}
+</template>

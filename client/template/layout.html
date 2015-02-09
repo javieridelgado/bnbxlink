@@ -1,0 +1,5 @@
+<template name="layout">
+    <div class="container-fluid">
+        {{#if currentUser}} {{> yield "menu"}} {{/if}} {{> yield}}
+    </div>
+</template>

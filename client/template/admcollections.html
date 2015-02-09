@@ -45,11 +45,20 @@
 </template>
 
 <template name="collUpdate">
-    {{#contentFor "menu"}} {{> menudetail}} {{/contentFor}} {{#autoForm collection="Collections" doc=this id="admCollectionUpd" type="update"}}
-    <fieldset>
-        <legend>Update Collection</legend>
-        {{> afQuickField name='name'}} {{> afQuickField name='description' rows=3}} {{> afQuickField name='cachedHTML' rows=3}} {{> afQuickField name='detailHTML' rows=3}}
-    </fieldset>
-    <button type="submit" class="btn btn-primary">Update</button>
-    {{/autoForm}}
+    {{#contentFor "menu"}} {{> menudetail}} {{/contentFor}}
+    <div class="container">
+        {{#autoForm collection="Collections" doc=this id="admCollectionUpd" type="update"}}
+        <fieldset>
+            {{> afQuickField name='name'}} 
+            {{> afQuickField name='description' rows=3}}
+            {{> afQuickField name='sourceType' type='select' options='allowed'}}
+            {{> afQuickField name='expirationTime'}} 
+            {{> afQuickField name='lastRefreshDttm'}} 
+            {{> afQuickField name='availableOffline'}} 
+            {{> afQuickField name='readOnly'}} 
+            {{> afQuickField name='socialEnabled'}} 
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Update</button>
+        {{/autoForm}}
+    </div>
 </template>

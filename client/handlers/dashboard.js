@@ -38,13 +38,18 @@ if (Meteor.isClient) {
                 chart: {
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
-                    plotShadow: false
+                    plotShadow: false,
+                    margin: [0, 0, 0, 0],
+                    spacingTop: 0,
+                    spacingBottom: 0,
+                    spacingLeft: 0,
+                    spacingRight: 0
                 },
                 credits: {
                     enabled: false
                 },
                 legend: {
-                    enabled: true,
+                    enabled: false,
                     layout: 'vertical',
                     align: 'center',
                     useHTML: true,

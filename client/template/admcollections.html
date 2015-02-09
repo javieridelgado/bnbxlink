@@ -49,14 +49,17 @@
     <div class="container">
         {{#autoForm collection="Collections" doc=this id="admCollectionUpd" type="update"}}
         <fieldset>
-            {{> afQuickField name='name'}} 
-            {{> afQuickField name='description' rows=3}}
-            {{> afQuickField name='sourceType' type='select' options='allowed'}}
-            {{> afQuickField name='expirationTime'}} 
-            {{> afQuickField name='lastRefreshDttm'}} 
-            {{> afQuickField name='availableOffline'}} 
-            {{> afQuickField name='readOnly'}} 
-            {{> afQuickField name='socialEnabled'}} 
+            {{> afQuickField name='name'}} {{> afQuickField name='description' rows=3}} {{> afQuickField name='sourceType' type='select' options='allowed'}} {{> afQuickField name='expirationTime'}} {{> afQuickField name='lastRefreshDttm'}} {{> afQuickField name='availableOffline'}} {{> afQuickField name='readOnly'}} {{> afQuickField name='socialEnabled'}}
+        </fieldset>
+        <fieldset>
+            <div class='form-group'>
+                <label for="inputExcel">Excel Input</label>
+                <textarea rows='3' class='form-control' id='inputExcel'></textarea>
+            </div>
+            <div class='form-group'>
+                <label for="outputJSON">JSON Output</label>
+                <textarea rows='3' class='form-control' id='outputJSON'></textarea>
+            </div>
         </fieldset>
         <button type="submit" class="btn btn-primary">Update</button>
         {{/autoForm}}

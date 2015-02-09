@@ -18,6 +18,28 @@ Meteor.methods({
         return "";
     },
 
+    populateCollection: function (coll, data, flush) {
+        // First check if the collection is already declared. If not, create it.
+        var myCollection;
+        
+        BNBLink.log("entered populateCollection:" + coll)
+        if (!BNBLink[coll]) {
+            myCollection = new Meteor.Collection(coll);
+            BNBLink[coll] = myCollection;
+        }
+
+        // If flush, then delete the information
+        if (flush) 
+            myCollection.remove({});
+        
+        // Once the collection is created, fill in the date.
+        data.forEach(function(item) {
+            myCollection.insert(item);
+        });
+        
+        return "";
+    },
+
     checkTwitter: function () {
         var dbColl;
         var listInfo, listInfoJSON, detailInfo, detailInfoJSON;

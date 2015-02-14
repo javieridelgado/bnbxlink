@@ -64,6 +64,109 @@ Meteor.methods({
         return "";
     },
 
+    psGetQueries: function (url, user, password, prefix) {
+        var svcResult, svcObject, params, result;
+        var parseStringSync;
+
+        try {
+            if (prefix)
+                params = "ListQuery.v1/public/listquery?search=" + prefix + "&maxrows=1000&isconnectedquery=N";
+            else
+                params = "ListQuery.v1/public/listquery?search=&maxrows=1000&isconnectedquery=N";
+
+            // Call PeopleSoft REST web service
+            svcResult = HTTP.call("GET", url + params, {
+                auth: user + ":" + password
+            });
+
+            // Convert PeopleSoft's XML response to JSON
+            parseStringSync = Meteor.wrapAsync(xml2js.parseString, xml2js);
+
+            // We use our own wrapped parseStringSync because the xml2js.parseStringSync
+            // function does not seem to work when called twice
+            svcObject = parseStringSync(svcResult.content, {
+                attrkey: "a",
+                explicitArray: false
+            });
+            BNBLink.debug = svcObject;
+
+            // Retrieve queries array
+            result = svcObject.QAS_LISTQUERY_RESP_MSG.QAS_LISTQUERY_RESP.map(function (item) {
+                console.log(JSON.stringify(item.PTQASWRK));
+                return {
+                    label: item.PTQASWRK.QueryName + "-" + item.PTQASWRK.Description,
+                    value: item.PTQASWRK.QueryName
+                }
+            });
+
+            //BNBLink.debug = result;
+            //return JSON.stringify(result);
+            return result;
+        } catch (e) {
+            BNBLink.debug = e;
+            return "error";
+        }
+
+        return "";
+    },
+
+    psRunQuery: function (url, user, password, query) {
+        var svcResult, svcObject, params, result;
+        var parseStringSync, columns, root;
+
+        try {
+            // http://192.168.59.103:8000/PSIGW/RESTListeningConnector/PSFT_HR/ExecuteQuery.v1/public/QAS_TST_MSGSETS/WEBROWSET/NONFILE?isconnectedquery=N&maxrows=100
+            params = "ExecuteQuery.v1/public/" + query + "/WEBROWSET/NONFILE?isconnectedquery=N&maxrows=100";
+            console.log(url + params);
+            // Call PeopleSoft REST web service
+            svcResult = HTTP.call("GET", url + params, {
+                auth: user + ":" + password
+            });
+
+            // Convert PeopleSoft's XML response to JSON
+            parseStringSync = Meteor.wrapAsync(xml2js.parseString, xml2js);
+            // We use our own wrapped parseStringSync because the xml2js.parseStringSync
+            // function does not seem to work when called twice
+            svcObject = parseStringSync(svcResult.content, {
+                attrkey: "a",
+                explicitArray: false
+            });
+            root = svcObject.QAS_GETQUERYRESULTS_RESP_MSG.webRowSet;
+            columns = root.metadata["column-definition"];
+            result = root.data.currentRow.map(function (item) {
+                var rowData = {};
+                var i;
+
+                for (i = 0; i < item.columnValue.length; i++) {
+                    rowData[columns[i]["column-name"]] = item.columnValue[i];
+                };
+
+                return rowData;
+            });
+            
+            BNBLink.debug2 = result;
+            BNBLink.debug = svcObject.QAS_GETQUERYRESULTS_RESP_MSG.webRowSet;
+
+            // Retrieve queries array
+            /*result = svcObject.QAS_LISTQUERY_RESP_MSG.QAS_LISTQUERY_RESP.map(function (item) {
+                console.log(JSON.stringify(item.PTQASWRK));
+                return {
+                    label: item.PTQASWRK.QueryName + "-" + item.PTQASWRK.Description,
+                    value: item.PTQASWRK.QueryName
+                }
+            });*/
+
+            //BNBLink.debug = result;
+            return JSON.stringify(result);
+            //return result;
+        } catch (e) {
+            BNBLink.debug = e;
+            return "error";
+        }
+
+        return "";
+    },
+
     checkTwitter: function () {
         var dbColl;
         var listInfo, listInfoJSON, detailInfo, detailInfoJSON;

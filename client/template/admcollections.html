@@ -78,12 +78,12 @@
             <textarea rows='3' class='form-control' id='outputJSONPeopleSoft'></textarea>
         </fieldset>
         <fieldset id='sourcePeopleSoftQuery'>
-            {{> afQuickField name='psURL'}} 
-            {{> afQuickField name='psUser'}} 
-            {{> afQuickField name='psPassword' type='password'}} 
+            {{> afQuickField name='psURL' id='psURLQuery'}} 
+            {{> afQuickField name='psUser' id='psUserQuery'}} 
+            {{> afQuickField name='psPassword' type='password' id='psPasswordQuery'}} 
             <button type="button" class="btn btn-warning" id="psGetQueries">Get Queries</button>
-            {{> afQuickField name='psQuery' type='select'}} 
-            <textarea rows='3' class='form-control' id='outputJSONPeopleSoft'></textarea>
+            {{> afQuickField name='psQuery' options=psQueries id='psQuery'}} 
+            <textarea rows='3' class='form-control' id='outputJSONPeopleSoftQuery'></textarea>
         </fieldset>
         <button type="submit" class="btn btn-primary">Update</button>
         {{/autoForm}}

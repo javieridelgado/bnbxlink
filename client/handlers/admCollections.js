@@ -327,6 +327,7 @@ var CSVParser = {
 
 }
 
+var psQueriesVar;
 
 if (Meteor.isClient) {
     //Meteor.subscribe("panels");
@@ -375,6 +376,24 @@ if (Meteor.isClient) {
         $('fieldset[id^="source' + sourceType + '"]').show();
     };
 
+    Template.collUpdate.helpers({
+        psQueries: function () {
+            var result;
+
+            result = [{
+                label: "no queries loaded",
+                value: "null"
+            }];
+
+            if (!psQueriesVar)
+                psQueriesVar = new ReactiveVar(result);
+
+            result = psQueriesVar.get();
+
+            return result;
+        }
+    });
+
     Template.collUpdate.events({
 
         'change textarea[name="dataInput"]': function (event) {
@@ -402,9 +421,45 @@ if (Meteor.isClient) {
             $('fieldset[id^="source' + event.target.value.replace(/\s+/g, '') + '"]').show();
         },
 
+        'click #psGetQueries': function (event) {
+            var url, params, user, password;
+
+            url = $("#psURLQuery").val();
+            user = $("#psUserQuery").val();
+            password = $("#psPasswordQuery").val();
+
+            Meteor.call("psGetQueries", url, user, password, function (error, results) {
+                $('#outputJSONPeopleSoftQuery').val(JSON.stringify(results));
+
+                console.log("create reactive var");
+
+                if (!psQueriesVar)
+                    psQueriesVar = new ReactiveVar(results)
+                else
+                    psQueriesVar.set(results);
+
+                BNBLink.debug = psQueriesVar;
+                console.log("processing finished");
+            });
+        },
+
+        'change #psQuery': function (event) {
+            var url, params, user, password, query;
+
+            url = $("#psURLQuery").val();
+            user = $("#psUserQuery").val();
+            password = $("#psPasswordQuery").val();
+            query = $("#psQuery").val();
+            console.log("running query: " + query);
+
+            Meteor.call("psRunQuery", url, user, password, query, function (error, results) {
+                $('#outputJSONPeopleSoftQuery').val(results);
+            });
+        },
+
         'click #psTest': function (event) {
             var url, params, user, password;
-            
+
             url = $("input[name='psURL']").val();
             params = $("input[name='psParameters']").val();
             user = $("input[name='psUser']").val();

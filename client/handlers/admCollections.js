@@ -362,9 +362,22 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.collUpdate.rendered = function () {
+        var sourceType;
+        // Enable autosize for all text areas
+        $('textarea').autosize();
+
+        // Hide source specific fields
+        $('fieldset[id^="source"]').hide();
+
+        // Retrieve source
+        sourceType = $('select[name="sourceType"]').val().replace(/\s+/g, '');
+        $('fieldset[id^="source' + sourceType + '"]').show();
+    };
+
     Template.collUpdate.events({
 
-        'change #inputExcel': function (event) {
+        'change textarea[name="dataInput"]': function (event) {
             var parseOutput = CSVParser.parse(event.target.value, true, 'tab', true, false);
 
             var dataGrid = parseOutput.dataGrid;
@@ -376,13 +389,30 @@ if (Meteor.isClient) {
 
             event.preventDefault();
             BNBLink.debug = parseOutput;
-            $('#outputJSON').val(outputText);
+            $('#outputJSONExcel').val(outputText);
 
             Meteor.call("populateCollection", "test", JSON.parse(outputText), true, function (error, results) {
                 console.log(results); //results.data should be a JSON object
             });
 
-        }
+        },
 
+        'change select[name="sourceType"]': function (event) {
+            $('fieldset[id^="source"]').hide();
+            $('fieldset[id^="source' + event.target.value.replace(/\s+/g, '') + '"]').show();
+        },
+
+        'click #psTest': function (event) {
+            var url, params, user, password;
+            
+            url = $("input[name='psURL']").val();
+            params = $("input[name='psParameters']").val();
+            user = $("input[name='psUser']").val();
+            password = $("input[name='psPassword']").val();
+
+            Meteor.call("testCall", url, params, user, password, function (error, results) {
+                $('#outputJSONPeopleSoft').val(results);
+            });
+        }
     });
 }

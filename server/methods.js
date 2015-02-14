@@ -21,7 +21,7 @@ Meteor.methods({
     populateCollection: function (coll, data, flush) {
         // First check if the collection is already declared. If not, create it.
         var myCollection;
-        
+
         BNBLink.log("entered populateCollection:" + coll)
         if (!BNBLink[coll]) {
             myCollection = new Meteor.Collection(coll);
@@ -29,14 +29,38 @@ Meteor.methods({
         }
 
         // If flush, then delete the information
-        if (flush) 
+        if (flush)
             myCollection.remove({});
-        
+
         // Once the collection is created, fill in the date.
-        data.forEach(function(item) {
+        data.forEach(function (item) {
             myCollection.insert(item);
         });
-        
+
+        return "";
+    },
+
+    testCall: function (url, params, user, password) {
+        var svcResult, result;
+
+        try {
+            svcResult = HTTP.call("GET", url + params, {
+                auth: user + ":" + password
+            });
+            result = xml2js.parseStringSync(svcResult.content, {
+                attrkey: "a",
+                explicitArray: false
+            });
+
+            result = result.QAS_LISTQUERY_RESP_MSG.QAS_LISTQUERY_RESP;
+            BNBLink.debug = svcResult;
+            return JSON.stringify(result);
+            //return svcResult.content;
+        } catch (e) {
+            BNBLink.debug = e;
+            return "error";
+        }
+
         return "";
     },
 

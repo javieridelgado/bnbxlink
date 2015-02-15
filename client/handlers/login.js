@@ -14,7 +14,7 @@ if (Meteor.isClient) {
                 Session.set("login.error", "You must provide a password.");
             } else {
                 // TODO: we should invoke our own services
-                Meteor.loginWithPassword(
+                /*Meteor.loginWithPassword(
                     userID,
                     userPswd,
                     function (error) {
@@ -26,7 +26,11 @@ if (Meteor.isClient) {
                             Session.set("login.error", null);
                         }
                     }
-                );
+                );*/
+                /*Meteor.call("customLogin", userID, userPswd, function (error, results) {
+                    console.log(results); //results.data should be a JSON object
+                });*/
+                Meteor.loginCaller(userID, userPswd);
             }
         }
     });

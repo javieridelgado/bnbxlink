@@ -1,5 +1,22 @@
 // This module contains the server only methods
 Meteor.methods({
+    customLogin: function (userId, userPswd) {
+        Meteor.loginWithPassword(
+            userId,
+            userPswd,
+            function (error) {
+                if (error) {
+                    Session.set("login.error", "Wrong user name and/or password.");
+                } else  {
+                    // TODO record last login date
+                    Session.set("login.error", null);
+                }
+            }
+        );
+        
+        return "";
+    },
+
     declareAndPublishColl: function (coll) {
         // First check if the collection is already declared. If not, create it.
         BNBLink.log("entered declareAndPublish:" + coll)
@@ -143,7 +160,7 @@ Meteor.methods({
 
                 return rowData;
             });
-            
+
             BNBLink.debug2 = result;
             BNBLink.debug = svcObject.QAS_GETQUERYRESULTS_RESP_MSG.webRowSet;
 

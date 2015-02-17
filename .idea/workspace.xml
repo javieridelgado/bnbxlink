@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="feadc50a-aeb3-480c-9a2a-b15e8ff3985b" name="Default" comment=".">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/admin/admCollection_c.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/model/collections.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/init/common.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/model/panels.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/handlers/addpanel.js" afterPath="$PROJECT_DIR$/client/handlers/user/addpanel.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/handlers/admCollections.js" afterPath="$PROJECT_DIR$/client/handlers/admin/admCollections.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/handlers/admpanel.js" afterPath="$PROJECT_DIR$/client/handlers/admin/admpanel.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/handlers/dashboard.js" afterPath="$PROJECT_DIR$/client/handlers/user/dashboard.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/handlers/login.js" afterPath="$PROJECT_DIR$/client/handlers/common/login.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/handlers/menu.js" afterPath="$PROJECT_DIR$/client/handlers/common/menu.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/handlers/paneldetail.js" afterPath="$PROJECT_DIR$/client/handlers/user/paneldetail.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/addpanel.html" afterPath="$PROJECT_DIR$/client/template/user/addpanel.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/admcollections.html" afterPath="$PROJECT_DIR$/client/template/admin/admCollection_s.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/admpanel.html" afterPath="$PROJECT_DIR$/client/template/admin/admPanel_s.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/admpanelins.html" afterPath="$PROJECT_DIR$/client/template/admin/admPanel_c.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/dashboard.html" afterPath="$PROJECT_DIR$/client/template/user/dashboard.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/layout.html" afterPath="$PROJECT_DIR$/client/template/common/layout.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/loading.html" afterPath="$PROJECT_DIR$/client/template/common/loading.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/login.html" afterPath="$PROJECT_DIR$/client/template/common/login.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/main.html" afterPath="$PROJECT_DIR$/client/template/common/main.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/menu.html" afterPath="$PROJECT_DIR$/client/template/common/menu.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/paneldetail.html" afterPath="$PROJECT_DIR$/client/template/user/paneldetail.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/model/declare.js" afterPath="$PROJECT_DIR$/lib/model/declare.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/platforms" afterPath="$PROJECT_DIR$/.meteor/platforms" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bnblink.iws" />
     <ignored path=".idea/workspace.xml" />

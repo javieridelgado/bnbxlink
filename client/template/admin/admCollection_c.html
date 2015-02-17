@@ -1,0 +1,52 @@
+<template name="collInsert">
+    {{#contentFor "menu"}} {{> menudetail}} {{/contentFor}}
+    <div class="container">
+        {{> quickForm collection="Collections" id="admCollectionIns" type="insert"}}
+    </div>
+</template>
+
+<template name="collUpdate">
+    {{#contentFor "menu"}} {{> menudetail}} {{/contentFor}}
+    <div class="container">
+        {{#autoForm collection="Collections" doc=this id="admCollectionUpd" type="update"}}
+            <fieldset id='main'>
+                {{> afQuickField name='name' id='collName'}}
+                {{> afQuickField name='description' rows=3}}
+                {{> afQuickField name='expirationTime'}}
+                {{> afQuickField name='lastRefreshDttm'}} {{> afQuickField name='availableOffline'}} {{> afQuickField name='readOnly'}} {{> afQuickField name='socialEnabled'}}
+                {{> afQuickField name='sourceType' type='select' options='allowed'}}
+            </fieldset>
+            <fieldset id='sourceExcel'>
+                {{> afQuickField name='dataInput' rows=3}}
+                <div class='form-group'>
+                    <label for="outputJSON">JSON Output</label>
+                    <textarea rows='3' class='form-control' id='outputJSONExcel'></textarea>
+                </div>
+            </fieldset>
+            <fieldset id='sourceCSV'>
+                {{> afQuickField name='dataInput' rows=3}}
+                <div class='form-group'>
+                    <label for="outputJSON">JSON Output</label>
+                    <textarea rows='3' class='form-control' id='outputJSONCSV'></textarea>
+                </div>
+            </fieldset>
+            <fieldset id='sourcePeopleSoftAdHoc'>
+                {{> afQuickField name='psURL'}}
+                {{> afQuickField name='psParameters'}}
+                {{> afQuickField name='psUser'}}
+                {{> afQuickField name='psPassword' type='password'}}
+                <button type="button" class="btn btn-warning" id="psTest">Test</button>
+                <textarea rows='3' class='form-control' id='outputJSONPeopleSoft'></textarea>
+            </fieldset>
+            <fieldset id='sourcePeopleSoftQuery'>
+                {{> afQuickField name='psURL' id='psURLQuery'}}
+                {{> afQuickField name='psUser' id='psUserQuery'}}
+                {{> afQuickField name='psPassword' type='password' id='psPasswordQuery'}}
+                <button type="button" class="btn btn-warning" id="psGetQueries">Get Queries</button>
+                {{> afQuickField name='psQuery' options=psQueries id='psQuery'}}
+                <textarea rows='3' class='form-control' id='outputJSONPeopleSoftQuery'></textarea>
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Update</button>
+        {{/autoForm}}
+    </div>
+</template>

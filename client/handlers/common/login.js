@@ -5,7 +5,6 @@ if (Meteor.isClient) {
             var userID = event.target.inputUser.value;
             var userPswd = event.target.inputPassword.value;
 
-            // Check git
             event.preventDefault();
 
             // Check if user is empty
@@ -15,22 +14,6 @@ if (Meteor.isClient) {
                 Session.set("login.error", "You must provide a password.");
             } else {
                 // TODO: we should invoke our own services
-                /*Meteor.loginWithPassword(
-                    userID,
-                    userPswd,
-                    function (error) {
-                        if (error) {
-                            Session.set("login.error", "Wrong user name and/or password.");
-                        }
-                        else {
-                            // TODO record last login date
-                            Session.set("login.error", null);
-                        }
-                    }
-                );*/
-                /*Meteor.call("customLogin", userID, userPswd, function (error, results) {
-                    console.log(results); //results.data should be a JSON object
-                });*/
                 Meteor.loginCaller(userID, userPswd, function (error) {
                     if (error) {
                         Session.set("login.error", "Wrong user name and/or password.");

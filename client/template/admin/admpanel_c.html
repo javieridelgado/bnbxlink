@@ -6,7 +6,8 @@
         {{#autoForm collection="Panels" id="admPanelIns" type="insert"}}
         <fieldset>
             {{> afQuickField name='name'}} 
-            {{> afQuickField name='description' rows=3}} 
+            {{> afQuickField name='description' rows=3}}
+            {{> afQuickField name='panelType' type='select' options='allowed'}}
             {{> afQuickField name='collectionBase'}} 
             {{> afQuickField name='collectionFilter' rows=3}} 
             {{> afQuickField name='jsonTransformSum' rows=3}} 
@@ -27,8 +28,9 @@
         {{#autoForm collection="Panels" doc=this id="admPanelUpd" type="update" autosave=true}}
         <fieldset>
             {{> afQuickField name='name'}} 
-            {{> afQuickField name='description' rows=3}} 
-            {{> afQuickField name='collectionBase'}} 
+            {{> afQuickField name='description' rows=3}}
+            {{> afQuickField name='panelType' type='select' options='allowed'}}
+            {{> afQuickField name='collectionBase'}}
             {{> afQuickField name='collectionFilter' rows=3}} 
             <div class="row">
                 <div class="col-sm-6">

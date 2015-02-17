@@ -3,13 +3,13 @@
         <div class="bnbpanel">
             <!-- for each panel, we should display them */-->
             <ul class="list-group bnbdashboard">
-                <li class="list-group-item">
+                <li class="list-group-item col-md-6 col-xs-12">
                     <h4>Customers by City</h4> 
                     {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
                 </li>
 
                 {{#each panels}}
-                <li class="list-group-item">
+                <li class="list-group-item col-md-6 col-xs-12">
                     <h4>{{name}}</h4> 
                     {{{cachedHTML}}}
                 </li>

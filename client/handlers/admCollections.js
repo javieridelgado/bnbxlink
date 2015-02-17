@@ -444,15 +444,16 @@ if (Meteor.isClient) {
         },
 
         'change #psQuery': function (event) {
-            var url, params, user, password, query;
+            var url, params, user, password, query, collection;
 
+            collection = $("#collName").val();
             url = $("#psURLQuery").val();
             user = $("#psUserQuery").val();
             password = $("#psPasswordQuery").val();
             query = $("#psQuery").val();
             console.log("running query: " + query);
 
-            Meteor.call("psRunQuery", url, user, password, query, function (error, results) {
+            Meteor.call("psSaveQuery", url, user, password, query, collection, function (error, results) {
                 $('#outputJSONPeopleSoftQuery').val(results);
             });
         },

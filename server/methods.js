@@ -13,7 +13,7 @@ Meteor.methods({
                 }
             }
         );
-        
+
         return "";
     },
 
@@ -82,106 +82,50 @@ Meteor.methods({
     },
 
     psGetQueries: function (url, user, password, prefix) {
-        var svcResult, svcObject, params, result;
-        var parseStringSync;
+        /* Set connector parameters */
+        BNBLink.connectors.peoplesoftQuery854.url = url;
+        BNBLink.connectors.peoplesoftQuery854.user = user;
+        BNBLink.connectors.peoplesoftQuery854.password = password;
 
-        try {
-            if (prefix)
-                params = "ListQuery.v1/public/listquery?search=" + prefix + "&maxrows=1000&isconnectedquery=N";
-            else
-                params = "ListQuery.v1/public/listquery?search=&maxrows=1000&isconnectedquery=N";
-
-            // Call PeopleSoft REST web service
-            svcResult = HTTP.call("GET", url + params, {
-                auth: user + ":" + password
-            });
-
-            // Convert PeopleSoft's XML response to JSON
-            parseStringSync = Meteor.wrapAsync(xml2js.parseString, xml2js);
-
-            // We use our own wrapped parseStringSync because the xml2js.parseStringSync
-            // function does not seem to work when called twice
-            svcObject = parseStringSync(svcResult.content, {
-                attrkey: "a",
-                explicitArray: false
-            });
-            BNBLink.debug = svcObject;
-
-            // Retrieve queries array
-            result = svcObject.QAS_LISTQUERY_RESP_MSG.QAS_LISTQUERY_RESP.map(function (item) {
-                console.log(JSON.stringify(item.PTQASWRK));
-                return {
-                    label: item.PTQASWRK.QueryName + "-" + item.PTQASWRK.Description,
-                    value: item.PTQASWRK.QueryName
-                }
-            });
-
-            //BNBLink.debug = result;
-            //return JSON.stringify(result);
-            return result;
-        } catch (e) {
-            BNBLink.debug = e;
-            return "error";
-        }
-
-        return "";
+        /* Call connector method */
+        return BNBLink.connectors.peoplesoftQuery854.getQueries(prefix);
     },
 
     psRunQuery: function (url, user, password, query) {
-        var svcResult, svcObject, params, result;
-        var parseStringSync, columns, root;
+        /* Set connector parameters */
+        BNBLink.connectors.peoplesoftQuery854.url = url;
+        BNBLink.connectors.peoplesoftQuery854.user = user;
+        BNBLink.connectors.peoplesoftQuery854.password = password;
 
-        try {
-            // http://192.168.59.103:8000/PSIGW/RESTListeningConnector/PSFT_HR/ExecuteQuery.v1/public/QAS_TST_MSGSETS/WEBROWSET/NONFILE?isconnectedquery=N&maxrows=100
-            params = "ExecuteQuery.v1/public/" + query + "/WEBROWSET/NONFILE?isconnectedquery=N&maxrows=100";
-            console.log(url + params);
-            // Call PeopleSoft REST web service
-            svcResult = HTTP.call("GET", url + params, {
-                auth: user + ":" + password
-            });
+        /* Call connector method */
+        return JSON.stringify(BNBLink.connectors.peoplesoftQuery854.run(query));
+    },
 
-            // Convert PeopleSoft's XML response to JSON
-            parseStringSync = Meteor.wrapAsync(xml2js.parseString, xml2js);
-            // We use our own wrapped parseStringSync because the xml2js.parseStringSync
-            // function does not seem to work when called twice
-            svcObject = parseStringSync(svcResult.content, {
-                attrkey: "a",
-                explicitArray: false
-            });
-            root = svcObject.QAS_GETQUERYRESULTS_RESP_MSG.webRowSet;
-            columns = root.metadata["column-definition"];
-            result = root.data.currentRow.map(function (item) {
-                var rowData = {};
-                var i;
+    psSaveQuery: function (url, user, password, query, collection) {
+        var info, collName, dbColl;
 
-                for (i = 0; i < item.columnValue.length; i++) {
-                    rowData[columns[i]["column-name"]] = item.columnValue[i];
-                };
+        /* Set connector parameters */
+        BNBLink.connectors.peoplesoftQuery854.url = url;
+        BNBLink.connectors.peoplesoftQuery854.user = user;
+        BNBLink.connectors.peoplesoftQuery854.password = password;
 
-                return rowData;
-            });
+        /* Call connector method */
+        info = BNBLink.connectors.peoplesoftQuery854.run(query);
 
-            BNBLink.debug2 = result;
-            BNBLink.debug = svcObject.QAS_GETQUERYRESULTS_RESP_MSG.webRowSet;
+        /* Initialize collection */
+        collName = "z" + collection;
+        dbColl = new Meteor.Collection(collName);
+        dbColl.remove({});
 
-            // Retrieve queries array
-            /*result = svcObject.QAS_LISTQUERY_RESP_MSG.QAS_LISTQUERY_RESP.map(function (item) {
-                console.log(JSON.stringify(item.PTQASWRK));
-                return {
-                    label: item.PTQASWRK.QueryName + "-" + item.PTQASWRK.Description,
-                    value: item.PTQASWRK.QueryName
-                }
-            });*/
-
-            //BNBLink.debug = result;
-            return JSON.stringify(result);
-            //return result;
-        } catch (e) {
-            BNBLink.debug = e;
+        if (!info)
             return "error";
-        }
 
-        return "";
+        /* Insert each item array into the collection */
+        info.forEach(function (item) {
+            dbColl.insert(item);
+        });
+
+        return JSON.stringify(info);
     },
 
     checkTwitter: function () {

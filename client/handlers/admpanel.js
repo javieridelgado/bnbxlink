@@ -67,6 +67,29 @@ if (Meteor.isClient) {
 
             enableCollection(coll);
         },
+        
+        'change textarea[name="jsonTransformSum"]': function (event) {
+            var coll;
+            var transform;
+
+            event.preventDefault();
+
+            coll = AutoForm.getFieldValue('admPanelUpd', 'collectionBase');
+            transform = event.target.value;
+
+            enableCollection(coll, function () {
+                var renderedHTML, template, cursor;
+
+                template = _.template(transform);
+                BNBLink.log("callback called");
+
+                cursor = {};
+                cursor.values = BNBLink[coll].find().fetch();
+                $("textarea[name='cachedHTML']").val(template(cursor));
+                /*this.detailHTML = template(cursor);*/
+                /*$("textarea[name='detailHTML']").text(json2html.transform(BNBLink[coll].find().fetch(), transform));*/
+            });
+        },
 
         'change textarea[name="jsonTransformDtl"]': function (event) {
             var coll;

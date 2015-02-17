@@ -30,7 +30,14 @@ if (Meteor.isClient) {
                 /*Meteor.call("customLogin", userID, userPswd, function (error, results) {
                     console.log(results); //results.data should be a JSON object
                 });*/
-                Meteor.loginCaller(userID, userPswd);
+                Meteor.loginCaller(userID, userPswd, function (error) {
+                    if (error) {
+                        Session.set("login.error", "Wrong user name and/or password.");
+                    } else  {
+                        // TODO record last login date
+                        Session.set("login.error", null);
+                    }
+                });
             }
         }
     });

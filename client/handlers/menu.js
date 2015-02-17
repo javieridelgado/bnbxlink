@@ -45,7 +45,6 @@ if (Meteor.isClient) {
             });
         },
 
-
         'click #signout': function (event) {
             event.preventDefault();
             Meteor.logout(function (error) {

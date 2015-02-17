@@ -49,7 +49,7 @@
     <div class="container">
         {{#autoForm collection="Collections" doc=this id="admCollectionUpd" type="update"}}
         <fieldset id='main'>
-            {{> afQuickField name='name'}} 
+            {{> afQuickField name='name' id='collName'}} 
             {{> afQuickField name='description' rows=3}} 
             {{> afQuickField name='expirationTime'}} 
             {{> afQuickField name='lastRefreshDttm'}} {{> afQuickField name='availableOffline'}} {{> afQuickField name='readOnly'}} {{> afQuickField name='socialEnabled'}}

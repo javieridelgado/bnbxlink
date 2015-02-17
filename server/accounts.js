@@ -22,7 +22,11 @@ Accounts.registerLoginHandler("PeopleSoft", function (loginRequest) {
         });
     } catch (e) {
         BNBLink.debug = e;
-        return;
+        throw new Meteor.Error("LOGIN:001", "Invalid user id or password.");
+        return {
+            userId: username,
+            error: new Meteor.Error(403, "Incorrect password")
+        };
     }
 
     //we create a admin user if not exists, and get the userId

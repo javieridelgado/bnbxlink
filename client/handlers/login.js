@@ -5,6 +5,7 @@ if (Meteor.isClient) {
             var userID = event.target.inputUser.value;
             var userPswd = event.target.inputPassword.value;
 
+            // Check git
             event.preventDefault();
 
             // Check if user is empty

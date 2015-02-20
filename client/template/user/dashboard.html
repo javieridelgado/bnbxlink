@@ -1,20 +1,51 @@
 <template name="dashboard">
-    <div id="container" class="panel panel-default bnbdashboard">
-        <div class="bnbpanel">
+    <!--<div id="container" class="panel panel-default bnbdashboard">
+        <div class="bnbpanel">-->
             <!-- for each panel, we should display them */-->
+            <!--
             <ul class="list-group bnbdashboard">
-                <li class="list-group-item col-md-6 col-xs-12">
-                    <h4>Customers by City</h4> 
-                    {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
-                </li>
-
                 {{#each panels}}
-                <li class="list-group-item col-md-6 col-xs-12">
-                    <h4>{{name}}</h4> 
-                    {{{cachedHTML}}}
-                </li>
+                    <li class="list-group-item col-md-6 col-xs-12">
+                        <h4>{{name}}</h4>
+                        {{> panelRender}}
+                    </li>
                 {{/each}}
             </ul>
+-->
+            {{#each panels}}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">{{name}}</h4>
+                    </div>
+                    <div class="panel-body">
+                        {{> panelRender}}
+                    </div>
+                </div>
+            {{/each}}
+<!--
         </div>
     </div>
+-->
+</template>
+
+<template name="panelRender">
+    {{#if isHTML}}
+        {{{displayHTML}}}
+    {{/if}}
+    {{#if isForm}}
+        {{> panelInput}}
+    {{/if}}
+    {{#if isChart}}
+        {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=chartData}}
+    {{/if}}
+</template>
+
+<template name="panelInput">
+    {{#autoForm schema=contactFormSchema id="contactForm" type="method" meteormethod="sendEmail"}}
+        <fieldset>
+            {{#each fields}}
+                {{> afQuickField name=fieldName}}
+            {{/each}}
+        </fieldset>
+    {{/autoForm}}
 </template>

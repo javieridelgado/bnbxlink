@@ -1,24 +1,6 @@
 // On Client and Server
 if (Meteor.isClient) {
     //Meteor.subscribe("panels");
-    function enableCollection(coll, f) {
-        Meteor.call("declareAndPublishColl", coll, function (error, results) {
-            if (error)
-                BNBLink.log("error detected: " + error);
-
-            if (!BNBLink[coll])
-                BNBLink[coll] = new Meteor.Collection(coll);
-
-            Meteor.subscribe("coll" + coll, function () {
-                BNBLink.log("subscribed collection: " + coll);
-                BNBLink.log(BNBLink[coll].find().count());
-
-                // Call callback function
-                if (f) f();
-            });
-        });
-    }
-
     Template.admPanelAll.helpers({
         panels: function () {
             return BNBLink.Panels.find({});
@@ -65,7 +47,7 @@ if (Meteor.isClient) {
             BNBLink.log("enter coll" + event.target.value);
             event.preventDefault();
 
-            enableCollection(coll);
+            BNBLink.enableCollection(coll);
         },
         
         'change textarea[name="jsonTransformSum"]': function (event) {
@@ -77,17 +59,16 @@ if (Meteor.isClient) {
             coll = AutoForm.getFieldValue('admPanelUpd', 'collectionBase');
             transform = event.target.value;
 
-            enableCollection(coll, function () {
+            BNBLink.enableCollection(coll, function () {
                 var renderedHTML, template, cursor;
 
                 template = _.template(transform);
                 BNBLink.log("callback called");
 
                 cursor = {};
-                cursor.values = BNBLink[coll].find().fetch();
+                cursor.values = BNBLink.collections[coll].find().fetch();
                 $("textarea[name='cachedHTML']").val(template(cursor));
                 /*this.detailHTML = template(cursor);*/
-                /*$("textarea[name='detailHTML']").text(json2html.transform(BNBLink[coll].find().fetch(), transform));*/
             });
         },
 
@@ -100,17 +81,16 @@ if (Meteor.isClient) {
             coll = AutoForm.getFieldValue('admPanelUpd', 'collectionBase');
             transform = event.target.value;
 
-            enableCollection(coll, function () {
+            BNBLink.enableCollection(coll, function () {
                 var renderedHTML, template, cursor;
 
                 template = _.template(transform);
                 BNBLink.log("callback called");
 
                 cursor = {};
-                cursor.values = BNBLink[coll].find().fetch();
+                cursor.values = BNBLink.collections[coll].find().fetch();
                 $("textarea[name='detailHTML']").val(template(cursor));
                 /*this.detailHTML = template(cursor);*/
-                /*$("textarea[name='detailHTML']").text(json2html.transform(BNBLink[coll].find().fetch(), transform));*/
             });
         }
     });

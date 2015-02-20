@@ -7,7 +7,7 @@ Meteor.methods({
             function (error) {
                 if (error) {
                     Session.set("login.error", "Wrong user name and/or password.");
-                } else  {
+                } else {
                     // TODO record last login date
                     Session.set("login.error", null);
                 }
@@ -19,18 +19,18 @@ Meteor.methods({
 
     declareAndPublishColl: function (coll) {
         // First check if the collection is already declared. If not, create it.
-        BNBLink.log("entered declareAndPublish:" + coll)
-        if (!BNBLink[coll])
-            BNBLink[coll] = new Meteor.Collection(coll);
+        BNBLink.log("entered declareAndPublish:" + coll);
+        if (!BNBLink.collections[coll])
+            BNBLink.collections[coll] = new Meteor.Collection(coll);
 
         // Once the collection is created, make sure it is published.
-        if (!BNBLink['pub' + coll]) {
+        if (BNBLink.publications.indexOf(coll) == -1) {
             BNBLink.log('marking collection as published: ' + coll);
-            BNBLink['pub' + coll] = true; // mark the collection as published
-            Meteor.publish('coll' + coll, function () {
-                return BNBLink[coll].find({});
+            Meteor.publish(coll, function () {
+                return BNBLink.collections[coll].find({});
             });
-        };
+            BNBLink.publications.push(coll); // mark the collection as published
+        }
 
         return "";
     },
@@ -39,17 +39,17 @@ Meteor.methods({
         // First check if the collection is already declared. If not, create it.
         var myCollection;
 
-        BNBLink.log("entered populateCollection:" + coll)
-        if (!BNBLink[coll]) {
+        BNBLink.log("entered populateCollection:" + coll);
+        if (!BNBLink.collections[coll]) {
             myCollection = new Meteor.Collection(coll);
-            BNBLink[coll] = myCollection;
+            BNBLink.collections[coll] = myCollection;
         }
 
         // If flush, then delete the information
         if (flush)
             myCollection.remove({});
 
-        // Once the collection is created, fill in the date.
+        // Once the collection is created, fill in the data.
         data.forEach(function (item) {
             myCollection.insert(item);
         });
@@ -114,8 +114,12 @@ Meteor.methods({
 
         /* Initialize collection */
         collName = "z" + collection;
-        dbColl = new Meteor.Collection(collName);
+        if (!BNBLink.collections[collName]) {
+            BNBLink.collections[collName] = new Meteor.Collection(collName);
+        }
+        dbColl = BNBLink.collections[collName];
         dbColl.remove({});
+
 
         if (!info)
             return "error";

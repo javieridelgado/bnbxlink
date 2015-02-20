@@ -1,24 +1,38 @@
 <template name="panelDetail">
-    {{{detailPanelHTML}}} {{#if commentsEnabled}} {{> panelComments}} {{/if}} {{#contentFor "menu"}} {{> menudetail}} {{/contentFor}}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{> panelRender}}
+        </div>
+    </div>
+    {{#if commentsEnabled}}
+        {{> panelComments}}
+    {{/if}}
+    {{#contentFor "menu"}}
+        {{> menudetail}}
+    {{/contentFor}}
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container">
-            <button type="button" class="btn btn-default navbar-btn navbar-left" data-toggle="modal" data-target="#sharepanelmodal">
+            <button type="button" class="btn btn-default navbar-btn navbar-left" data-toggle="modal"
+                    data-target="#sharepanelmodal">
                 <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
             </button>
             <button type="button" class="btn btn-default navbar-btn navbar-left" id="commentPanel">
                 <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
             </button>
-            <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" data-target="#deletepanelmodal">
+            <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal"
+                    data-target="#deletepanelmodal">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button>
         </div>
     </nav>
 
-    <div class="modal fade" id="deletepanelmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deletepanelmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
                 </div>
@@ -33,11 +47,13 @@
         </div>
     </div>
 
-    <div class="modal fade" id="sharepanelmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="sharepanelmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
                     </button>
                     <h4 class="modal-title" id="exampleModalLabel">Share panel</h4>
                 </div>
@@ -70,22 +86,23 @@
         <div class="panel-body">
             <ul class="chat">
                 {{#each comments}}
-                <li class="left clearfix">
+                    <li class="left clearfix">
                     <span class="chat-img pull-left">
                         <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
                     </span>
-                    <div class="chat-body clearfix">
-                        <div class="header">
-                            <strong class="primary-font">{{username}}</strong>
-                            <small class="pull-right text-muted">
-                        <span class="glyphicon glyphicon-time"></span>12 mins ago
-                    </small>
+
+                        <div class="chat-body clearfix">
+                            <div class="header">
+                                <strong class="primary-font">{{username}}</strong>
+                                <small class="pull-right text-muted">
+                                    <span class="glyphicon glyphicon-time"></span>12 mins ago
+                                </small>
+                            </div>
+                            <p>
+                                {{comment}}
+                            </p>
                         </div>
-                        <p>
-                            {{comment}}
-                        </p>
-                    </div>
-                </li>
+                    </li>
                 {{/each}}
             </ul>
         </div>
@@ -93,10 +110,12 @@
             <form>
                 <div class="form-group">
                     <div class="input-group">
-                        <input id="newComment" type="text" class="form-control input-sm" placeholder="Type your message here...">
+                        <input id="newComment" type="text" class="form-control input-sm"
+                               placeholder="Type your message here...">
                         <span class="input-group-btn">
                             <button class="btn btn-warning btn-sm" id="btn-chat">
-                                Send</button>
+                                Send
+                            </button>
                         </span>
                     </div>
                 </div>

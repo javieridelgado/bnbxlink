@@ -70,4 +70,4 @@ if (Meteor.isClient) {
             BNBLink.goBack();
         },
     });
-};
+}

@@ -101,8 +101,7 @@ connector.run = function (query, prompts) {
 
             for (i = 0; i < item.columnValue.length; i++) {
                 rowData[columns[i]["column-name"]] = item.columnValue[i];
-            };
-
+            }
             return rowData;
         });
 

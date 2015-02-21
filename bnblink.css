@@ -35,6 +35,9 @@ body {
     margin-bottom: 0px;
 }
 
+.bnbaction1 {
+    cursor: pointer;
+}
 
 
 /* class for nav bar buttons with icons */

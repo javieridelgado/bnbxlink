@@ -1,43 +1,7 @@
 <template name="dashboard">
-    <!--<div id="container" class="panel panel-default bnbdashboard">
-        <div class="bnbpanel">-->
-            <!-- for each panel, we should display them */-->
-            <!--
-            <ul class="list-group bnbdashboard">
-                {{#each panels}}
-                    <li class="list-group-item col-md-6 col-xs-12">
-                        <h4>{{name}}</h4>
-                        {{> panelRender}}
-                    </li>
-                {{/each}}
-            </ul>
--->
-            {{#each panels}}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">{{name}}</h4>
-                    </div>
-                    <div class="panel-body">
-                        {{> panelRender}}
-                    </div>
-                </div>
-            {{/each}}
-<!--
-        </div>
-    </div>
--->
-</template>
-
-<template name="panelRender">
-    {{#if isHTML}}
-        {{{displayHTML}}}
-    {{/if}}
-    {{#if isForm}}
-        {{> panelInput}}
-    {{/if}}
-    {{#if isChart}}
-        {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=chartData}}
-    {{/if}}
+    {{#each panels}}
+        {{> panelView}}
+    {{/each}}
 </template>
 
 <template name="panelInput">

@@ -68,7 +68,6 @@ if (Meteor.isClient) {
                 cursor = {};
                 cursor.values = BNBLink.collections[coll].find().fetch();
                 $("textarea[name='cachedHTML']").val(template(cursor));
-                /*this.detailHTML = template(cursor);*/
             });
         },
 

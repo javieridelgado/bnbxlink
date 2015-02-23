@@ -39,6 +39,10 @@ body {
     cursor: pointer;
 }
 
+.ghost {
+    opacity: .3;
+    background: #C8EBFB;
+}
 
 /* class for nav bar buttons with icons */
 

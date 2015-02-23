@@ -28,7 +28,6 @@ ground:minimax@1.1.2
 ground:servertime@0.0.3
 ground:store@0.1.1
 ground:util@0.1.13
-hammer:hammer@2.0.4_1
 html-tools@1.0.3
 htmljs@1.0.3
 http@1.0.10

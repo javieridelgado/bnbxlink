@@ -21,7 +21,7 @@ Meteor.methods({
         // First check if the collection is already declared. If not, create it.
         BNBLink.log("entered declareAndPublish:" + coll);
         if (!BNBLink.collections[coll])
-            BNBLink.collections[coll] = new Meteor.Collection(coll);
+            BNBLink.collections[coll] = new Mongo.Collection(coll);
 
         // Once the collection is created, make sure it is published.
         if (BNBLink.publications.indexOf(coll) == -1) {
@@ -41,7 +41,7 @@ Meteor.methods({
 
         BNBLink.log("entered populateCollection:" + coll);
         if (!BNBLink.collections[coll]) {
-            myCollection = new Meteor.Collection(coll);
+            myCollection = new Mongo.Collection(coll);
             BNBLink.collections[coll] = myCollection;
         }
 
@@ -115,7 +115,7 @@ Meteor.methods({
         /* Initialize collection */
         collName = "z" + collection;
         if (!BNBLink.collections[collName]) {
-            BNBLink.collections[collName] = new Meteor.Collection(collName);
+            BNBLink.collections[collName] = new Mongo.Collection(collName);
         }
         dbColl = BNBLink.collections[collName];
         dbColl.remove({});
@@ -142,7 +142,7 @@ Meteor.methods({
 
         // Initialise collection 
         collName = "ifadCustomers";
-        dbColl = new Meteor.Collection(collName);
+        dbColl = new Mongo.Collection(collName);
         dbColl.remove({});
 
         // First retrieve the list of customers

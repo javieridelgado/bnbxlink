@@ -1,7 +1,12 @@
 <template name="dashboard">
-    {{#each panels}}
-        {{> panelView}}
-    {{/each}}
+    <div id="dashboard">
+        {{#sortable items=panels options=sortableOptions}}
+            {{> panelView}}
+        {{/sortable}}
+        <!--{{#each panels}}
+            {{> panelView}}
+        {{/each}}-->
+    </div>
 </template>
 
 <template name="panelInput">

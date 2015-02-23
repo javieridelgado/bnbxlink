@@ -30,6 +30,13 @@ if (Meteor.isClient) {
                     $in: myPanels[0]
                 }
             });
+        },
+
+        sortableOptions: function () {
+            return {
+                ghostClass: "ghost"
+                /*draggable: "#dashboard"*/
+            };
         }
     });
 

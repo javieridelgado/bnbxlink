@@ -44,7 +44,7 @@ if (Meteor.isClient) {
                 BNBLink.log("error detected: " + error);
 
             if (!BNBLink.collections[coll])
-                BNBLink.collections[coll] = new Meteor.Collection(coll);
+                BNBLink.collections[coll] = new Mongo.Collection(coll);
 
             // Add subscription if it doesn't exist
             if (BNBLink.subscriptions.indexOf(coll) == -1) {

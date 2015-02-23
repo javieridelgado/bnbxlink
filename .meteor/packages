@@ -7,7 +7,6 @@
 meteor-platform
 less
 nemo64:bootstrap
-hammer:hammer@=2.0.4_1
 accounts-ui
 iron:router
 matteodem:easy-search

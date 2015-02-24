@@ -17,6 +17,17 @@ if (Meteor.isClient) {
         }
     });
 
+    Meteor.subscribe("notifications", {
+        onReady: function () {
+            if (!Ground.lookup("notifications")) {
+                Ground.Collection(BNBLink.Notifications, "notifications");
+            }
+        },
+        onError: function () {
+            BNBLink.log("subscription error");
+        }
+    });
+
     Meteor.subscribe("collections", function () {
         BNBLink.log("entered subscribe collections");
         //Ground.Collection(Meteor.users);

@@ -1,4 +1,19 @@
 if (Meteor.isClient) {
+    Template.menu.helpers({
+        pendingNotifications: function () {
+            var nbrOfNotifications;
+
+            // It is not needed to filter by user id, as only the current user documents have been
+            // published.
+            nbrOfNotifications = BNBLink.Notifications.find().count();
+
+            if (!nbrOfNotifications)
+                return "";
+
+            return BNBLink.Notifications.find().count();
+        }
+    });
+
     Template.menu.events({
         'submit form': function (event) {
             event.preventDefault();

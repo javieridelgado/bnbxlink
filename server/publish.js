@@ -13,6 +13,11 @@ if (Meteor.isServer) {
         return BNBLink.Comments.find({});
     });
 
+    Meteor.publish('notifications', function () {
+        return BNBLink.Notifications.find({userId: Meteor.user()});
+    });
+
+
     Meteor.publish('userPreferences', function () {
         return Meteor.users.find(this.userId, {
             fields: {

@@ -1,14 +1,3 @@
-<template name="panelView">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">{{name}}</h4>
-        </div>
-        <div class="panel-body">
-            {{> panelRender}}
-        </div>
-    </div>
-</template>
-
 <template name="panelRender">
     {{#if isHTML}}
         {{{displayHTML}}}
@@ -19,4 +8,13 @@
     {{#if isChart}}
         {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=chartData}}
     {{/if}}
+</template>
+
+
+<template name="panelRenderHeader">
+    {{{displayHTML}}}
+</template>
+
+<template name="panelRenderFooter">
+    {{{displayHTML}}}
 </template>

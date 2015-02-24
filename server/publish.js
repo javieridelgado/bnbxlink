@@ -14,7 +14,7 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish('notifications', function () {
-        return BNBLink.Notifications.find({userId: Meteor.user()});
+        return BNBLink.Notifications.find({userId: this.userId});
     });
 
 

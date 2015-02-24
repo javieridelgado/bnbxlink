@@ -44,6 +44,10 @@ body {
     background: #C8EBFB;
 }
 
+.huge {
+    font-size: 40px;
+}
+
 /* class for nav bar buttons with icons */
 
 .navbar-btn-icon {

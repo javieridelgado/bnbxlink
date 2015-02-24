@@ -1,6 +1,78 @@
 // This only runs on the client
 if (Meteor.isClient) {
 
+    var onCreate = function () {
+        var parent;
+
+        // we will try to store the attributes in the parent.
+        parent = this.closestInstance("panelView");
+
+        // if it does not exist, we will take this instance as the parent
+        if (!parent) {
+            parent = this;
+        }
+
+        this.parentInstance = parent;
+
+        // initialize attributes
+        if (!this.parentInstance.panelData) {
+            this.parentInstance.panelData = new ReactiveVar("");
+        }
+    }
+
+    // fetches data and associates it to the instance and the parent instance (if any)
+    var fetchData = function (data, instance) {
+        var coll, filter;
+        var parent;
+
+        // populate the context variables
+        coll = data.collectionBase;
+        filter = data.collectionFilter;
+        parent = instance.parentInstance;
+
+        // If there is no collection, then no data can be retrieved
+        if (!coll) {
+            parent.panelData.set(null);
+            return null;
+        }
+
+        BNBLink.enableCollection(coll, function () {
+            var ctrl, fltr;
+            var p, n;
+
+            console.log("filter: " + filter);
+
+            if (filter) {
+                /* Retrieve filter parameters */
+                if (Router) {
+                    ctrl = Router.current();
+
+                    /* Replace filter parameters */
+                    for (p in ctrl.params.query) {
+                        // Retrieve parameter number
+                        n = p.substring(1);
+
+                        console.log("retrieve parameter " + n);
+                        filter = filter.replace("%" + n + "%", ctrl.params.query[p]);
+                    }
+                }
+
+                console.log("filter: " + filter);
+                /* Convert to filter object */
+                fltr = JSON.parse(filter);
+            }
+            else fltr = {};
+
+            parent.panelData.set(BNBLink.collections[coll].find(fltr).fetch());
+        });
+    }
+
+    // Set creation handlers
+    Template.panelRender.created = onCreate;
+    Template.panelRenderHeader.created = onCreate;
+    Template.panelRenderFooter.created = onCreate;
+
+    // Helpers
     Template.panelRender.helpers({
         /* Dashboard display helpers */
         isHTML: function () {
@@ -19,7 +91,6 @@ if (Meteor.isClient) {
             var instance, transform;
             var coll, filter;
 
-            // TODO: make this helper reactive when the collection changes
             coll = this.collectionBase;
             transform = this.jsonTransformSum;
             filter = this.collectionFilter;

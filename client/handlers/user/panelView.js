@@ -1,5 +1,41 @@
 // This only runs on the client
 if (Meteor.isClient) {
+    Template.panelView.helpers({
+        // feed the panel style
+        panelStyle: function () {
+            return this.sumPanelStyle || "default";
+        },
+
+        // should we show a custom header or not?
+        customPanelHeader: function () {
+            if (this.jsonTransformSumHeader)
+                return true;
+
+            return false;
+        },
+
+        // should we show a the panel body or not
+        hasPanelBody: function () {
+            if (this.jsonTransformSum || this.panelType != "HTML")
+                return true;
+
+            return false;
+        },
+
+        // should we show a the panel footer or not
+        hasPanelFooter: function () {
+            if (this.jsonTransformSumFooter)
+                return true;
+
+            return false;
+        }
+    });
+
+    Template.panelView.created = function () {
+        // initialize the panel data attribute
+        this.panelData = new ReactiveVar("");
+    }
+
     Template.panelView.rendered = function () {
         var instance = this;
 

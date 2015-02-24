@@ -28,7 +28,8 @@ if (Meteor.isClient) {
             return BNBLink.Panels.find({
                 _id: {
                     $in: myPanels[0]
-                }
+                },
+                availableForDashboard: true
             });
         },
 

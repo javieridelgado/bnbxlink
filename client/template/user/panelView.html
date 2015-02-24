@@ -1,0 +1,21 @@
+<template name="panelView">
+    <div class="panel panel-{{panelStyle}}">
+        <div class="panel-heading">
+            {{#if customPanelHeader}}
+                {{> panelRenderHeader}}
+            {{else}}
+                <h4 class="panel-title">{{name}}</h4>
+            {{/if}}
+        </div>
+        {{#if hasPanelBody}}
+            <div class="panel-body">
+                {{> panelRender}}
+            </div>
+        {{/if}}
+        {{#if hasPanelFooter}}
+            <div class="panel-footer">
+                {{> panelRenderFooter}}
+            </div>
+        {{/if}}
+    </div>
+</template>

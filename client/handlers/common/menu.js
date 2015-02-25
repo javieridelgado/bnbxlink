@@ -55,7 +55,7 @@ if (Meteor.isClient) {
         },
 
         'click #testOption': function (event) {
-            Meteor.call("checkTwitter", function (error, results) {
+            Meteor.call("pullAllSteps", function (error, results) {
                 console.log(results); //results.data should be a JSON object
             });
         },

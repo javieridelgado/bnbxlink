@@ -113,12 +113,25 @@ if (Meteor.isClient) {
                     });
                 }
             }
+
+            // Check if we are at the top level
+            if (event.currentTarget.matches("div.panel")) {
+                // if there is a detail panel
+                if (this.jsonTransformDtl) {
+                    // go to the detail panel
+                    Router.go("panelDetail", {
+                        _id: this._id
+                    });
+                }
+            }
+
         },
 
         // Avoid dragging based on panel body
         "mousedown div.panel-body": function (event, t) {
             event.preventDefault();
         }
+
         /*"dblclick div.panel.panel-default": function (event, t) {
          console.log("hola");
          t.$("div.panel-heading").append("<p>Swipe Left</p>");

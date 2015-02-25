@@ -21,7 +21,7 @@ if (Meteor.isClient) {
     }
 
     // fetches data and associates it to the instance and the parent instance (if any)
-    var fetchData = function (data, instance) {
+    var fetchData = function (data, instance, force) {
         var coll, filter;
         var parent;
 
@@ -30,7 +30,15 @@ if (Meteor.isClient) {
         filter = data.collectionFilter;
         parent = instance.parentInstance;
 
+        // we should do nothing the information was already loaded
+        if (!force && parent.panelDataProcessed)
+            return;
+
+        // mark the information as generated, so we don't process again unless forced
+        parent.panelDataProcessed = true;
+
         // If there is no collection, then no data can be retrieved
+        console.log("reading data for collection " + coll);
         if (!coll) {
             parent.panelData.set(null);
             return null;
@@ -40,6 +48,7 @@ if (Meteor.isClient) {
             var ctrl, fltr;
             var p, n;
 
+            console.log("fetching data for collection " + coll);
             console.log("filter: " + filter);
 
             if (filter) {
@@ -73,6 +82,44 @@ if (Meteor.isClient) {
     Template.panelRenderFooter.created = onCreate;
 
     // Helpers
+    Template.panelRenderHeader.helpers({
+        /* Dashboard display helpers */
+        displayHTML: function () {
+            var cursor, instance, transform, template;
+
+            instance = Template.instance();
+            transform = this.jsonTransformSumHeader;
+            template = _.template(transform);
+
+            // Retrieve data
+            fetchData(this, instance);
+
+            // Transform data
+            cursor = {};
+            cursor.values = instance.parentInstance.panelData.get();
+            return template(cursor);
+        }
+    });
+
+    Template.panelRenderFooter.helpers({
+        /* Dashboard display helpers */
+        displayHTML: function () {
+            var cursor, instance, transform, template;
+
+            instance = Template.instance();
+            transform = this.jsonTransformSumFooter;
+            template = _.template(transform);
+
+            // Retrieve data
+            fetchData(this, instance);
+
+            // Transform data
+            cursor = {};
+            cursor.values = instance.parentInstance.panelData.get();
+            return template(cursor);
+        }
+    });
+
     Template.panelRender.helpers({
         /* Dashboard display helpers */
         isHTML: function () {
@@ -88,65 +135,25 @@ if (Meteor.isClient) {
         },
 
         displayHTML: function () {
-            var instance, transform;
-            var coll, filter;
-
-            coll = this.collectionBase;
-            transform = this.jsonTransformSum;
-            filter = this.collectionFilter;
-
-            // If the collection is not set, then the transformation is a plain HTML
-            if (!coll)
-                return transform;
+            var cursor, instance, transform, template;
 
             instance = Template.instance();
+            transform = this.jsonTransformSum;
+            template = _.template(transform);
 
-            // Create reactive var if it doesn't exist
-            if (!instance.displayHTML) {
-                instance.displayHTML = new ReactiveVar("");
-                instance.displayHTML.set("");
-            }
+            // Retrieve data
+            fetchData(this, instance);
 
-            BNBLink.enableCollection(coll, function () {
-                var template, cursor, ctrl, fltr;
-                var p, n;
-
-                BNBLink.log("callback called");
-                template = _.template(transform);
-                console.log("filter: " + filter);
-
-                if (filter) {
-                    /* Retrieve filter parameters */
-                    if (Router) {
-                        ctrl = Router.current();
-
-                        /* Replace filter parameters */
-                        for (p in ctrl.params.query) {
-                            // Retrieve parameter number
-                            n = p.substring(1);
-
-                            console.log("retrieve parameter " + n);
-                            filter = filter.replace("%" + n + "%", ctrl.params.query[p]);
-                        }
-                    }
-
-                    console.log("filter: " + filter);
-                    /* Convert to filter object */
-                    fltr = JSON.parse(filter);
-                }
-                else fltr = {};
-
-                cursor = {};
-                cursor.values = BNBLink.collections[coll].find(fltr).fetch();
-                instance.displayHTML.set(template(cursor));
-            });
-
-            return instance.displayHTML.get();
+            // Transform data
+            cursor = {};
+            cursor.values = instance.parentInstance.panelData.get();
+            return template(cursor);
         },
 
         chartData: function () {
+            var data, instance, otherSum;
             var myChart = {};
-            var coll, instance;
+            var coll;
 
             myChart.chart = {
                 plotBackgroundColor: null,
@@ -198,56 +205,39 @@ if (Meteor.isClient) {
                     data: []
                 }];
 
-            // Populate data
-            // TODO: make this helper reactive when the collection changes
-            coll = this.collectionBase;
+            instance = Template.instance();
 
-            // If the collection is not set, then the transformation is a plain HTML
-            if (coll) {
-                instance = Template.instance();
+            // Retrieve data
+            console.log("fetch chart data...");
+            fetchData(this, instance);
 
-                // Create reactive var if it doesn't exist
-                if (!instance.chartData) {
-                    instance.chartData = new ReactiveVar("");
-                    instance.chartData.set("");
-                }
-                console.log("chart data set");
+            // Transform data
+            data = instance.parentInstance.panelData.get();
 
-                BNBLink.enableCollection(coll, function () {
-                    var template, data, otherSum;
+            if (data) {
+                console.log("we have chart data!");
+                otherSum = 0;
 
-                    otherSum = 0;
+                data = data
+                    .filter(function (item) {
+                        var count;
 
-                    data = BNBLink.collections[coll].find().fetch()
-                        .filter(function (item) {
-                            var count;
+                        count = Number(item.A_BIRTHSTATE);
+                        if (count < 50) {
+                            otherSum += count;
+                            return false;
+                        }
 
-                            count = Number(item.A_BIRTHSTATE);
-                            if (count < 50) {
-                                otherSum += count;
-                                return false;
-                            }
+                        return true;
+                    })
+                    .map(function (item) {
+                        return [item.B_DESCR, Number(item.A_BIRTHSTATE)];
+                    });
 
-                            return true;
-                        })
-                        .map(function (item) {
-                            return [item.B_DESCR, Number(item.A_BIRTHSTATE)];
-                        });
-
-                    data.push(["Others", otherSum]);
-
-                    instance.chartData.set(data);
-                    console.log("final chart data set");
-                });
-
-                myChart.series[0].data = instance.chartData.get();
-                console.log("chart data get");
+                data.push(["Others", otherSum]);
+                myChart.series[0].data = data;
+                $("#test").highcharts(myChart);
             }
-
-            console.log("return chart");
-
-            // Refresh chart
-            $("#test").highcharts(myChart);
 
             return myChart;
         }

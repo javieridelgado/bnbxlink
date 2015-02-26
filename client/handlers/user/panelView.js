@@ -32,7 +32,7 @@ if (Meteor.isClient) {
     });
 
     // Common functions
-    var onCreate = function() {
+    var onCreate = function () {
         // initialize the panel data attribute
         this.panelData = new ReactiveVar("");
     }
@@ -42,9 +42,21 @@ if (Meteor.isClient) {
 
         // Create handlers
         instance.handlers = {};
-        BNBLink.debug = instance;
         if (this.data.actions) {
             this.data.actions.forEach(function (item) {
+                var parameters;
+
+                // If there is a parameter, we need to split them into an array
+                if (item.params) {
+                    parameters = item.params.split(",")
+                        .map(function (item) {
+                            return item.trim();
+                        });
+                } else {
+                    parameters = [];
+                }
+                item.parameters = parameters;
+
                 if (!instance.handlers[item.event]) {
                     console.log("new item: " + item.command);
                     instance.handlers[item.event] = [item];
@@ -56,12 +68,10 @@ if (Meteor.isClient) {
         }
     }
 
-    var handlePanelEvent = function(eventName, event, template) {
+    var handlePanelEvent = function (eventName, event, template) {
         var handlers;
         var matching = [];
-        var i, param;
-
-        BNBLink.debug = template;
+        var i, param, querystr;
 
         // Check if the target matches any of the selectors
         if (template.handlers[eventName]) {
@@ -73,17 +83,28 @@ if (Meteor.isClient) {
             });
 
             // If the event has been handled, the stop propagation
+            // TODO: if there is more than one, we should show a context menu
             if (matching.length) {
                 event.stopPropagation();
 
                 // retrieve parameters
-                param = event.currentTarget.getAttribute(matching[0].params);
+                querystr = "";
+                matching[0].parameters.forEach(function(paramName, paramNbr) {
+                    var pnbr;
+
+                    pnbr = paramNbr + 1;
+
+                    if (querystr)
+                        querystr = querystr + "&";
+
+                    querystr = querystr + "p" + pnbr + "=" + event.currentTarget.getAttribute(paramName);
+                });
 
                 // route to the new direction
                 BNBLink.go("panelDetail", {
                     _id: matching[0].panel
                 }, {
-                    query: "p1=" + param
+                    query: querystr
                 });
             }
         }

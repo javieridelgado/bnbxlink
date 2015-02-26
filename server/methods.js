@@ -70,11 +70,9 @@ Meteor.methods({
             });
 
             result = result.QAS_LISTQUERY_RESP_MSG.QAS_LISTQUERY_RESP;
-            BNBLink.debug = svcResult;
             return JSON.stringify(result);
             //return svcResult.content;
         } catch (e) {
-            BNBLink.debug = e;
             return "error";
         }
 

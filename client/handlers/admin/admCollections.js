@@ -397,7 +397,6 @@ if (Meteor.isClient) {
             var outputText = toJSON(dataGrid, headerNames, headerTypes, '  ', '\n');
 
             event.preventDefault();
-            BNBLink.debug = parseOutput;
             $('#outputJSONExcel').val(outputText);
 
             Meteor.call("populateCollection", "test", JSON.parse(outputText), true, function (error, results) {
@@ -421,15 +420,10 @@ if (Meteor.isClient) {
             Meteor.call("psGetQueries", url, user, password, function (error, results) {
                 $('#outputJSONPeopleSoftQuery').val(JSON.stringify(results));
 
-                console.log("create reactive var");
-
                 if (!psQueriesVar)
                     psQueriesVar = new ReactiveVar(results);
                 else
                     psQueriesVar.set(results);
-
-                BNBLink.debug = psQueriesVar;
-                console.log("processing finished");
             });
         },
 

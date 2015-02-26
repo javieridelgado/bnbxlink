@@ -50,7 +50,6 @@ connector.getQueries = function (prefix) {
 
         return result;
     } catch (e) {
-        BNBLink.debug = e;
         throw new Meteor.Error("PSQ854:002", "Error detected while invoking listquery service.");
         return "error";
     }
@@ -107,7 +106,6 @@ connector.run = function (query, prompts) {
 
         return result;
     } catch (e) {
-        BNBLink.debug = e;
         throw new Meteor.Error("PSQ854:004", "Error detected while invoking ExecuteQuery service.");
         return "error";
     }

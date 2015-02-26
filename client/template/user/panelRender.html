@@ -16,11 +16,11 @@
 
 
 <template name="panelRenderHeader">
-    {{{displayHTML}}}
+    {{> panelRenderHTML doc=this part="header"}}
 </template>
 
 <template name="panelRenderFooter">
-    {{{displayHTML}}}
+    {{> panelRenderHTML doc=this part="footer"}}
 </template>
 
 <template name="panelRenderHTML">

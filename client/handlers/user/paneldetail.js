@@ -8,10 +8,6 @@ if (Meteor.isClient) {
                 return true;
 
             return false;
-        },
-        
-        detailPanelHTML: function () {
-            return this.detailHTML || this.cachedHTML;
         }
     });
 
@@ -23,8 +19,6 @@ if (Meteor.isClient) {
             });
         }
     });
-
-
 
     Template.panelDetail.events({
         'click #commentPanel': function (event) {

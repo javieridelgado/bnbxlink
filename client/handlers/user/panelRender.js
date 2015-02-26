@@ -6,23 +6,24 @@ if (Meteor.isClient) {
 
         // we will try to store the attributes in the parent.
         parent = this.closestInstance("panelView");
+        if (!parent) {
+            parent = this.closestInstance("panelViewDetail");
+            this.panelType = "detail";
+        } else {
+            this.panelType = "dashboard";
+        }
 
         // if it does not exist, we will take this instance as the parent
         if (!parent) {
             parent = this;
         }
-
         this.parentInstance = parent;
-
-        // initialize attributes
-        if (!this.parentInstance.panelData) {
-            this.parentInstance.panelData = new ReactiveVar("");
-        }
     }
 
     // fetches data and associates it to the instance and the parent instance (if any)
     var fetchData = function (data, instance, force) {
         var coll, filter;
+        var ctxHash;
         var parent;
 
         // populate the context variables
@@ -30,15 +31,26 @@ if (Meteor.isClient) {
         filter = data.collectionFilter;
         parent = instance.parentInstance;
 
+        console.log("reading data for collection " + coll + " with filter " + filter + " on panel " + data._id);
+
+        // Retrieve context parameters
+        ctxHash = "";
+        if (Router) {
+            ctxHash = JSON.stringify(Router.current().params.query);
+        }
+        ctxHash = ctxHash + "|" + data._id;
+
         // we should do nothing the information was already loaded
-        if (!force && parent.panelDataProcessed)
+        if (!force && parent.dataProcessedHash && parent.dataProcessedHash == ctxHash)
             return;
 
         // mark the information as generated, so we don't process again unless forced
-        parent.panelDataProcessed = true;
+        parent.dataProcessedHash = ctxHash;
+
+        // initialize reactive variable
+        parent.panelData = new ReactiveVar("");
 
         // If there is no collection, then no data can be retrieved
-        console.log("reading data for collection " + coll);
         if (!coll) {
             parent.panelData.set(null);
             return null;
@@ -48,8 +60,7 @@ if (Meteor.isClient) {
             var ctrl, fltr;
             var p, n;
 
-            console.log("fetching data for collection " + coll);
-            console.log("filter: " + filter);
+            console.log("fetching data for collection " + coll + " with filter " + filter);
 
             if (filter) {
                 /* Retrieve filter parameters */
@@ -60,8 +71,6 @@ if (Meteor.isClient) {
                     for (p in ctrl.params.query) {
                         // Retrieve parameter number
                         n = p.substring(1);
-
-                        console.log("retrieve parameter " + n);
                         filter = filter.replace("%" + n + "%", ctrl.params.query[p]);
                     }
                 }
@@ -84,63 +93,6 @@ if (Meteor.isClient) {
     Template.panelRenderHTML.created = onCreate;
 
     // Helpers
-    Template.panelRenderHeader.helpers({
-        /* Dashboard display helpers */
-        displayHTML: function () {
-            var cursor, instance, transform, template;
-
-            instance = Template.instance();
-            transform = this.jsonTransformSumHeader;
-            template = _.template(transform);
-
-            // Retrieve data
-            fetchData(this, instance);
-
-            // Transform data
-            cursor = {};
-            cursor.values = instance.parentInstance.panelData.get();
-            return template(cursor);
-        }
-    });
-
-    Template.panelRenderFooter.helpers({
-        /* Dashboard display helpers */
-        displayHTML: function () {
-            var cursor, instance, transform, template;
-
-            instance = Template.instance();
-            transform = this.jsonTransformSumFooter;
-            template = _.template(transform);
-
-            // Retrieve data
-            fetchData(this, instance);
-
-            // Transform data
-            cursor = {};
-            cursor.values = instance.parentInstance.panelData.get();
-            return template(cursor);
-        }
-    });
-
-    Template.panelRenderDetail.helpers({
-        /* Dashboard display helpers */
-        displayHTML: function () {
-            var cursor, instance, transform, template;
-
-            instance = Template.instance();
-            transform = this.jsonTransformDtl;
-            template = _.template(transform);
-
-            // Retrieve data
-            fetchData(this, instance);
-
-            // Transform data
-            cursor = {};
-            cursor.values = instance.parentInstance.panelData.get();
-            return template(cursor);
-        }
-    });
-
     Template.panelRenderHTML.helpers({
         /* Dashboard display helpers */
         displayHTML: function () {
@@ -149,7 +101,6 @@ if (Meteor.isClient) {
             instance = Template.instance();
 
             console.log("rendering HTML part: " + this.part);
-            BNBLink.debug = this.doc;
             switch (this.part) {
                 case "header":
                     transform = this.doc.jsonTransformSumHeader;
@@ -189,23 +140,6 @@ if (Meteor.isClient) {
 
         isChart: function () {
             return this.panelType == "Chart";
-        },
-
-        displayHTML: function () {
-            var cursor, instance, transform, template;
-
-            console.log("rendering...");
-            instance = Template.instance();
-            transform = this.jsonTransformSum;
-            template = _.template(transform);
-
-            // Retrieve data
-            fetchData(this, instance);
-
-            // Transform data
-            cursor = {};
-            cursor.values = instance.parentInstance.panelData.get();
-            return template(cursor);
         },
 
         chartData: function () {

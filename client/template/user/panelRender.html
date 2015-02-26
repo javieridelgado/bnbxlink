@@ -1,6 +1,6 @@
 <template name="panelRender">
     {{#if isHTML}}
-        {{{displayHTML}}}
+        {{> panelRenderHTML doc=this part="body"}}
     {{/if}}
     {{#if isForm}}
         {{> panelInput}}
@@ -10,11 +10,19 @@
     {{/if}}
 </template>
 
+<template name="panelRenderDetail">
+    {{> panelRenderHTML doc=this part="detail"}}
+</template>
+
 
 <template name="panelRenderHeader">
     {{{displayHTML}}}
 </template>
 
 <template name="panelRenderFooter">
+    {{{displayHTML}}}
+</template>
+
+<template name="panelRenderHTML">
     {{{displayHTML}}}
 </template>

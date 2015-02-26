@@ -80,6 +80,8 @@ if (Meteor.isClient) {
     Template.panelRender.created = onCreate;
     Template.panelRenderHeader.created = onCreate;
     Template.panelRenderFooter.created = onCreate;
+    Template.panelRenderDetail.created = onCreate;
+    Template.panelRenderHTML.created = onCreate;
 
     // Helpers
     Template.panelRenderHeader.helpers({
@@ -120,6 +122,61 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.panelRenderDetail.helpers({
+        /* Dashboard display helpers */
+        displayHTML: function () {
+            var cursor, instance, transform, template;
+
+            instance = Template.instance();
+            transform = this.jsonTransformDtl;
+            template = _.template(transform);
+
+            // Retrieve data
+            fetchData(this, instance);
+
+            // Transform data
+            cursor = {};
+            cursor.values = instance.parentInstance.panelData.get();
+            return template(cursor);
+        }
+    });
+
+    Template.panelRenderHTML.helpers({
+        /* Dashboard display helpers */
+        displayHTML: function () {
+            var cursor, instance, transform, template;
+
+            instance = Template.instance();
+
+            console.log("rendering HTML part: " + this.part);
+            BNBLink.debug = this.doc;
+            switch (this.part) {
+                case "header":
+                    transform = this.doc.jsonTransformSumHeader;
+                    break;
+                case "footer":
+                    transform = this.doc.jsonTransformSumFooter;
+                    break;
+                case "detail":
+                    transform = this.doc.jsonTransformDtl;
+                    break;
+                default:
+                    transform = this.doc.jsonTransformSum;
+                    break;
+            }
+
+            template = _.template(transform);
+
+            // Retrieve data
+            fetchData(this.doc, instance);
+
+            // Transform data
+            cursor = {};
+            cursor.values = instance.parentInstance.panelData.get();
+            return template(cursor);
+        }
+    });
+
     Template.panelRender.helpers({
         /* Dashboard display helpers */
         isHTML: function () {
@@ -137,6 +194,7 @@ if (Meteor.isClient) {
         displayHTML: function () {
             var cursor, instance, transform, template;
 
+            console.log("rendering...");
             instance = Template.instance();
             transform = this.jsonTransformSum;
             template = _.template(transform);

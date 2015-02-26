@@ -1,9 +1,5 @@
 <template name="panelDetail">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            {{> panelRender}}
-        </div>
-    </div>
+    {{> panelViewDetail}}
     {{#if commentsEnabled}}
         {{> panelComments}}
     {{/if}}

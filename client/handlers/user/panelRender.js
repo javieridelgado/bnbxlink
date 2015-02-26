@@ -89,8 +89,25 @@ if (Meteor.isClient) {
     Template.panelRender.created = onCreate;
     Template.panelRenderHeader.created = onCreate;
     Template.panelRenderFooter.created = onCreate;
-    Template.panelRenderDetail.created = onCreate;
+    Template.panelRenderForm.created = onCreate;
     Template.panelRenderHTML.created = onCreate;
+
+    Template.panelRenderForm.rendered = function () {
+        var doc, field;
+
+        // Retrieve the document data
+        fetchData(this.data, this);
+
+        console.log("populating form");
+        doc = this.parentInstance.panelData.get()[0];
+
+        // Fill the form with the document data
+        for (field in doc) {
+            if (doc[field]) {
+                $("#" + field).val(doc[field]);
+            }
+        }
+    }
 
     // Helpers
     Template.panelRenderHTML.helpers({
@@ -234,4 +251,5 @@ if (Meteor.isClient) {
             return myChart;
         }
     });
+
 }

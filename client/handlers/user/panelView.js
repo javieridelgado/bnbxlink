@@ -130,12 +130,12 @@ if (Meteor.isClient) {
     Template.panelView.events({
         "click *": function (event, template) {
             // Check if we are at the top level
-            if (event.currentTarget.matches("div.panel")) {
+            if (event.currentTarget.matches("div.bnbsummarypanel")) {
                 // if there is a detail panel
-                if (this.jsonTransformDtl) {
+                if (this.detailPanel) {
                     // go to the detail panel
                     BNBLink.go("panelDetail", {
-                        _id: this._id
+                        _id: this.detailPanel
                     });
                     return false;
                 }

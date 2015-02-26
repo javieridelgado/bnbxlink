@@ -3,17 +3,12 @@
         {{> panelRenderHTML doc=this part="body"}}
     {{/if}}
     {{#if isForm}}
-        {{> panelInput}}
+        {{> panelRenderForm}}
     {{/if}}
     {{#if isChart}}
         {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=chartData}}
     {{/if}}
 </template>
-
-<template name="panelRenderDetail">
-    {{> panelRenderHTML doc=this part="detail"}}
-</template>
-
 
 <template name="panelRenderHeader">
     {{> panelRenderHTML doc=this part="header"}}

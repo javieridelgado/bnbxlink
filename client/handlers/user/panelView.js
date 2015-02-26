@@ -80,7 +80,7 @@ if (Meteor.isClient) {
                 param = event.currentTarget.getAttribute(matching[0].params);
 
                 // route to the new direction
-                Router.go("panelDetail", {
+                BNBLink.go("panelDetail", {
                     _id: matching[0].panel
                 }, {
                     query: "p1=" + param
@@ -93,7 +93,7 @@ if (Meteor.isClient) {
             // if there is a detail panel
             if (this.jsonTransformDtl) {
                 // go to the detail panel
-                Router.go("panelDetail", {
+                BNBLink.go("panelDetail", {
                     _id: this._id
                 });
             }
@@ -113,7 +113,7 @@ if (Meteor.isClient) {
                 // if there is a detail panel
                 if (this.jsonTransformDtl) {
                     // go to the detail panel
-                    Router.go("panelDetail", {
+                    BNBLink.go("panelDetail", {
                         _id: this._id
                     });
                     return false;

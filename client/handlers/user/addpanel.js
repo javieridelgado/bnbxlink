@@ -40,7 +40,7 @@ if (Meteor.isClient) {
                 if (error)
                     return BNBLink.log(error.reason);
 
-                Router.go('/');
+                BNBLink.go('/');
             });
         }
     });

@@ -11,7 +11,7 @@ if (Meteor.isClient) {
         'click #addpanel': function (event) {
             event.preventDefault();
             // This functionality should search within the current data of the added panels
-            Router.go('panelInsert');
+            BNBLink.go('panelInsert');
         }
     });
 
@@ -28,7 +28,7 @@ if (Meteor.isClient) {
             event.preventDefault();
             // This functionality should search within the current data of the added panels
             BNBLink.log('click panel ' + this._id);
-            Router.go("panelUpdate", {
+            BNBLink.go("panelUpdate", {
                 _id: this._id
             });
         }

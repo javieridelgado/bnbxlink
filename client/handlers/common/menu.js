@@ -24,7 +24,7 @@ if (Meteor.isClient) {
         'click #addpanel': function (event) {
             event.preventDefault();
             // This should list the panels still not added by the user and available to him/her
-            Router.go("panelSubscribe");
+            BNBLink.go("panelSubscribe");
         },
 
         'click #notifications': function (event) {
@@ -45,13 +45,13 @@ if (Meteor.isClient) {
         'click #admpanel': function (event) {
             event.preventDefault();
             // This should show a preferences dialog
-            Router.go('panelSearch');
+            BNBLink.go('panelSearch');
         },
 
         'click #admCollections': function (event) {
             event.preventDefault();
             // This should show a preferences dialog
-            Router.go('collSearch');
+            BNBLink.go('collSearch');
         },
 
         'click #testOption': function (event) {

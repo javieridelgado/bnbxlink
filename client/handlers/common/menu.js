@@ -10,7 +10,7 @@ if (Meteor.isClient) {
             if (!nbrOfNotifications)
                 return "";
 
-            return BNBLink.Notifications.find().count();
+            return nbrOfNotifications;
         }
     });
 

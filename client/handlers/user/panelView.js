@@ -34,7 +34,7 @@ if (Meteor.isClient) {
     // Common functions
     var onCreate = function () {
         // initialize the panel data attribute
-        this.panelData = new ReactiveVar("");
+        this.panelDataRetrieved = new ReactiveVar("");
     }
 
     var onRender = function () {

@@ -48,11 +48,12 @@ if (Meteor.isClient) {
         parent.dataProcessedHash = ctxHash;
 
         // initialize reactive variable
-        parent.panelData = new ReactiveVar("");
+        parent.panelDataRetrieved = new ReactiveVar("");
+        parent.panelData = null;
 
         // If there is no collection, then no data can be retrieved
+        parent.panelDataRetrieved.set(false);
         if (!coll) {
-            parent.panelData.set(null);
             return null;
         }
 
@@ -81,7 +82,8 @@ if (Meteor.isClient) {
             }
             else fltr = {};
 
-            parent.panelData.set(BNBLink.collections[coll].find(fltr).fetch());
+            parent.panelData = BNBLink.collections[coll].find(fltr).fetch();
+            parent.panelDataRetrieved.set(true);
         });
     }
 
@@ -93,13 +95,18 @@ if (Meteor.isClient) {
     Template.panelRenderHTML.created = onCreate;
 
     Template.panelRenderForm.rendered = function () {
-        var doc, field;
+        var doc, field, done;
 
         // Retrieve the document data
         fetchData(this.data, this);
 
         console.log("populating form");
-        doc = this.parentInstance.panelData.get()[0];
+        done = this.parentInstance.panelDataRetrieved.get();
+        if (this.parentInstance.panelData && this.parentInstance.panelData.length) {
+            doc = this.parentInstance.panelData[0];
+        } else {
+            return;
+        }
 
         // Fill the form with the document data
         for (field in doc) {
@@ -113,7 +120,7 @@ if (Meteor.isClient) {
     Template.panelRenderHTML.helpers({
         /* Dashboard display helpers */
         displayHTML: function () {
-            var cursor, instance, transform, template;
+            var cursor, instance, transform, template, done;
 
             instance = Template.instance();
 
@@ -138,8 +145,13 @@ if (Meteor.isClient) {
 
             // Transform data
             cursor = {};
-            cursor.values = instance.parentInstance.panelData.get();
-            return template(cursor);
+            done = instance.parentInstance.panelDataRetrieved.get();
+            if (done) {
+                cursor.values = instance.parentInstance.panelData;
+                return template(cursor);
+            }
+
+            return "";
         }
     });
 
@@ -158,7 +170,7 @@ if (Meteor.isClient) {
         },
 
         chartData: function () {
-            var data, instance, otherSum;
+            var data, instance, otherSum, done;
             var myChart = {};
             var coll;
 
@@ -219,7 +231,8 @@ if (Meteor.isClient) {
             fetchData(this, instance);
 
             // Transform data
-            data = instance.parentInstance.panelData.get();
+            done = instance.parentInstance.panelDataRetrieved.get();
+            data = instance.parentInstance.panelData;
 
             if (data) {
                 console.log("we have chart data!");

@@ -117,26 +117,24 @@ if (Meteor.isClient) {
 
             instance = Template.instance();
 
+            console.log("this: " + JSON.stringify(this));
             console.log("rendering HTML part: " + this.part);
             switch (this.part) {
                 case "header":
-                    transform = this.doc.jsonTransformSumHeader;
+                    transform = this.panel.jsonTransformSumHeader;
                     break;
                 case "footer":
-                    transform = this.doc.jsonTransformSumFooter;
-                    break;
-                case "detail":
-                    transform = this.doc.jsonTransformDtl;
+                    transform = this.panel.jsonTransformSumFooter;
                     break;
                 default:
-                    transform = this.doc.jsonTransformSum;
+                    transform = this.panel.jsonTransformSum;
                     break;
             }
 
             template = _.template(transform);
 
             // Retrieve data
-            fetchData(this.doc, instance);
+            fetchData(this.panel, instance);
 
             // Transform data
             cursor = {};

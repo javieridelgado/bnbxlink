@@ -10,7 +10,7 @@ if (Meteor.isClient) {
 
             data = {_id: template.parentInstance.panelData[0]._id, description: "new one"};
             console.log("submit form");
-            Meteor.call("saveForm", this.doc.collectionBase, data, function (error, results) {
+            Meteor.call("saveForm", this.panel.collectionBase, data, function (error, results) {
                 console.log(results); //results.data should be a JSON object
             });
         }

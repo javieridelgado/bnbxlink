@@ -111,7 +111,7 @@ if (Meteor.isClient) {
         // Fill the form with the document data
         for (field in doc) {
             if (doc[field]) {
-                $("#" + field).val(doc[field]);
+                $("#" + field).attr("name", field).val(doc[field]);
             }
         }
     }

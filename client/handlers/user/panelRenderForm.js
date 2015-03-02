@@ -4,13 +4,15 @@ if (Meteor.isClient) {
         "submit form": function (event, template) {
             var data;
 
-            console.log("submit form");
+            data = JSON.stringify($("form").serializeArray());
+
+            console.log("submit form= " + data);
             BNBLink.debug = template;
             event.preventDefault();
 
-            data = {_id: template.parentInstance.panelData[0]._id, description: "new one"};
+            data = {description: "new one"};
             console.log("submit form");
-            Meteor.call("saveForm", this.panel.collectionBase, data, function (error, results) {
+            Meteor.call("saveForm", this.panel.collectionBase, template.parentInstance.panelData[0]._id, data, function (error, results) {
                 console.log(results); //results.data should be a JSON object
             });
         }

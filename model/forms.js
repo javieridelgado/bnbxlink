@@ -1,11 +1,10 @@
 Meteor.methods({
-    saveForm: function (coll, data) {
-        var myColl, id, isUpdate;
+    saveForm: function (coll, id, data) {
+        var myColl, isUpdate;
 
         console.log("data to be processed: " + JSON.stringify(data));
         console.log("collection: " + coll);
         myColl = BNBLink.collections[coll];
-        id = data._id;
         isUpdate = false;
 
         // If an id was provided, then look for the existing value to check if it is an update

@@ -4,6 +4,10 @@ body {
     padding-top: 50px;
 }
 
+.bnbpaneldetail {
+    padding-bottom: 50px;
+}
+
 .navbar-btn {
     background-color: transparent;
     border-color: rgb(221, 221, 221);
@@ -46,6 +50,11 @@ body {
 
 .huge {
     font-size: 40px;
+}
+
+label.bnbminilabel {
+    font-size: 12px;
+    font-weight: normal;
 }
 
 /* class for nav bar buttons with icons */

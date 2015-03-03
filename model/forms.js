@@ -2,8 +2,8 @@ Meteor.methods({
     saveForm: function (coll, id, data) {
         var myColl, isUpdate;
 
-        console.log("data to be processed: " + JSON.stringify(data));
-        console.log("collection: " + coll);
+        BNBLink.log("data to be processed: " + JSON.stringify(data));
+        BNBLink.log("collection: " + coll);
         myColl = BNBLink.collections[coll];
         isUpdate = false;
 

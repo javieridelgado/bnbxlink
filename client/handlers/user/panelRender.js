@@ -31,7 +31,7 @@ if (Meteor.isClient) {
         filter = data.collectionFilter;
         parent = instance.parentInstance;
 
-        console.log("reading data for collection " + coll + " with filter " + filter + " on panel " + data._id);
+        BNBLink.log("reading data for collection " + coll + " with filter " + filter + " on panel " + data._id);
 
         // Retrieve context parameters
         ctxHash = "";
@@ -61,7 +61,7 @@ if (Meteor.isClient) {
             var ctrl, fltr;
             var p, n;
 
-            console.log("fetching data for collection " + coll + " with filter " + filter);
+            BNBLink.log("fetching data for collection " + coll + " with filter " + filter);
 
             if (filter) {
                 /* Retrieve filter parameters */
@@ -76,7 +76,7 @@ if (Meteor.isClient) {
                     }
                 }
 
-                console.log("filter: " + filter);
+                BNBLink.log("filter: " + filter);
                 /* Convert to filter object */
                 fltr = JSON.parse(filter);
             }
@@ -100,7 +100,7 @@ if (Meteor.isClient) {
         // Retrieve the document data
         fetchData(this.data, this);
 
-        console.log("populating form");
+        BNBLink.log("populating form");
         done = this.parentInstance.panelDataRetrieved.get();
         if (this.parentInstance.panelData && this.parentInstance.panelData.length) {
             doc = this.parentInstance.panelData[0];
@@ -114,6 +114,12 @@ if (Meteor.isClient) {
                 $("#" + field).attr("name", field).val(doc[field]);
             }
         }
+        $("input[id]").each(function() {
+           $(this).attr("name", $(this).attr("id"));
+        });
+
+        // Set rating inputs
+        $("input.bnbrating").rating({size: "xs", step: 1, showCaption: false});
     }
 
     // Helpers
@@ -124,8 +130,6 @@ if (Meteor.isClient) {
 
             instance = Template.instance();
 
-            console.log("this: " + JSON.stringify(this));
-            console.log("rendering HTML part: " + this.part);
             switch (this.part) {
                 case "header":
                     transform = this.panel.jsonTransformSumHeader;
@@ -137,7 +141,6 @@ if (Meteor.isClient) {
                     transform = this.panel.jsonTransformSum;
                     break;
             }
-
             template = _.template(transform);
 
             // Retrieve data
@@ -227,7 +230,7 @@ if (Meteor.isClient) {
             instance = Template.instance();
 
             // Retrieve data
-            console.log("fetch chart data...");
+            BNBLink.log("fetch chart data...");
             fetchData(this, instance);
 
             // Transform data
@@ -235,7 +238,7 @@ if (Meteor.isClient) {
             data = instance.parentInstance.panelData;
 
             if (data) {
-                console.log("we have chart data!");
+                BNBLink.log("we have chart data!");
                 otherSum = 0;
 
                 data = data

@@ -400,7 +400,7 @@ if (Meteor.isClient) {
             $('#outputJSONExcel').val(outputText);
 
             Meteor.call("populateCollection", "test", JSON.parse(outputText), true, function (error, results) {
-                console.log(results); //results.data should be a JSON object
+                BNBLink.log(results); //results.data should be a JSON object
             });
 
         },
@@ -435,7 +435,6 @@ if (Meteor.isClient) {
             user = $("#psUserQuery").val();
             password = $("#psPasswordQuery").val();
             query = $("#psQuery").val();
-            console.log("running query: " + query);
 
             Meteor.call("psSaveQuery", url, user, password, query, collection, function (error, results) {
                 $('#outputJSONPeopleSoftQuery').val(results);

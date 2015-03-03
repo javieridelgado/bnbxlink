@@ -58,10 +58,10 @@ if (Meteor.isClient) {
                 item.parameters = parameters;
 
                 if (!instance.handlers[item.event]) {
-                    console.log("new item: " + item.command);
+                    BNBLink.log("new item: " + item.command);
                     instance.handlers[item.event] = [item];
                 } else {
-                    console.log("add item: " + item.command);
+                    BNBLink.log("add item: " + item.command);
                     instance.handlers[item.event].push(item);
                 }
             });
@@ -77,7 +77,7 @@ if (Meteor.isClient) {
         if (template.handlers[eventName]) {
             template.handlers[eventName].forEach(function (item) {
                 if (event.currentTarget.matches(item.name)) {
-                    console.log("matching element: " + event.currentTarget.nodeName);
+                    BNBLink.log("matching element: " + event.currentTarget.nodeName);
                     matching.push(item);
                 }
             });

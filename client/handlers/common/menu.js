@@ -56,7 +56,7 @@ if (Meteor.isClient) {
 
         'click #testOption': function (event) {
             Meteor.call("pullAllSteps", function (error, results) {
-                console.log(results); //results.data should be a JSON object
+                BNBLink.log(results); //results.data should be a JSON object
             });
         },
 

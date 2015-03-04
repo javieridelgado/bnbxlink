@@ -40,32 +40,39 @@ if (Meteor.isClient) {
     var onRender = function () {
         var instance = this;
 
-        // Create handlers
-        instance.handlers = {};
-        if (this.data.actions) {
-            this.data.actions.forEach(function (item) {
-                var parameters;
+        // This part of the code should be run every time the panel data is refreshed
+        this.autorun(function() {
+            var data;
 
-                // If there is a parameter, we need to split them into an array
-                if (item.params) {
-                    parameters = item.params.split(",")
-                        .map(function (item) {
-                            return item.trim();
-                        });
-                } else {
-                    parameters = [];
-                }
-                item.parameters = parameters;
+            // We use Template.currentData instead of instance.data because it sets a reactive dependency with the
+            // panel data. Every time a different panel is loaded, this code is executed again.
+            data = Template.currentData();
 
-                if (!instance.handlers[item.event]) {
-                    BNBLink.log("new item: " + item.command);
-                    instance.handlers[item.event] = [item];
-                } else {
-                    BNBLink.log("add item: " + item.command);
-                    instance.handlers[item.event].push(item);
-                }
-            });
-        }
+            // Create handlers
+            instance.handlers = {};
+            if (data.actions) {
+                data.actions.forEach(function (item) {
+                    var parameters;
+
+                    // If there is a parameter, we need to split them into an array
+                    if (item.params) {
+                        parameters = item.params.split(",")
+                            .map(function (item) {
+                                return item.trim();
+                            });
+                    } else {
+                        parameters = [];
+                    }
+                    item.parameters = parameters;
+
+                    if (!instance.handlers[item.event]) {
+                        instance.handlers[item.event] = [item];
+                    } else {
+                        instance.handlers[item.event].push(item);
+                    }
+                });
+            }
+        });
     }
 
     var handlePanelEvent = function (eventName, event, template) {

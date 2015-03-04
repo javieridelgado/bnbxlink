@@ -20,107 +20,12 @@ if (Meteor.isClient) {
         this.parentInstance = parent;
     }
 
-    // fetches data and associates it to the instance and the parent instance (if any)
-    var fetchData = function (data, instance, force) {
-        var coll, filter;
-        var ctxHash;
-        var parent;
-
-        // populate the context variables
-        coll = data.collectionBase;
-        filter = data.collectionFilter;
-        parent = instance.parentInstance;
-
-        BNBLink.log("reading data for collection " + coll + " with filter " + filter + " on panel " + data._id);
-
-        // Retrieve context parameters
-        ctxHash = "";
-        if (Router) {
-            ctxHash = JSON.stringify(Router.current().params.query);
-        }
-        ctxHash = ctxHash + "|" + data._id;
-
-        // we should do nothing the information was already loaded
-        if (!force && parent.dataProcessedHash && parent.dataProcessedHash == ctxHash)
-            return;
-
-        // mark the information as generated, so we don't process again unless forced
-        parent.dataProcessedHash = ctxHash;
-
-        // initialize reactive variable
-        parent.panelDataRetrieved = new ReactiveVar("");
-        parent.panelData = null;
-
-        // If there is no collection, then no data can be retrieved
-        parent.panelDataRetrieved.set(false);
-        if (!coll) {
-            return null;
-        }
-
-        BNBLink.enableCollection(coll, function () {
-            var ctrl, fltr;
-            var p, n;
-
-            BNBLink.log("fetching data for collection " + coll + " with filter " + filter);
-
-            if (filter) {
-                /* Retrieve filter parameters */
-                if (Router) {
-                    ctrl = Router.current();
-
-                    /* Replace filter parameters */
-                    for (p in ctrl.params.query) {
-                        // Retrieve parameter number
-                        n = p.substring(1);
-                        filter = filter.replace("%" + n + "%", ctrl.params.query[p]);
-                    }
-                }
-
-                BNBLink.log("filter: " + filter);
-                /* Convert to filter object */
-                fltr = JSON.parse(filter);
-            }
-            else fltr = {};
-
-            parent.panelData = BNBLink.collections[coll].find(fltr).fetch();
-            parent.panelDataRetrieved.set(true);
-        });
-    }
-
     // Set creation handlers
     Template.panelRender.created = onCreate;
     Template.panelRenderHeader.created = onCreate;
     Template.panelRenderFooter.created = onCreate;
     Template.panelRenderForm.created = onCreate;
     Template.panelRenderHTML.created = onCreate;
-
-    Template.panelRenderForm.rendered = function () {
-        var doc, field, done;
-
-        // Retrieve the document data
-        fetchData(this.data, this);
-
-        BNBLink.log("populating form");
-        done = this.parentInstance.panelDataRetrieved.get();
-        if (this.parentInstance.panelData && this.parentInstance.panelData.length) {
-            doc = this.parentInstance.panelData[0];
-        } else {
-            return;
-        }
-
-        // Fill the form with the document data
-        for (field in doc) {
-            if (doc[field]) {
-                $("#" + field).attr("name", field).val(doc[field]);
-            }
-        }
-        $("input[id]").each(function() {
-           $(this).attr("name", $(this).attr("id"));
-        });
-
-        // Set rating inputs
-        $("input.bnbrating").rating({size: "xs", step: 1, showCaption: false});
-    }
 
     // Helpers
     Template.panelRenderHTML.helpers({
@@ -144,7 +49,7 @@ if (Meteor.isClient) {
             template = _.template(transform);
 
             // Retrieve data
-            fetchData(this.panel, instance);
+            BNBLink.fetchData(this.panel, instance);
 
             // Transform data
             cursor = {};

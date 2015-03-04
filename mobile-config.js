@@ -2,7 +2,7 @@
 // the entire section is optional.
 App.info({
   id: 'com.bnetbuilders.jdelgado.blink',
-  name: 'BNB Link',
+  name: 'BNBLink',
   description: 'Mobile application for business offline reports',
   author: 'Javier Delgado',
   email: 'info@bnetbuilders.com',

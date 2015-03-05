@@ -2,48 +2,30 @@
     <div class="bnbpaneldetail">
         {{> panelViewDetail}}
     </div>
-    {{#if commentsEnabled}}
-        {{> panelComments}}
-    {{/if}}
     {{#contentFor "menu"}}
         {{> menudetail}}
     {{/contentFor}}
     <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container">
-            <button type="button" class="btn btn-default navbar-btn navbar-left" data-toggle="modal"
-                    data-target="#sharepanelmodal">
-                <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-            </button>
-            <button type="button" class="btn btn-default navbar-btn navbar-left" id="commentPanel">
-                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-            </button>
-            <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal"
-                    data-target="#deletepanelmodal">
-                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-            </button>
-        </div>
-    </nav>
-
-    <div class="modal fade" id="deletepanelmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
-                </div>
-                <div class="modal-body">
-                    This action will remove the panel from your dashboard. Do you want to proceed?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" id="deletepanel">Yes</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
-                </div>
+        {{#if commentsEnabled}}
+            {{> panelComments}}
+        {{else}}
+            <div class="container">
+                <button type="button" class="btn btn-default navbar-btn navbar-left" data-toggle="modal"
+                        data-target="#sharepanelmodal">
+                    <span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default navbar-btn navbar-left" id="commentPanel">
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                </button>
+                <!--
+                            <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal"
+                                    data-target="#deletepanelmodal">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                -->
             </div>
-        </div>
-    </div>
+        {{/if}}
+    </nav>
 
     <div class="modal fade" id="sharepanelmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -77,8 +59,13 @@
 </template>
 
 <template name="panelComments">
-    <div class="panel panel-primary">
+    <div class="panel panel-primary bnbchat">
         <div class="panel-heading">
+            <div class="btn-group pull-right">
+                <button type="button" id="bnbclosechat" class="btn btn-primary btn-xs">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <span class="glyphicon glyphicon-comment"></span> Comments
         </div>
         <div class="panel-body">
@@ -104,7 +91,7 @@
                 {{/each}}
             </ul>
         </div>
-        <div class="panel-footer bnbchat">
+        <div class="panel-footer">
             <form>
                 <div class="form-group">
                     <div class="input-group">

@@ -136,7 +136,7 @@ if (Meteor.isClient) {
 
             // Retrieve data
             BNBLink.log("fetch chart data...");
-            fetchData(this, instance);
+            BNBLink.fetchData(this, instance);
 
             // Transform data
             done = instance.parentInstance.panelDataRetrieved.get();

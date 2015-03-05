@@ -57,6 +57,20 @@ label.bnbminilabel {
     font-weight: normal;
 }
 
+/* chat related - BNB specific */
+
+.panel.bnbchat {
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.panel.bnbchat > .panel-body
+{
+    height: 250px;
+}
+
 /* class for nav bar buttons with icons */
 
 .navbar-btn-icon {

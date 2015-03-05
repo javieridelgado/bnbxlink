@@ -50,7 +50,12 @@ if (Meteor.isClient) {
     });
 
     Template.panelComments.events({
-        'submit form': function (event) {
+        "click #bnbclosechat": function(event) {
+            Session.set("commentsEnabled", "N");
+            console.log("close comments");
+        },
+
+        "submit form": function (event) {
             event.preventDefault();
             // This functionality should search within the current data of the added panels
             Meteor.call('addPanelComment', this._id, Meteor.userId(), $("#newComment").val(), function (error, result) {

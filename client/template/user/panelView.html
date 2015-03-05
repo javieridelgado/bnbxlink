@@ -1,11 +1,42 @@
 <template name="panelView">
     <div class="panel panel-{{panelStyle}} bnbsummarypanel">
         <div class="panel-heading">
-            {{#if customPanelHeader}}
-                {{> panelRenderHeader}}
-            {{else}}
-                <h4 class="panel-title">{{name}}</h4>
-            {{/if}}
+            <div style="display: inline-block; width: 90%">
+                {{#if customPanelHeader}}
+                    {{> panelRenderHeader}}
+                {{else}}
+                    <h4 class="panel-title">{{name}}</h4>
+                {{/if}}
+            </div>
+            <!--<div class="icon-btn pull-right dropdown" style="max-width: 16px;">
+                <a class="dropdown-toggle bnbsummarymenu" role="button" href="#" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Remove</a>
+                    </li>
+                    <li><a href="#">Follow</a>
+                    </li>
+                    <li><a href="#">Zoom</a>
+                    </li>
+                </ul>
+            </div>-->
+            <div class="btn-group pull-right">
+                <button type="button" class="btn btn-{{panelStyle}} btn-xs dropdown-toggle bnbsummarymenu"
+                        data-toggle="dropdown" aria-expanded="false">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a class="bnbsummaryremove" href="#">Remove</a>
+                    </li>
+                    <li><a class="bnbsummaryfollow" href="#">Follow</a>
+                    </li>
+                    {{#if hasPanelBody}}
+                        <li><a class="bnbsummaryzoom" href="#">Zoom</a>
+                        </li>
+                    {{/if}}
+                </ul>
+            </div>
         </div>
         {{#if hasPanelBody}}
             <div class="panel-body">
@@ -20,14 +51,6 @@
     </div>
 </template>
 
-
-<template name="panelViewDetail2">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            {{> panelRender}}
-        </div>
-    </div>
-</template>
 
 <template name="panelViewDetail">
     {{> panelRender}}

@@ -14,7 +14,7 @@ if (Meteor.isClient) {
             return false;
         },
 
-        // should we show a the panel body or not
+        // should we show the panel body or not
         hasPanelBody: function () {
             if (this.jsonTransformSum || this.panelType != "HTML")
                 return true;
@@ -22,7 +22,7 @@ if (Meteor.isClient) {
             return false;
         },
 
-        // should we show a the panel footer or not
+        // should we show the panel footer or not
         hasPanelFooter: function () {
             if (this.jsonTransformSumFooter)
                 return true;
@@ -41,7 +41,7 @@ if (Meteor.isClient) {
         var instance = this;
 
         // This part of the code should be run every time the panel data is refreshed
-        this.autorun(function() {
+        this.autorun(function () {
             var data;
 
             // We use Template.currentData instead of instance.data because it sets a reactive dependency with the
@@ -96,7 +96,7 @@ if (Meteor.isClient) {
 
                 // retrieve parameters
                 querystr = "";
-                matching[0].parameters.forEach(function(paramName, paramNbr) {
+                matching[0].parameters.forEach(function (paramName, paramNbr) {
                     var pnbr;
 
                     pnbr = paramNbr + 1;
@@ -136,6 +136,17 @@ if (Meteor.isClient) {
 
     Template.panelView.events({
         "click *": function (event, template) {
+            // Handle drop down menu first
+            if (event.currentTarget.matches("button.bnbsummarymenu")) {
+                // if there is a detail panel
+                template.$('.dropdown-toggle').dropdown("toggle");
+                return false;
+            }
+
+            // Did the user choose the zoom option?
+            if (event.currentTarget.matches("a.bnbsummaryzoom")) {
+            }
+
             // Check if we are at the top level
             if (event.currentTarget.matches("div.bnbsummarypanel")) {
                 // if there is a detail panel
@@ -149,6 +160,23 @@ if (Meteor.isClient) {
             }
 
             handlePanelEvent("click", event, template);
+        },
+
+        // handle remove event
+        "click a.bnbsummaryremove": function(event, template) {
+            Meteor.call('delPanel', this._id, Meteor.userId(), function (error, result) {
+                if (error)
+                    return BNBLink.log(error.reason);
+            });
+            return false;
+        },
+
+        // handle zoom event
+        "click a.bnbsummaryzoom": function(event, template) {
+            BNBLink.go("panelDetail", {
+                _id: this._id
+            });
+            return false;
         },
 
         // Avoid dragging based on panel body

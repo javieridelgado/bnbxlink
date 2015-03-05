@@ -71,23 +71,7 @@
         <div class="panel-body">
             <ul class="chat">
                 {{#each comments}}
-                    <li class="left clearfix">
-                    <span class="chat-img pull-left">
-                        <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
-                    </span>
-
-                        <div class="chat-body clearfix">
-                            <div class="header">
-                                <strong class="primary-font">{{username}}</strong>
-                                <small class="pull-right text-muted">
-                                    <span class="glyphicon glyphicon-time"></span>12 mins ago
-                                </small>
-                            </div>
-                            <p>
-                                {{comment}}
-                            </p>
-                        </div>
-                    </li>
+                    {{> panelCommentEntry}}
                 {{/each}}
             </ul>
         </div>
@@ -107,4 +91,42 @@
             </form>
         </div>
     </div>
+</template>
+
+<template name="panelCommentEntry">
+    {{#if isOwnEntry}}
+        <li class="right clearfix">
+            <span class="chat-img pull-right">
+                <img src="http://placehold.it/50/FA6F57/fff&amp;text=ME" alt="User Avatar" class="img-circle">
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <small class="text-muted">
+                        <span class="glyphicon glyphicon-time"></span>{{formatTime timestamp}}
+                    </small>
+                    <strong class="pull-right primary-font">{{username}}</strong>
+                </div>
+                <p>
+                    {{comment}}
+                </p>
+            </div>
+        </li>
+    {{else}}
+        <li class="left clearfix">
+            <span class="chat-img pull-left">
+                <img src="http://placehold.it/50/55C1E7/fff&amp;text=U" alt="User Avatar" class="img-circle">
+            </span>
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <strong class="primary-font">{{username}}</strong>
+                    <small class="pull-right text-muted">
+                        <span class="glyphicon glyphicon-time"></span>{{formatTime timestamp}}
+                    </small>
+                </div>
+                <p>
+                    {{comment}}
+                </p>
+            </div>
+        </li>
+    {{/if}}
 </template>

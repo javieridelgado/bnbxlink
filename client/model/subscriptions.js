@@ -96,7 +96,7 @@ if (Meteor.isClient) {
                                     Ground.Collection(BNBLink.collections[coll], coll);
                                 } else {
                                     // TODO -  check - in some cases, this flag is not set, causing the information not be available offline
-                                    //BNBLink.collections[coll].grounddb._databaseLoaded = true;
+                                    //BNBLink.collections[coll].gronddb._databaseLoaded = true;
                                     console.log("after subscription of " + coll + ", the loaded status is: " + BNBLink.collections[coll].grounddb._databaseLoaded);
                                 }
                             }

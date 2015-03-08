@@ -15,6 +15,7 @@ Accounts.registerLoginHandler("PeopleSoft", function (loginRequest) {
 
     // first check the credentials against PeopleSoft
     url = "http://192.168.59.103:8000/PSIGW/RESTListeningConnector/PSFT_HR/ListQuery.v1/public/listquery?search=&maxrows=1000&isconnectedquery=N";
+    BNBLink.log("checking user credentials with PeopleSoft server");
 
     try {
         svcResult = HTTP.call("GET", url, {

@@ -17,11 +17,19 @@ Meteor.methods({
         return "";
     },
 
+
     declareAndPublishColl: function (coll) {
         // First check if the collection is already declared. If not, create it.
         BNBLink.log("entered declareAndPublish:" + coll);
-        if (!BNBLink.collections[coll])
-            BNBLink.collections[coll] = new Mongo.Collection(coll);
+        if (!BNBLink.collections[coll]) {
+            if (BNBLink.isOfflineCollection(coll)) {
+                BNBLink.collections[coll] = new Ground.Collection(coll);
+                console.log("declared as offline:" + coll);
+            } else {
+                BNBLink.collections[coll] = new Mongo.Collection(coll);
+                console.log("declared as online:" + coll);
+            }
+        }
 
         // Once the collection is created, make sure it is published.
         if (BNBLink.publications.indexOf(coll) == -1) {
@@ -34,6 +42,7 @@ Meteor.methods({
 
         return "";
     },
+
 
     populateCollection: function (coll, data, flush) {
         // First check if the collection is already declared. If not, create it.

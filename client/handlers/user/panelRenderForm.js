@@ -1,25 +1,23 @@
 // This only runs on the client
 if (Meteor.isClient) {
     Template.panelRenderForm.rendered = function () {
-        var doc, field, done;
         var instance = this;
 
         // Force the execution of this code whenever the panel is refreshed
         this.autorun(function() {
+            var doc, field, done;
             var f_AssignName;
+            var panelData;
             var data;
 
             // We use Template.currentData instead of instance.data because it sets a reactive dependency with the
             // panel data. Every time a different panel is loaded, this code is executed again.
-            data = Template.currentData();
+            panelData = Template.currentData();
 
             // Retrieve the document data
-            BNBLink.fetchData(data, instance);
-
-            BNBLink.log("populating form");
-            done = instance.parentInstance.panelDataRetrieved.get();
-            if (instance.parentInstance.panelData && instance.parentInstance.panelData.length) {
-                doc = instance.parentInstance.panelData[0];
+            data = instance.parentInstance.panelData.get();
+            if (data && data.length) {
+                doc = data[0];
             } else {
                 return;
             }
@@ -38,6 +36,7 @@ if (Meteor.isClient) {
             $("input[id]").each(f_AssignName);
             $("textarea[id]").each(f_AssignName);
 
+            // TODO: when submitting, the ratings are duplicated
             // Set rating inputs
             $("input.bnbrating").rating({size: "xs", step: 1, showCaption: false});
         });
@@ -45,21 +44,25 @@ if (Meteor.isClient) {
 
     Template.panelRenderForm.events({
         "submit form.bnbform": function (event, template) {
-            var data, formArray;
+            var data, oldData, formArray;
 
+            // retrieve the current form data
             data = {};
             formArray = $("form.bnbform").serializeArray();
             formArray.forEach(function(item) {
                 data[item.name] = item.value;
             });
 
-            BNBLink.log("submit form= " + JSON.stringify(data));
-            event.preventDefault();
+            // retrieve previous data
+            oldData = template.parentInstance.panelData.get();
 
-            //Meteor.call("saveForm", this.panel.collectionBase, template.parentInstance.panelData[0]._id, data, function (error, results) {
-            Meteor.call("saveForm", this.collectionBase, template.parentInstance.panelData[0]._id, data, function (error, results) {
+            // call method to save the form information
+            Meteor.call("saveForm", this.collectionBase, oldData[0]._id, data, function (error, results) {
                 BNBLink.log(results); //results.data should be a JSON object
             });
+
+            // we don't want to process further actions
+            return false;
         }
     });
 

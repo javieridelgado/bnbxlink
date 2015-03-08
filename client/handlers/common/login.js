@@ -2,8 +2,16 @@ if (Meteor.isClient) {
     Template.login.events({
         // Process Signin button
         'submit .form-signin': function (event) {
-            var userID = event.target.inputUser.value;
-            var userPswd = event.target.inputPassword.value;
+            var userID;
+            var userPswd;
+            var $btn;
+
+            // set signin in message in the button
+            $btn = $("button.btn-primary").button('loading');
+
+            // initialize variables
+            userID = event.target.inputUser.value;
+            userPswd = event.target.inputPassword.value;
 
             event.preventDefault();
 
@@ -15,6 +23,7 @@ if (Meteor.isClient) {
             } else {
                 // TODO: we should invoke our own services
                 Meteor.loginCaller(userID, userPswd, function (error) {
+                    $btn.button('reset');
                     if (error) {
                         Session.set("login.error", "Wrong user name and/or password.");
                     } else  {

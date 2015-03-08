@@ -1,7 +1,5 @@
-// On Client and Server
-// name is the field to search over
 if (Meteor.isServer) {
-    Meteor.publish('panels', function () {
+    Meteor.publish("panels", function () {
         return BNBLink.Panels.find({});
     });
 

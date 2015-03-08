@@ -1,4 +1,3 @@
-// This only runs on the client
 if (Meteor.isClient) {
     Template.panelView.helpers({
         // feed the panel style
@@ -32,26 +31,33 @@ if (Meteor.isClient) {
     });
 
     // Common functions
-    var onCreate = function () {
+    var onViewCreate = function () {
         // initialize the panel data attribute
-        this.panelDataRetrieved = new ReactiveVar("");
+        this.panelData = new ReactiveVar([]);
     }
 
-    var onRender = function () {
+    var onViewRender = function () {
         var instance = this;
+
+        console.log("panelView rendered");
 
         // This part of the code should be run every time the panel data is refreshed
         this.autorun(function () {
-            var data;
+            var panelData, coll, filter;
+            var ctrl, fltr, params;
+            var p, n;
 
             // We use Template.currentData instead of instance.data because it sets a reactive dependency with the
             // panel data. Every time a different panel is loaded, this code is executed again.
-            data = Template.currentData();
+            panelData = Template.currentData();
 
-            // Create handlers
+            // Every time the panel data is reloaded, we need to reinitialize the variables.
             instance.handlers = {};
-            if (data.actions) {
-                data.actions.forEach(function (item) {
+            instance.panelData.set([]);
+
+            // load handlers
+            if (panelData.actions) {
+                panelData.actions.forEach(function (item) {
                     var parameters;
 
                     // If there is a parameter, we need to split them into an array
@@ -72,6 +78,44 @@ if (Meteor.isClient) {
                     }
                 });
             }
+
+            // retrieve panel metadata
+            coll = panelData.collectionBase;
+            filter = panelData.collectionFilter;
+
+            // if no collection, then exit
+            if (!coll) {
+                return;
+            }
+
+            // if there is a filter, we need to take it into account
+            if (filter) {
+                /* Retrieve filter parameters */
+                if (Router) {
+                    ctrl = Router.current();
+
+                    // this is a reactive call to obtain the panel parameters. if they change, the code will be
+                    // re-executed automatically.
+                    params = ctrl.getParams();
+
+                    /* Replace filter parameters */
+                    for (p in params.query) {
+                        // Retrieve parameter number
+                        n = p.substring(1);
+                        filter = filter.replace("%" + n + "%", ctrl.params.query[p]);
+                    }
+                }
+
+                BNBLink.log("panel view filter: " + filter);
+                /* Convert to filter object */
+                fltr = JSON.parse(filter);
+            }
+            else fltr = {};
+
+            // enable collection
+            BNBLink.enableCollection(coll, function () {
+                instance.panelData.set(BNBLink.collections[coll].find(fltr).fetch());
+            });
         });
     }
 
@@ -80,11 +124,10 @@ if (Meteor.isClient) {
         var matching = [];
         var i, param, querystr;
 
-        // Check if the target matches any of the selectors
+        // Check if the target matches any of the selectors and save the handlers in the matching array.
         if (template.handlers[eventName]) {
             template.handlers[eventName].forEach(function (item) {
                 if (event.currentTarget.matches(item.name)) {
-                    BNBLink.log("matching element: " + event.currentTarget.nodeName);
                     matching.push(item);
                 }
             });
@@ -115,55 +158,27 @@ if (Meteor.isClient) {
                 });
             }
         }
-
-        // Check if we are at the top level
-        if (event.currentTarget.matches("div.panel")) {
-            // if there is a detail panel
-            if (this.jsonTransformDtl) {
-                // go to the detail panel
-                BNBLink.go("panelDetail", {
-                    _id: this._id
-                });
-            }
-        }
     }
 
-    Template.panelView.created = onCreate;
-    Template.panelViewDetail.created = onCreate;
+    Template.panelView.created = onViewCreate;
+    Template.panelViewDetail.created = onViewCreate;
 
-    Template.panelView.rendered = onRender;
-    Template.panelViewDetail.rendered = onRender;
+    Template.panelView.rendered = onViewRender;
+    Template.panelViewDetail.rendered = onViewRender;
 
     Template.panelView.events({
         "click *": function (event, template) {
-            // Handle drop down menu first
-            if (event.currentTarget.matches("button.bnbsummarymenu")) {
-                // if there is a detail panel
-                template.$('.dropdown-toggle').dropdown("toggle");
-                return false;
-            }
-
-            // Did the user choose the zoom option?
-            if (event.currentTarget.matches("a.bnbsummaryzoom")) {
-            }
-
-            // Check if we are at the top level
-            if (event.currentTarget.matches("div.bnbsummarypanel")) {
-                // if there is a detail panel
-                if (this.detailPanel) {
-                    // go to the detail panel
-                    BNBLink.go("panelDetail", {
-                        _id: this.detailPanel
-                    });
-                    return false;
-                }
-            }
-
             handlePanelEvent("click", event, template);
         },
 
+        // handle summary menu click
+        "click button.bnbsummarymenu": function (event, template) {
+            template.$('.dropdown-toggle').dropdown("toggle");
+            return false;
+        },
+
         // handle remove event
-        "click a.bnbsummaryremove": function(event, template) {
+        "click a.bnbsummaryremove": function (event, template) {
             Meteor.call('delPanel', this._id, Meteor.userId(), function (error, result) {
                 if (error)
                     return BNBLink.log(error.reason);
@@ -172,7 +187,7 @@ if (Meteor.isClient) {
         },
 
         // handle zoom event
-        "click a.bnbsummaryzoom": function(event, template) {
+        "click a.bnbsummaryzoom": function (event, template) {
             BNBLink.go("panelDetail", {
                 _id: this._id
             });
@@ -182,6 +197,18 @@ if (Meteor.isClient) {
         // Avoid dragging based on panel body
         "mousedown div.panel-body": function (event, t) {
             event.preventDefault();
+        },
+
+        // handle go to detail panel event
+        "click div.bnbsummarypanel": function (event, template) {
+            // if there is a detail panel
+            if (this.detailPanel) {
+                // go to the detail panel
+                BNBLink.go("panelDetail", {
+                    _id: this.detailPanel
+                });
+                return false;
+            }
         }
     });
 

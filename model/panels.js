@@ -33,7 +33,7 @@ Meteor.methods({
         return "something";
     },
 
-    addPanelComment: function (panelID, userID, comment) {
+    addPanelComment: function (panelID, panelKey, userID, comment) {
         var username, users, userList;
 
         BNBLink.log("in server: " + panelID + ' - ' + userID + ' - ' + comment);
@@ -43,6 +43,7 @@ Meteor.methods({
         BNBLink.Comments.insert({
             objType: "panel",
             objID: panelID,
+            objKey: panelKey,
             userID: userID,
             username: username,
             comment: comment,
@@ -62,7 +63,7 @@ Meteor.methods({
 
         // Notify comment
         if (userList.length) {
-            Meteor.call("sendNotification", userList, "%n comments were made on panel.", "");
+            Meteor.call("sendNotification", userList, "%n comments were made on panel.", panelID, panelKey);
         }
 
         return "something";

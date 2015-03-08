@@ -1,6 +1,22 @@
-// On Client and Server
+// Utility functions
+var renderPanel = function(coll, transform, f) {
+    BNBLink.enableCollection(coll, function () {
+        var renderedHTML, template, cursor;
+
+        // create transform engine instance
+        template = _.template(transform);
+
+        // create data
+        cursor = {};
+        cursor.values = BNBLink.collections[coll].find().fetch();
+
+        // callback function
+        if (f) f(template(cursor));
+    });
+}
+
 if (Meteor.isClient) {
-    //Meteor.subscribe("panels");
+
     Template.admPanelAll.helpers({
         panels: function () {
             return BNBLink.Panels.find({});
@@ -34,11 +50,42 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.panelUpdate.rendered = function () {
-        $('textarea').autosize();
+    // panelCRUDbody template
+
+
+    Template.panelCRUDbody.rendered = function () {
+        // set all text areas to autosize
+        $("textarea").autosize();
+
+        // set preview area
+        $("div#htmlSum").hide();
+        //$("div#previewSum").hide();
     };
 
-    Template.panelUpdate.events({
+    Template.panelCRUDbody.helpers({
+        renderedHTML: function () {
+            var coll, transform;
+            var template;
+
+            // retrieve collection and transform values. These are reactive methods, so this helper will
+            // be automatically refreshed each time one of the two values changes.
+            coll = AutoForm.getFieldValue("admPanelForm", "collectionBase");
+            transform = AutoForm.getFieldValue("admPanelForm", "jsonTransformSum");
+
+            // enable collection
+            BNBLink.enableCollection(coll);
+
+            // create template instance
+            template = _.template(transform);
+
+            cursor = {};
+            cursor.values = BNBLink.collections[coll].find().fetch();
+
+            return template(cursor);
+        }
+    });
+
+    Template.panelCRUDbody.events({
         'change input[name="collectionBase"]': function (event) {
             var coll;
 
@@ -49,14 +96,24 @@ if (Meteor.isClient) {
 
             BNBLink.enableCollection(coll);
         },
-        
+
+        "click button#refreshHTML": function(event) {
+            $("div#htmlSum").show();
+            $("div#previewSum").hide();
+        },
+
+        "click button#refreshPreview": function(event) {
+            $("div#htmlSum").hide();
+            $("div#previewSum").show();
+        } /*,
+
         'change textarea[name="jsonTransformSum"]': function (event) {
             var coll;
             var transform;
 
             event.preventDefault();
 
-            coll = AutoForm.getFieldValue('admPanelUpd', 'collectionBase');
+            coll = AutoForm.getFieldValue('admPanelForm', 'collectionBase');
             transform = event.target.value;
 
             BNBLink.enableCollection(coll, function () {
@@ -69,28 +126,6 @@ if (Meteor.isClient) {
                 cursor.values = BNBLink.collections[coll].find().fetch();
                 $("textarea[name='cachedHTML']").val(template(cursor));
             });
-        },
-
-        'change textarea[name="jsonTransformDtl"]': function (event) {
-            var coll;
-            var transform;
-
-            event.preventDefault();
-
-            coll = AutoForm.getFieldValue('admPanelUpd', 'collectionBase');
-            transform = event.target.value;
-
-            BNBLink.enableCollection(coll, function () {
-                var renderedHTML, template, cursor;
-
-                template = _.template(transform);
-                BNBLink.log("callback called");
-
-                cursor = {};
-                cursor.values = BNBLink.collections[coll].find().fetch();
-                $("textarea[name='detailHTML']").val(template(cursor));
-                /*this.detailHTML = template(cursor);*/
-            });
-        }
+        }*/
     });
 }

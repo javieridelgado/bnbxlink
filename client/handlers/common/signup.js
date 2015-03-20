@@ -1,7 +1,7 @@
 if (Meteor.isClient) {
-    Template.login.events({
+    Template.signup.events({
         // Process Signin button
-        'submit .form-signin': function (event) {
+        "submit form": function (event) {
             var org, server;
             var userID;
             var userPswd;

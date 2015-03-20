@@ -20,24 +20,6 @@
                     <img alt="Brand" src="/pics/logo_klein.png" width="80px" height="20px">
                 </a>
 
-                <ul class="nav navbar-nav navbar-right hidden-xs">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a id="admpanel">Maintain Panels</a>
-                            </li>
-                            <li><a id="admCollections">Maintain Collections</a>
-                            </li>
-                            <li><a id="testOption">Google Drive</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a id="signout">Sign Out</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -45,9 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <button type="button" id="addpanel" class="btn btn-default navbar-btn navbar-right"><span
-                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                </button>
+
                 <div class="visible-xs-block">
                     <button type="button" class="navbar-toggle collapsed navbar-btn-icon" data-toggle="collapse"
                             data-target="#bs-example-navbar-collapse-2"><span class="glyphicon glyphicon-search"
@@ -66,19 +46,25 @@
                 </form>
             </div>
 
-            <div class="visible-xs-block">
+            <div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a id="preferences">Preferences</a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Production <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Staging</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Create environment</a></li>
+                            </ul>
                         </li>
                         <li><a id="signout">Sign Out</a>
                         </li>
-                        <li><a id="testOption">Google Drive</a>
-                        </li>
                     </ul>
                 </div>
+            </div>
 
+            <div class="visible-xs-block">
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">

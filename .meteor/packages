@@ -26,3 +26,4 @@ meteorhacks:aggregate
 twbs:bootstrap
 sha
 npm-bcrypt
+accounts-password

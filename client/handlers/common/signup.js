@@ -1,60 +1,9 @@
-var schema;
-
-SimpleSchema.messages({
-    "passwordMismatch": "Passwords do not match",
-    "existingOrgID": "Organization ID already exists",
-    regEx: [
-        {msg: "[label] failed regular expression validation"},
-        {exp: /^[a-z][a-z0-9_.]*$/, msg: "[label] must only contain numbers and lowercase letters, always starting with a letter"},
-    ]
-});
-
-schema = new SimpleSchema({
-    organization: {
-        type: String,
-        label: "Organization name",
-        max: 50
-    },
-    orgID: {
-        type: String,
-        label: "Organization ID",
-        regEx: /^[a-z][a-z0-9_.]*$/,
-        max: 50,
-        custom: function () {
-            Meteor.call("checkOrgID", this.value, function (error, result) {
-                if (!result) {
-                    schema.namedContext("signupForm").addInvalidKeys([{name: "orgID", type: "existingOrgID"}]);
-                }
-            });
-        }
-    },
-    email: {
-        type: String,
-        regEx: SimpleSchema.RegEx.Email,
-        label: "E-mail address"
-    },
-    password: {
-        type: String,
-        label: "Password",
-        min: 6
-    },
-    confirm: {
-        type: String,
-        label: "Confirmation",
-        min: 6,
-        custom: function () {
-            if (this.value !== this.field("password").value) {
-                return "passwordMismatch";
-            }
-        }
-    }
-});
 
 if (Meteor.isClient) {
 
     Template.signup.helpers({
         signupSchema: function () {
-            return schema;
+            return Schema.signup;
         }
     });
 

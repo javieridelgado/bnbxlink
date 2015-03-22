@@ -1,4 +1,19 @@
 <template name="login">
+    <div class="container">
+        {{#autoForm schema=loginSchema id="loginForm"}}
+            <h2><img alt="Brand" src="pics/logo_klein.png"></h2>
+            <fieldset>
+                <legend>Admin Console Login</legend>
+                {{> afQuickField name="orgID"}}
+                {{> afQuickField name="email"}}
+                {{> afQuickField type="password" name="password"}}
+                <div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </fieldset>
+        {{/autoForm}}
+    </div>
+    <!--
     <form class="form-signin">
         <h2><img alt="Brand" src="pics/logo_klein.png"></h2>
         {{> loginMessages}}
@@ -25,6 +40,7 @@
         </button>
         <a href="{{pathFor 'signup'}}">Sign Up</a>
     </form>
+-->
 </template>
 
 <template name="loginMessages">

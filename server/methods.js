@@ -19,6 +19,14 @@ Meteor.methods({
 
 
     declareAndPublishColl: function (coll) {
+        var collName;
+
+        // do not declare collection if organization does not exists
+        if (!BNBLink.currentOrgID) {
+            // TODO error
+            return;
+        }
+
         // First check if the collection is already declared. If not, create it.
         BNBLink.log("entered declareAndPublish:" + coll);
         if (!BNBLink.collections[coll]) {

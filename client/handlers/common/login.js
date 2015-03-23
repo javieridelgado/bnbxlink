@@ -38,18 +38,19 @@ if (Meteor.isClient) {
             event.preventDefault();
 
             // login
-            Meteor.loginCallerAdmin(doc.orgID, doc.email, doc.password, function (error) {
-                $btn.button('reset');
+            BNBLink.loginCallerAdmin(doc.orgID, doc.email, doc.password, function (error) {
+                // reset the original Login button status
+                $btn.button("reset");
+
                 if (error) {
                     Session.set("login.error", error.reason);
                 } else {
+                    // successful login
                     Session.set("login.error", null);
 
                     // record the input in the local storage
                     localStorage.email = doc.email;
                     localStorage.orgID = doc.orgID;
-
-                    Session.set("organizationID", doc.orgID);
                 }
             });
         }

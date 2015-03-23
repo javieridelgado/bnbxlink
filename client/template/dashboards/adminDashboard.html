@@ -4,11 +4,21 @@
         {{> sidebar}}
     {{/contentFor}}
     <div id="page-wrapper" style="min-height: 610px;">
-        {{> adminDBCollections}}
-        {{> adminDBPanels}}
-        {{> adminDBIntegration}}
-        {{> adminDBOrganization}}
-        {{> adminDBSecurity}}
+        {{#if currentDashboard "collections"}}
+            {{> adminDBCollections}}
+        {{/if}}
+        {{#if currentDashboard "panels"}}
+            {{> adminDBPanels}}
+        {{/if}}
+        {{#if currentDashboard "integration"}}
+            {{> adminDBIntegration}}
+        {{/if}}
+        {{#if currentDashboard "organization"}}
+            {{> adminDBOrganization}}
+        {{/if}}
+        {{#if currentDashboard "security"}}
+            {{> adminDBSecurity}}
+        {{/if}}
     </div>
 </template>
 

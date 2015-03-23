@@ -2,10 +2,10 @@ Meteor.methods({
     setCurrentOrganization: function(orgID) {
         BNBLink.currentOrgID = orgID;
 
-        Meteor.publish("environments", function () {
+        /*Meteor.publish("environments", function () {
             console.log("publish environments:" + BNBLink.currentOrgID);
             return BNBLink.Environments.find({orgID: BNBLink.currentOrgID});
-        });
+        });*/
     },
 
     // signup a new user

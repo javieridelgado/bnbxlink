@@ -2,11 +2,6 @@ var orgID;
 
 if (Meteor.isClient) {
 
-    Tracker.autorun(function () {
-        envName = Session.get("currentEnvironment");
-
-    });
-
     Meteor.subscribe("userPreferences", function () {
         BNBLink.log("entered subscribe userPreferences");
         //Ground.Collection(Meteor.users);
@@ -35,15 +30,21 @@ if (Meteor.isClient) {
         }
     });
 
-    Meteor.subscribe("collections", {
-        onReady: function () {
-            if (!Ground.lookup("collections")) {
-                Ground.Collection(BNBLink.Collections, "collections");
+    Tracker.autorun(function () {
+        var envID;
+
+        envID = Session.get("currentEnvironment");
+
+        Meteor.subscribe("collections", envID, {
+            onReady: function () {
+                if (!Ground.lookup("collections")) {
+                    Ground.Collection(BNBLink.Collections, "collections");
+                }
+            },
+            onError: function () {
+                BNBLink.log("subscription error");
             }
-        },
-        onError: function () {
-            BNBLink.log("subscription error");
-        }
+        });
     });
 
     Meteor.subscribe("comments", function () {

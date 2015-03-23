@@ -2,6 +2,22 @@ if (Meteor.isClient) {
     Template.login.helpers({
         loginSchema: function () {
             return Schema.login;
+        },
+
+        email: function() {
+            if (localStorage.email) {
+                return localStorage.email;
+            }
+
+            return "";
+        },
+
+        orgID: function() {
+            if (localStorage.orgID) {
+                return localStorage.orgID;
+            }
+
+            return "";
         }
     });
 
@@ -27,16 +43,21 @@ if (Meteor.isClient) {
                 if (error) {
                     Session.set("login.error", error.reason);
                 } else {
-                    // TODO record last login date
                     Session.set("login.error", null);
+
+                    // record the input in the local storage
+                    localStorage.email = doc.email;
+                    localStorage.orgID = doc.orgID;
+
+                    Session.set("organizationID", doc.orgID);
                 }
             });
         }
     });
 
-    /*Template.loginMessages.helpers({
-     errorMessage: function () {
-     return Session.get("login.error");
-     }
-     });*/
+    Template.loginMessages.helpers({
+        errorMessage: function () {
+            return Session.get("login.error");
+        }
+    });
 }

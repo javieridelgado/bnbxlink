@@ -1,8 +1,9 @@
 <template name="signup">
     <div class="container">
+        <h2><img alt="Brand" src="pics/logo_klein.png"></h2>
         {{#autoForm schema=signupSchema id="signupForm" type="method" meteormethod="signup"}}
             <fieldset>
-                <legend>Sign Up</legend>
+                <legend>Admin Console Sign Up</legend>
                 {{> afQuickField name="organization"}}
                 {{> afQuickField name="orgID"}}
                 {{> afQuickField name="email"}}

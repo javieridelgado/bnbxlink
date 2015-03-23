@@ -2,6 +2,7 @@
     <div class="container-fluid">
         {{#if currentUser}}
             {{> yield "menu"}}
+            {{> yield "sidebar"}}
         {{/if}}
         {{> yield}}
     </div>

@@ -11,6 +11,38 @@ if (Meteor.isClient) {
                 return "";
 
             return nbrOfNotifications;
+        },
+
+        currentEnvironment: function () {
+            var env, name, obj;
+
+            env = Session.get("currentEnvironment");
+            name = "<select environment>";
+            if (!env) {
+                obj = BNBLink.Environments.findOne({default: true});
+                if (obj) {
+                    name = obj.name;
+                    env = obj.envID;
+                    Session.set("currentEnvironment", env);
+                }
+            } else {
+                obj = BNBLink.Environments.findOne({envID: env});
+                if (obj) {
+                    name = obj.name;
+                } else {
+                    // reset environment id, because it is wrong
+                    Session.set("currentEnvironment", "");
+                }
+            }
+
+            return name;
+        },
+
+        environments: function () {
+            var env;
+
+            env = Session.get("currentEnvironment");
+            return BNBLink.Environments.find({envID: {$ne: env}});
         }
     });
 
@@ -19,6 +51,15 @@ if (Meteor.isClient) {
             event.preventDefault();
             // This functionality should search within the current data of the added panels
             BNBLink.log('search');
+        },
+
+        "click .bnbselenv": function (event) {
+            var env;
+
+            env = event.target.id;
+
+            // change environment... the subscriptions are reactively recalculated
+            Session.set("currentEnvironment", env.substring(6));
         },
 
         'click #addpanel': function (event) {

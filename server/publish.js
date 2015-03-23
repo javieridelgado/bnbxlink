@@ -16,6 +16,15 @@ if (Meteor.isServer) {
     });
 
 
+    Meteor.publish("environments", function () {
+        console.log("publish environments:" + BNBLink.currentOrgID);
+        if (this.userId) {
+            return BNBLink.Environments.find({orgID: BNBLink.currentOrgID});
+        } else {
+            this.ready();
+        }
+    });
+
     Meteor.publish('userPreferences', function () {
         return Meteor.users.find(this.userId, {
             fields: {

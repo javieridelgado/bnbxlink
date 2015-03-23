@@ -1,0 +1,14 @@
+<template name="adminDashboard">
+    <!-- context menu for this panel -->
+    {{#contentFor "sidebar"}}
+        {{> sidebar}}
+    {{/contentFor}}
+    <div id="page-wrapper" style="min-height: 610px;">
+        {{> adminDBCollections}}
+        {{> adminDBPanels}}
+        {{> adminDBIntegration}}
+        {{> adminDBOrganization}}
+        {{> adminDBSecurity}}
+    </div>
+</template>
+

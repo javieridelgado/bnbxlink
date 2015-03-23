@@ -1,0 +1,29 @@
+<template name="roles">
+    {{#contentFor "menu"}}
+        {{> menudetail}}
+    {{/contentFor}}
+    <div class="container">
+        <form class="navbar-form">
+          <div class="form-group">
+            <input type="text" name="addRole" id="addRole" class="form-control" placeholder="Role name" />
+          </div>
+          <button class="btn btn-default navbar-btn add-btn">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </button>
+        </form>
+        <table class="table table-striped">
+          <tr>
+            <th>Role name</th>
+            <th>Role ID</th>
+            <th></th>
+          </tr>
+          {{#each allRoles}}
+            <tr>
+              <td>{{this.name}}</td>
+              <td>{{this._id}}</td>
+              <td><a href="./edit/{{this._id}}"><button class="btn btn-default modify-btn">Modify</button></a></td>
+            </tr>
+          {{/each}}
+        </table>
+    </div>
+</template>

@@ -26,3 +26,5 @@ twbs:bootstrap
 sha
 npm-bcrypt
 accounts-password
+alanning:roles
+mizzao:autocomplete

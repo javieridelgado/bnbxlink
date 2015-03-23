@@ -1,0 +1,36 @@
+<template name="roleEdit">
+    {{#contentFor "menu"}}
+        {{> menudetail}}
+    {{/contentFor}}
+    <div class="container">
+        <form class="navbar-form">
+          <fieldset>
+              <legend>Modify role</legend>
+              <div class="form-group">
+              {{> inputAutocomplete settings=settings class="form-control" id="username" name="username" placeholder="Add user"}}
+              </div>
+              <button class="btn btn-default navbar-btn add-btn">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+          </fieldset>
+        </form>
+        <table class="table table-striped">
+          <tr>
+            <th>User id</th>
+            <th></th>
+          </tr>
+          {{#each allUsers}}
+            <tr>
+              <td>{{this._id}}</td>
+              <td><button class="btn btn-default del-btn">Delete</button></td>
+            </tr>
+          {{/each}}
+        </table>
+    </div>
+</template>
+
+
+
+<template name="usernameTemplate">
+  <span>{{_id}}</span>
+</template>

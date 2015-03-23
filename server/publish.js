@@ -1,11 +1,14 @@
 if (Meteor.isServer) {
-    Meteor.publish("panels", function () {
-        return BNBLink.Panels.find({});
+    Meteor.publish("panels", function (envID) {
+        if (this.userId) {
+            return BNBLink.Panels.find({orgID: BNBLink.currentOrgID, envID: envID});
+        } else {
+            this.ready();
+        }
     });
 
     Meteor.publish('collections', function (envID) {
         if (this.userId) {
-            console.log("republishing collections: " + BNBLink.currentOrgID + " - " + envID);
             return BNBLink.Collections.find({orgID: BNBLink.currentOrgID, envID: envID});
         } else {
             this.ready();
@@ -16,10 +19,21 @@ if (Meteor.isServer) {
         return BNBLink.Comments.find({});
     });
 
-    Meteor.publish('notifications', function () {
-        return BNBLink.Notifications.find({userId: this.userId});
+    Meteor.publish('notifications', function (envID) {
+        if (this.userId) {
+            return BNBLink.Notifications.find({userId: this.userId, orgID: BNBLink.currentOrgID, envID: envID});
+        } else {
+            this.ready();
+        }
     });
 
+    Meteor.publish("organizations", function () {
+        if (this.userId) {
+            return BNBLink.Organizations.find({orgID: BNBLink.currentOrgID});
+        } else {
+            this.ready();
+        }
+    });
 
     Meteor.publish("environments", function () {
         if (this.userId) {

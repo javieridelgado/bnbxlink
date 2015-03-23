@@ -60,6 +60,9 @@ Meteor.methods({
 
             // add organization and environment to user
             Meteor.users.update({_id: result.id}, {$set: {environments: [{orgID: doc.orgID, env: "admin"}]}});
+
+            // set Organization ID
+            BNBLink.currentOrgID = doc.orgID;
         });
     }
 

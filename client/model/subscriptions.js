@@ -7,18 +7,6 @@ if (Meteor.isClient) {
         //Ground.Collection(Meteor.users);
     });
 
-    Meteor.subscribe("panels", {
-        onReady: function () {
-            if (!Ground.lookup("panels")) {
-                console.log("grounding panels");
-                Ground.Collection(BNBLink.Panels, "panels");
-            }
-        },
-        onError: function () {
-            BNBLink.log("subscription error");
-        }
-    });
-
     Meteor.subscribe("notifications", {
         onReady: function () {
             if (!Ground.lookup("notifications")) {
@@ -39,6 +27,18 @@ if (Meteor.isClient) {
             onReady: function () {
                 if (!Ground.lookup("collections")) {
                     Ground.Collection(BNBLink.Collections, "collections");
+                }
+            },
+            onError: function () {
+                BNBLink.log("subscription error");
+            }
+        });
+
+        Meteor.subscribe("panels", envID, {
+            onReady: function () {
+                if (!Ground.lookup("panels")) {
+                    console.log("grounding panels");
+                    Ground.Collection(BNBLink.Panels, "panels");
                 }
             },
             onError: function () {

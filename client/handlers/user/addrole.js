@@ -1,7 +1,11 @@
 if (Meteor.isClient) {
   Template.roles.helpers({
     allRoles: function(){
-      return Roles.getAllRoles().fetch();
+      var rolesObj = Roles.getAllRoles().fetch();
+      rolesObj.forEach(function(role){
+        role.nUsers = Meteor.users.find({roles: {$in: [role._id]}}).count();
+      });
+      return rolesObj;
     }
   });
 

@@ -4,28 +4,34 @@
     {{/contentFor}}
     <div class="container">
         <form class="navbar-form">
-          <div class="form-group">
-            <input type="text" name="addRole" id="addRole" class="form-control" placeholder="Role name" />
+          <div class="form-group bnb-form-control">
+            <input type="text" name="addRole" id="addRole" class="form-control bnb-form-disp" placeholder="Role name" />
           </div>
-          <button class="btn btn-default navbar-btn add-btn">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          </button>
+          <button class="btn btn-success add-btn">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
         </form>
         <table class="table table-striped">
-          <tr>
-            <th>Role name</th>
-            <th>Role ID</th>
-            <th></th>
-          </tr>
-          {{#each allRoles}}
+          <thead>
             <tr>
-              <td>{{this.name}}</td>
-              <td>{{this._id}}</td>
-              <td><a href="./update/{{this._id}}"><button class="btn btn-default modify-btn">Modify</button></a>
-                <button class="btn btn-default del-btn" value="{{this._id}}">Delete</button>
-              </td>
+              <th class="col-md-4 col-sm-5 col-xs-4">Role name</th>
+              <th class="hidden-xs col-md-3 col-sm-2"># of users</th>
+              <th class="hidden-xs col-md-3 col-sm-2"># of panels</th>
+              <th class="col-md-2 col-sm-3 col-xs-8"></th>
             </tr>
-          {{/each}}
+          </thead>
+            <tbody>
+            {{#each allRoles}}
+              <tr>
+                <td>{{this.name}}</td>
+                <td class="hidden-xs">{{this.nUsers}}</td>
+                <td class="hidden-xs">0</td>
+                <td><a href="./update/{{this._id}}"><button class="btn btn-primary modify-btn">Modify</button></a>
+                  <button class="btn btn-danger del-btn" value="{{this._id}}">Delete</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
         </table>
     </div>
 </template>

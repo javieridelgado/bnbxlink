@@ -17,7 +17,11 @@ if (Meteor.isClient) {
     allUsers: function(){
       //console.log(this._id);
       //var users = {};
-      var users = Meteor.users.find({roles: {$in: [this._id]}});
+      var users = Meteor.users.find({roles: {$in: [this._id]}}).fetch();
+      //var usersArr = users.fetch();
+      users.forEach(function(user){
+        user.mainEmail = user.emails[0].address;
+      });
       return users;
     }
 
@@ -26,9 +30,8 @@ if (Meteor.isClient) {
   Template.roleEdit.events({
     'click .add-btn': function (event) {
       event.preventDefault();
-      console.log(this._id);
       var userName = document.getElementById('username');
-      if(event.target.value !== ""){
+      if(userName !== ""){
         var actualRoles = Meteor.users.findOne({_id:userName.value}).roles;
         if(actualRoles.indexOf(this._id) < 0){
           actualRoles.push(this._id);

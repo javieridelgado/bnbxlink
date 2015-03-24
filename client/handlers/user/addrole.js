@@ -11,6 +11,11 @@ if (Meteor.isClient) {
       var roleName = document.getElementById('addRole');
       Roles.createRole(roleName.value);
       roleName.value = "";
+    },
+
+    'click .del-btn': function(event) {
+      event.preventDefault();
+      Meteor.roles.remove({_id: event.target.value});
     }
   });
 }

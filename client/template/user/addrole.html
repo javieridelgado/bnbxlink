@@ -21,7 +21,9 @@
             <tr>
               <td>{{this.name}}</td>
               <td>{{this._id}}</td>
-              <td><a href="./role/update/{{this._id}}"><button class="btn btn-default modify-btn">Modify</button></a></td>
+              <td><a href="./update/{{this._id}}"><button class="btn btn-default modify-btn">Modify</button></a>
+                <button class="btn btn-default del-btn" value="{{this._id}}">Delete</button>
+              </td>
             </tr>
           {{/each}}
         </table>

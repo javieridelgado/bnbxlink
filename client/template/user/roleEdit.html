@@ -1,4 +1,7 @@
 <template name="roleEdit">
+  <script>
+  'use strict';
+  </script>
     {{#contentFor "menu"}}
         {{> menudetail}}
     {{/contentFor}}
@@ -22,7 +25,7 @@
           {{#each allUsers}}
             <tr>
               <td>{{this._id}}</td>
-              <td><button class="btn btn-default del-btn">Delete</button></td>
+              <td><button class="btn btn-default del-btn" value={{../_id}}>Delete</button></td>
             </tr>
           {{/each}}
         </table>

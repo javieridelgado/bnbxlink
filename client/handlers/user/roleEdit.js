@@ -26,14 +26,21 @@ if (Meteor.isClient) {
   Template.roleEdit.events({
     'click .add-btn': function (event) {
       event.preventDefault();
+      console.log(this._id);
       var userName = document.getElementById('username');
-      //var actualRoles = Meteor.users.findOne({_id:userName.value}).roles;
-      //role = roles
-      Roles.setUserRoles(userName.value, this._id);
-      userName.value = "";
+      if(event.target.value !== ""){
+        var actualRoles = Meteor.users.findOne({_id:userName.value}).roles;
+        if(actualRoles.indexOf(this._id) < 0){
+          actualRoles.push(this._id);
+          Meteor.users.update({_id: userName.value}, {$set:{roles: actualRoles}});
+        }
+        userName.value = "";
+      }
     },
     'click .del-btn': function (event) {
       event.preventDefault();
+      Meteor.users.update({_id: this._id},
+        {$pull: {roles: event.target.value} });
     }
   });
 

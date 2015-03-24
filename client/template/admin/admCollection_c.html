@@ -25,6 +25,7 @@
 <template name="collectionCRUDbody">
     <fieldset id="main">
         {{> afQuickField name="name" id="collName"}}
+        {{> afQuickField name="envID" type="hidden" defaultValue=envID}}
         {{> afQuickField name="description" rows=3}}
         {{> afQuickField name="expirationTime"}}
         {{> afQuickField name="lastRefreshDttm"}} {{> afQuickField name="availableOffline"}} {{> afQuickField name="readOnly"}} {{> afQuickField name="socialEnabled"}}

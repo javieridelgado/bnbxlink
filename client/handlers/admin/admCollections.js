@@ -1,8 +1,6 @@
 var psQueriesVar;
 
 if (Meteor.isClient) {
-    //Meteor.subscribe("panels");
-
     Template.admCollectionsAll.helpers({
         collections: function () {
             return BNBLink.Collections.find({});
@@ -27,7 +25,6 @@ if (Meteor.isClient) {
         'click #updCollection': function (event) {
             event.preventDefault();
             // This functionality should search within the current data of the added panels
-            BNBLink.log('click panel ' + this._id);
             BNBLink.go("collUpdate", {
                 _id: this._id
             });
@@ -65,24 +62,30 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.collectionCRUDbody.helpers({
+        envID: function () {
+            return Session.get("currentEnvironment");
+        }
+    });
+
     Template.collectionCRUDbody.events({
 
         'change textarea[name="dataInput"]': function (event) {
-            var parseOutput = CSVParser.parse(event.target.value, true, 'tab', true, false);
+            /*var parseOutput = CSVParser.parse(event.target.value, true, 'tab', true, false);
 
             var dataGrid = parseOutput.dataGrid;
             var headerNames = parseOutput.headerNames;
             var headerTypes = parseOutput.headerTypes;
             var errors = parseOutput.errors;
 
-            var outputText = toJSON(dataGrid, headerNames, headerTypes, '  ', '\n');
+            var outputText = toJSON(dataGrid, headerNames, headerTypes, '  ', '\n');*/
 
             event.preventDefault();
-            $('#outputJSONExcel').val(outputText);
+            /*$('#outputJSONExcel').val(outputText);
 
             Meteor.call("populateCollection", "test", JSON.parse(outputText), true, function (error, results) {
                 BNBLink.log(results); //results.data should be a JSON object
-            });
+            });*/
 
         },
 

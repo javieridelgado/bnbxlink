@@ -24,10 +24,10 @@ if (Meteor.isClient) {
     });
 
     Template.panelSearch.events({
-        'click #addpanel': function (event) {
+        "click #addpanel": function (event) {
             event.preventDefault();
             // This functionality should search within the current data of the added panels
-            BNBLink.go('panelInsert');
+            BNBLink.go("panelInsert");
         }
     });
 
@@ -61,6 +61,12 @@ if (Meteor.isClient) {
         $("div#htmlSum").hide();
         //$("div#previewSum").hide();
     };
+
+    Template.panelCRUDbody.helpers({
+        envID: function () {
+            return Session.get("currentEnvironment");
+        }
+    });
 
     Template.panelCRUDbody.helpers({
         renderedHTML: function () {

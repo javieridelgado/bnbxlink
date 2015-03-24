@@ -1,15 +1,23 @@
 if (Meteor.isServer) {
     Meteor.publish("panels", function (envID) {
-        if (this.userId) {
-            return BNBLink.Panels.find({orgID: BNBLink.currentOrgID, envID: envID});
+        var userId = this.userId;
+        var user;
+
+        if (userId) {
+            user = BNBLink.utils.getUserAttributes(userId);
+            return BNBLink.Panels.find({orgID: user.orgID, envID: envID});
         } else {
             this.ready();
         }
     });
 
     Meteor.publish('collections', function (envID) {
-        if (this.userId) {
-            return BNBLink.Collections.find({orgID: BNBLink.currentOrgID, envID: envID});
+        var userId = this.userId;
+        var user;
+
+        if (userId) {
+            user = BNBLink.utils.getUserAttributes(userId);
+            return BNBLink.Collections.find({orgID: user.orgID, envID: envID});
         } else {
             this.ready();
         }
@@ -21,23 +29,34 @@ if (Meteor.isServer) {
 
     Meteor.publish('notifications', function (envID) {
         if (this.userId) {
-            return BNBLink.Notifications.find({userId: this.userId, orgID: BNBLink.currentOrgID, envID: envID});
+            return BNBLink.Notifications.find({userId: this.userId});
         } else {
             this.ready();
         }
     });
 
     Meteor.publish("organizations", function () {
-        if (this.userId) {
-            return BNBLink.Organizations.find({orgID: BNBLink.currentOrgID});
+        var userId = this.userId;
+        var user;
+
+        if (userId) {
+            user = BNBLink.utils.getUserAttributes(userId);
+            return BNBLink.Organizations.find({orgID: user.orgID});
         } else {
             this.ready();
         }
     });
 
     Meteor.publish("environments", function () {
-        if (this.userId) {
-            return BNBLink.Environments.find({orgID: BNBLink.currentOrgID});
+        var userId = this.userId;
+        var user;
+
+        if (userId) {
+            user = BNBLink.utils.getUserAttributes(userId);
+            console.log("publish environments: " + user.orgID);
+            console.log(userId);
+
+            return BNBLink.Environments.find({orgID: user.orgID});
         } else {
             this.ready();
         }
@@ -51,7 +70,7 @@ if (Meteor.isServer) {
         });
     });
 
-    Meteor.publish(null, function (){ 
+    Meteor.publish(null, function () {
         return Meteor.roles.find({})
     });
 }

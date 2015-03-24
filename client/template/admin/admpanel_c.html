@@ -3,7 +3,7 @@
         {{> menudetail}}
     {{/contentFor}}
     <div class="container">
-        {{#autoForm collection="Panels" id="admPanelForm" type="insert"}}
+        {{#autoForm collection="Panels" doc=this id="admPanelForm" type="insert"}}
             {{> panelCRUDbody}}
             <button type="submit" class="btn btn-primary">Add</button>
         {{/autoForm}}
@@ -25,6 +25,7 @@
 <template name="panelCRUDbody">
     <fieldset>
         {{> afQuickField name='name'}}
+        {{> afQuickField name="envID" type="hidden" defaultValue=envID}}
         {{> afQuickField name='description' rows=3}}
         {{> afQuickField name='panelType' type='select' options='allowed'}}
         {{> afQuickField name='availableForDashboard'}}

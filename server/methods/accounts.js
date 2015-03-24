@@ -19,16 +19,14 @@ Meteor.methods({
         if (!BNBLink.Organizations.checkOrgID(doc.orgID))
             throw new Meteor.Error("duplicateOrg", "Organization already exists.");
 
-        // exit if the email already exists
-        if (BNBLink.Users.emailExists(doc.email))
-            throw new Meteor.Error("duplicateEmail", "Email already exists.");
+        // build unique user ID
+        userId = BNBLink.utils.getUserName(doc.email,doc.orgID, "admin");
 
         // create user
         Meteor.call("createUser", {
-            email: doc.email,
+            username: userId,
             password: doc.password
         }, function (error, result) {
-            console.log("createUser callback: " + error);
             if (error)
                 return;
 

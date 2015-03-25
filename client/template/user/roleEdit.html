@@ -4,27 +4,31 @@
     {{/contentFor}}
     <div class="container">
         <form class="navbar-form">
-          <fieldset>
-              <legend>Modify role</legend>
-              <div class="form-group">
-              {{> inputAutocomplete settings=settings class="form-control" id="username" name="username" placeholder="Add user"}}
+              <legend>Edit role</legend>
+              <div class="form-group bnb-form-control bnb-form-disp">
+              {{> inputAutocomplete settings=settings class="form-control bnb-form-disp" id="username" name="username" placeholder="Add user"}}
               </div>
-              <button class="btn btn-default navbar-btn add-btn">
+              <button class="btn btn-success add-btn">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
               </button>
-          </fieldset>
         </form>
         <table class="table table-striped">
-          <tr>
-            <th>User id</th>
-            <th></th>
-          </tr>
-          {{#each allUsers}}
+          <thead>
             <tr>
-              <td>{{this._id}}</td>
-              <td><button class="btn btn-default del-btn">Delete</button></td>
+              <th class="col-md-5 col-sm-5 col-xs-9">User ID</th>
+              <th class="col-md-6 col-sm-6 hidden-xs">Email</th>
+              <th class="col-md-1 col-sm-1 col-xs-2"></th>
             </tr>
-          {{/each}}
+          </thead>
+          <tbody>
+            {{#each allUsers}}
+              <tr>
+                <td>{{this._id}}</td>
+                <td class="hidden-xs">{{this.mainEmail}}</td>
+                <td><button class="btn btn-danger del-btn" value={{../_id}}>Delete</button></td>
+              </tr>
+            {{/each}}
+          </tbody>
         </table>
     </div>
 </template>

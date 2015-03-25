@@ -1,0 +1,8 @@
+.bnb-form-disp{
+  display: inline-block;
+}
+
+.bnb-form-control{
+  display:inline-block;
+  width:auto;
+}

@@ -73,10 +73,16 @@ if (Meteor.isClient) {
             var coll, transform;
             var template;
 
+            // TODO this should be only applicable to HTML panels
             // retrieve collection and transform values. These are reactive methods, so this helper will
             // be automatically refreshed each time one of the two values changes.
-            coll = AutoForm.getFieldValue("admPanelForm", "collectionBase");
-            transform = AutoForm.getFieldValue("admPanelForm", "jsonTransformSum");
+            coll = AutoForm.getFieldValue("collectionBase");
+            if (!coll)
+                return "";
+
+            transform = AutoForm.getFieldValue("jsonTransformSum");
+            if (!transform)
+                return "";
 
             // enable collection
             BNBLink.enableCollection(coll);
@@ -87,7 +93,7 @@ if (Meteor.isClient) {
             cursor = {};
             cursor.values = BNBLink.collections[coll].find().fetch();
 
-            return template(cursor);
+                return template(cursor);
         }
     });
 

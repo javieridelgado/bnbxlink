@@ -24,13 +24,31 @@
 
 <template name="collectionCRUDbody">
     <fieldset id="main">
+        <legend>Definition</legend>
         {{> afQuickField name="name" id="collName"}}
         {{> afQuickField name="envID" type="hidden" defaultValue=envID}}
         {{> afQuickField name="description" rows=3}}
+        <!--
         {{> afQuickField name="expirationTime"}}
-        {{> afQuickField name="lastRefreshDttm"}} {{> afQuickField name="availableOffline"}} {{> afQuickField name="readOnly"}} {{> afQuickField name="socialEnabled"}}
-        {{> afQuickField name="sourceType" type="select" options="allowed"}}
+            {{> afQuickField name="lastRefreshDttm"}}
+-->
+        {{> afQuickField name="availableOffline"}}
+        {{> afQuickField name="readOnly"}}
+        {{> afQuickField name="socialEnabled"}}
+        <!--{{> afQuickField name="sourceType" type="select" options="allowed"}}-->
     </fieldset>
+    <fieldset>
+        <legend>Schema <button class="btn btn-xs btn-warning pull-right">Retrieve Schema</button></legend>
+        <div class="form-group">
+            <textarea name="schemaText" rows="3" id="schemaTextFld" class="form-control"
+                      style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 74px;"></textarea>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Statistics</legend>
+        {{> afQuickField name="lastUpdateDttm" readonly=true}}
+    </fieldset>
+    <!--
     <fieldset id="sourceExcel" class="bnbsource">
         {{> afQuickField name="dataInput" rows=3}}
         <div class="form-group">
@@ -58,4 +76,5 @@
         {{> afQuickField name="gsSheetName"}}
         {{> afQuickField name="gsRange"}}
     </fieldset>
+-->
 </template>

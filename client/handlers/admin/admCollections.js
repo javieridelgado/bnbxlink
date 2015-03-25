@@ -8,23 +8,20 @@ if (Meteor.isClient) {
     });
 
     Template.collSearch.events({
-        'click #addcollection': function (event) {
+        "click #addCollection": function (event) {
             event.preventDefault();
-            // This functionality should search within the current data of the added panels
             BNBLink.go('collInsert');
         }
     });
 
     Template.admCollectionSrch.events({
-        'click #delCollection': function (event) {
+        "click #delCollection": function (event) {
             event.preventDefault();
-            // This functionality should search within the current data of the added panels
             BNBLink.Collections.remove(this._id);
         },
 
-        'click #updCollection': function (event) {
+        "click #updCollection": function (event) {
             event.preventDefault();
-            // This functionality should search within the current data of the added panels
             BNBLink.go("collUpdate", {
                 _id: this._id
             });
@@ -37,15 +34,15 @@ if (Meteor.isClient) {
         this.$("textarea").autosize();
 
         // Hide source specific fields
-        this.$(".bnbsource").hide();
+        //this.$(".bnbsource").hide();
 
         // Retrieve source
-        sourceType = this.$('select[name="sourceType"]').val().replace(/\s+/g, '');
-        this.$('fieldset.bnbsource[id="source' + sourceType + '"]').show();
+        //sourceType = this.$('select[name="sourceType"]').val().replace(/\s+/g, '');
+        //this.$('fieldset.bnbsource[id="source' + sourceType + '"]').show();
     };
 
     Template.collUpdate.helpers({
-        psQueries: function () {
+        /*psQueries: function () {
             var result;
 
             result = [{
@@ -59,7 +56,7 @@ if (Meteor.isClient) {
             result = psQueriesVar.get();
 
             return result;
-        }
+        }*/
     });
 
     Template.collectionCRUDbody.helpers({
@@ -70,7 +67,7 @@ if (Meteor.isClient) {
 
     Template.collectionCRUDbody.events({
 
-        'change textarea[name="dataInput"]': function (event) {
+        /*'change textarea[name="dataInput"]': function (event) {*/
             /*var parseOutput = CSVParser.parse(event.target.value, true, 'tab', true, false);
 
             var dataGrid = parseOutput.dataGrid;
@@ -80,15 +77,16 @@ if (Meteor.isClient) {
 
             var outputText = toJSON(dataGrid, headerNames, headerTypes, '  ', '\n');*/
 
-            event.preventDefault();
+            /*event.preventDefault();*/
             /*$('#outputJSONExcel').val(outputText);
 
             Meteor.call("populateCollection", "test", JSON.parse(outputText), true, function (error, results) {
                 BNBLink.log(results); //results.data should be a JSON object
             });*/
 
-        },
+        /*},*/
 
+        /*
         'change select[name="sourceType"]': function (event, template) {
             template.$(".bnbsource").hide();
             template.$('fieldset.bnbsource[id="source' + event.target.value.replace(/\s+/g, '') + '"]').show();
@@ -136,6 +134,6 @@ if (Meteor.isClient) {
             Meteor.call("testCall", url, params, user, password, function (error, results) {
                 $('#outputJSONPeopleSoft').val(results);
             });
-        }
+        }*/
     });
 }

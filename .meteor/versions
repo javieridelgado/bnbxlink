@@ -63,6 +63,7 @@ momentjs:moment@2.8.4
 mongo@1.1.0
 mongo-livedata@1.0.8
 mrt:moment@2.8.1
+nimble:restivus@0.6.2
 npm-bcrypt@0.7.8_1
 observe-sequence@1.0.5
 ongoworks:google-spreadsheets@0.1.0

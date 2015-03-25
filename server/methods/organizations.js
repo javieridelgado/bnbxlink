@@ -16,8 +16,9 @@ Meteor.methods({
     isUserOrgAdmin: function(user, orgID) {
         console.log("in isUserOrgAdmin " + orgID + " user " + user);
         var org = BNBLink.Organizations.findOne({orgID: orgID});
-        if (org.administrators && org.administrators.indexOf(user) != -1)
-            return true;
+        if(typeof org !== "undefined")
+            if (org.administrators && org.administrators.indexOf(user) != -1)
+                return true;
 
         return false;
     }

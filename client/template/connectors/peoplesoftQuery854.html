@@ -1,0 +1,16 @@
+<template name="c_peoplesoftQuery854">
+    <div class="container">
+        {{#autoForm schema=c_peoplesoftQuery854Schema id="connector_peoplesoftQuery854Form"}}
+            <fieldset>
+                <legend>PS/Query 8.54 Configuration</legend>
+                {{> afQuickField name="urlRESTListeningConnector"}}
+                {{> afQuickField name="user"}}
+                {{> afQuickField type="password" name="password"}}
+                {{> afQuickField name="query"}}
+                <div>
+                    <button type="submit" class="btn btn-primary">Accept</button>
+                </div>
+            </fieldset>
+        {{/autoForm}}
+    </div>
+</template>

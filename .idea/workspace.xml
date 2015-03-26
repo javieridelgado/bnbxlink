@@ -2,19 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="feadc50a-aeb3-480c-9a2a-b15e8ff3985b" name="Default" comment=".">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/admin/admConnector_c.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/admin/admConnector_s.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/handlers/dashboards/adminDBConnectors.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/collections.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/model/connector.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/server/restapi.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/client/template/admin/admcollection_s.html" afterPath="$PROJECT_DIR$/client/template/admin/admCollection_s.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/model/collections.js" afterPath="$PROJECT_DIR$/client/model/collections.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/.finished-upgraders" afterPath="$PROJECT_DIR$/.meteor/.finished-upgraders" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/dashboards/adminDBIntegration.html" afterPath="$PROJECT_DIR$/client/template/dashboards/adminDBIntegration.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/release" afterPath="$PROJECT_DIR$/.meteor/release" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/handlers/admin/admConnectors.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/admin/admImport_c.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/admin/admImport_s.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/handlers/admin/admImports.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/model/import.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/template/connectors/peoplesoftQuery854.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/handlers/connectors/peoplesoftQuery854.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/admin/admConnector_c.html" afterPath="$PROJECT_DIR$/client/template/admin/admConnector_c.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/template/dashboards/adminDBCollections.html" afterPath="$PROJECT_DIR$/client/template/dashboards/adminDBCollections.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/handlers/dashboards/adminDBCollections.js" afterPath="$PROJECT_DIR$/client/handlers/dashboards/adminDBCollections.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bnblink.css" afterPath="$PROJECT_DIR$/bnblink.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/publish.js" afterPath="$PROJECT_DIR$/server/publish.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/router.js" afterPath="$PROJECT_DIR$/lib/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/versions" afterPath="$PROJECT_DIR$/.meteor/versions" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/model/subscriptions.js" afterPath="$PROJECT_DIR$/client/model/subscriptions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bnblink.iws" />
@@ -39,103 +40,101 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="import.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/model/import.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1545">
+              <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="connector.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/model/connector.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1590">
-              <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="1590">
+              <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admConnector_s.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/admin/admConnector_s.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="750">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admCollection_c.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/admin/admCollection_c.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.875" vertical-offset="186" max-vertical-offset="1290">
-              <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
-              <folding>
-                <element signature="n#style#0;n#textarea#0;n#div#0;n#fieldset#1;n#template#2;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admConnector_c.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/admin/admConnector_c.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="1290">
-              <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="router.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="router.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/router.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2538" max-vertical-offset="3525">
-              <caret line="198" column="22" selection-start-line="198" selection-start-column="22" selection-end-line="198" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.7315436" vertical-offset="3573" max-vertical-offset="4020">
+              <caret line="260" column="3" selection-start-line="260" selection-start-column="3" selection-end-line="260" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="adminDBIntegration.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/dashboards/adminDBIntegration.html">
+      <file leaf-file-name="admImport_s.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/template/admin/admImport_s.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="930">
-              <caret line="17" column="64" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="64" />
+            <state vertical-scroll-proportion="-9.25" vertical-offset="303" max-vertical-offset="750">
+              <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="adminDBCollections.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/handlers/dashboards/adminDBCollections.js">
+      <file leaf-file-name="admImport_c.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/template/admin/admImport_c.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
-              <caret line="7" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="-3.898734" vertical-offset="442" max-vertical-offset="990">
+              <caret line="50" column="79" selection-start-line="50" selection-start-column="79" selection-end-line="50" selection-end-column="79" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="adminDBConnectors.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/handlers/dashboards/adminDBConnectors.js">
+      <file leaf-file-name="bnblink.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bnblink.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23489933" vertical-offset="0" max-vertical-offset="447">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2403" max-vertical-offset="2850">
+              <caret line="184" column="1" selection-start-line="184" selection-start-column="1" selection-end-line="184" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="adminDBOrganization.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/dashboards/adminDBOrganization.html">
+      <file leaf-file-name="admImports.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/handlers/admin/admImports.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5416665" vertical-offset="422" max-vertical-offset="930">
-              <caret line="37" column="49" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1125" max-vertical-offset="1650">
+              <caret line="99" column="15" selection-start-line="99" selection-start-column="15" selection-end-line="99" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="adminDBCollections.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/template/dashboards/adminDBCollections.html">
+      <file leaf-file-name="peoplesoftQuery854.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/template/connectors/peoplesoftQuery854.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.125" vertical-offset="180" max-vertical-offset="1275">
-              <caret line="17" column="65" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="65" />
+            <state vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="315">
+              <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="peoplesoftQuery854.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/handlers/connectors/peoplesoftQuery854.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="subscriptions.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/model/subscriptions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="2145">
+              <caret line="48" column="7" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -149,14 +148,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/server/methods/organizations.js" />
-        <option value="$PROJECT_DIR$/client/template/common/login.html" />
-        <option value="$PROJECT_DIR$/server/packages/accounts.js" />
-        <option value="$PROJECT_DIR$/lib/model/environments.js" />
-        <option value="$PROJECT_DIR$/client/template/common/menu.html" />
-        <option value="$PROJECT_DIR$/client/handlers/common/menu.js" />
-        <option value="$PROJECT_DIR$/client/template/common/main.html" />
-        <option value="$PROJECT_DIR$/client/template/user/panelDetail.html" />
         <option value="$PROJECT_DIR$/client/template/common/layout.html" />
         <option value="$PROJECT_DIR$/client/template/admin/adminDashboard.html" />
         <option value="$PROJECT_DIR$/client/template/dashboards/sidebar.js" />
@@ -168,24 +159,20 @@
         <option value="$PROJECT_DIR$/client/template/dashboards/sidebar.html" />
         <option value="$PROJECT_DIR$/client/handlers/dashboards/sidebar.js" />
         <option value="$PROJECT_DIR$/client/handlers/common/login.js" />
-        <option value="$PROJECT_DIR$/client/handlers/dashboards/adminDBCollections.js" />
         <option value="$PROJECT_DIR$/client/handlers/dashboards/adminDBPanels.js" />
         <option value="$PROJECT_DIR$/client/template/dashboards/adminDBPanels.html" />
-        <option value="$PROJECT_DIR$/client/model/subscriptions.js" />
         <option value="$PROJECT_DIR$/client/template/common/signup.html" />
         <option value="$PROJECT_DIR$/lib/model/signup.js" />
         <option value="$PROJECT_DIR$/utils/init.js" />
         <option value="$PROJECT_DIR$/utils/security/users.js" />
         <option value="$PROJECT_DIR$/client/model/accounts.js" />
         <option value="$PROJECT_DIR$/lib/init/common.js" />
-        <option value="$PROJECT_DIR$/server/publish.js" />
         <option value="$PROJECT_DIR$/lib/utils/users.js" />
         <option value="$PROJECT_DIR$/server/methods/accounts.js" />
         <option value="$PROJECT_DIR$/lib/model/panels.js" />
         <option value="$PROJECT_DIR$/client/template/admin/admPanel_c.html" />
         <option value="$PROJECT_DIR$/client/template/admin/admpanel_c.html" />
         <option value="$PROJECT_DIR$/client/handlers/admin/admPanel.js" />
-        <option value="$PROJECT_DIR$/client/template/dashboards/adminDBCollections.html" />
         <option value="$PROJECT_DIR$/lib/model/collections.js" />
         <option value="$PROJECT_DIR$/client/template/admin/admCollection_c.html" />
         <option value="$PROJECT_DIR$/client/handlers/admin/admCollections.js" />
@@ -195,11 +182,23 @@
         <option value="$PROJECT_DIR$/server/restapi.js" />
         <option value="$PROJECT_DIR$/lib/model/connector.js" />
         <option value="$PROJECT_DIR$/client/template/admin/admCollection_s.html" />
-        <option value="$PROJECT_DIR$/client/template/admin/admConnector_c.html" />
-        <option value="$PROJECT_DIR$/lib/router.js" />
         <option value="$PROJECT_DIR$/client/template/admin/admConnector_s.html" />
         <option value="$PROJECT_DIR$/client/template/dashboards/adminDBIntegration.html" />
         <option value="$PROJECT_DIR$/client/handlers/dashboards/adminDBConnectors.js" />
+        <option value="$PROJECT_DIR$/client/handlers/admin/admConnectors.js" />
+        <option value="$PROJECT_DIR$/client/template/admin/admConnector_c.html" />
+        <option value="$PROJECT_DIR$/server/publish.js" />
+        <option value="$PROJECT_DIR$/client/model/subscriptions.js" />
+        <option value="$PROJECT_DIR$/client/handlers/dashboards/adminDBCollections.js" />
+        <option value="$PROJECT_DIR$/client/template/dashboards/adminDBCollections.html" />
+        <option value="$PROJECT_DIR$/client/template/admin/admImport_s.html" />
+        <option value="$PROJECT_DIR$/lib/model/import.js" />
+        <option value="$PROJECT_DIR$/lib/router.js" />
+        <option value="$PROJECT_DIR$/bnblink.css" />
+        <option value="$PROJECT_DIR$/client/template/admin/admImport_c.html" />
+        <option value="$PROJECT_DIR$/client/handlers/admin/admImports.js" />
+        <option value="$PROJECT_DIR$/client/template/connectors/peoplesoftQuery854.html" />
+        <option value="$PROJECT_DIR$/client/handlers/connectors/peoplesoftQuery854.js" />
       </list>
     </option>
   </component>
@@ -437,6 +436,50 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="connectors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bnblink" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bnblinkd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bnblink" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bnblinkd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="admin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -539,6 +582,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="connectors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bnblink" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bnblinkd" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="handlers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="common" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -587,7 +652,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/handlers/connectors" />
+      <recent name="$PROJECT_DIR$/client/template/connectors" />
+      <recent name="$PROJECT_DIR$/client/handlers/admin" />
       <recent name="$PROJECT_DIR$/client/template/admin" />
+      <recent name="$PROJECT_DIR$/lib/model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/client/model" />
@@ -755,7 +824,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32719547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2494043" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1604448" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1604448" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3654391" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33427763" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -823,80 +892,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/template/user/panelDetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="975">
-          <caret line="10" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/dashboards/adminDBSecurity.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="512" max-vertical-offset="930">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/common/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="210">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/dashboards/adminDashboard.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="450">
-          <caret line="6" column="46" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/utils/helpers.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/dashboards/sidebar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.625" vertical-offset="0" max-vertical-offset="435">
-          <caret line="17" column="48" selection-start-line="17" selection-start-column="48" selection-end-line="17" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/handlers/dashboards/sidebar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/methods/organizations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3" max-vertical-offset="450">
-          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/handlers/dashboards/adminDBPanels.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/template/dashboards/adminDBPanels.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.75" vertical-offset="0" max-vertical-offset="585">
           <caret line="22" column="50" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/model/subscriptions.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.888889" vertical-offset="1305" max-vertical-offset="2130">
-          <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -953,13 +952,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5700713" vertical-offset="0" max-vertical-offset="421">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/publish.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="665" max-vertical-offset="1215">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1130,40 +1122,8 @@
         <state vertical-scroll-proportion="-12.875" vertical-offset="186" max-vertical-offset="1290">
           <caret line="33" column="3" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
           <folding>
-            <element signature="n#style#0;n#textarea#0;n#div#0;n#fieldset#1;n#template#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#0;n#fieldset#1;n#template#2;n#!!top" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2538" max-vertical-offset="3525">
-          <caret line="198" column="22" selection-start-line="198" selection-start-column="22" selection-end-line="198" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/admin/admConnector_s.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="750">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/model/connector.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1590">
-          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/dashboards/adminDBCollections.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.125" vertical-offset="180" max-vertical-offset="1275">
-          <caret line="17" column="65" selection-start-line="17" selection-start-column="46" selection-end-line="17" selection-end-column="65" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1175,10 +1135,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/template/admin/admConnector_c.html">
+    <entry file="file://$PROJECT_DIR$/client/handlers/dashboards/adminDBConnectors.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="1290">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1191,18 +1151,138 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/handlers/dashboards/adminDBCollections.js">
+    <entry file="file://$PROJECT_DIR$/client/template/admin/admConnector_s.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
-          <caret line="7" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="750">
+          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/handlers/dashboards/adminDBConnectors.js">
+    <entry file="file://$PROJECT_DIR$/client/handlers/admin/admConnectors.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23489933" vertical-offset="0" max-vertical-offset="447">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="675">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/publish.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="318" max-vertical-offset="1575">
+          <caret line="37" column="9" selection-start-line="37" selection-start-column="9" selection-end-line="37" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/handlers/dashboards/adminDBCollections.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/dashboards/adminDBCollections.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.125" vertical-offset="297" max-vertical-offset="1275">
+          <caret line="44" column="22" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/admin/admConnector_c.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.125" vertical-offset="0" max-vertical-offset="615">
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/model/subscriptions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="2145">
+          <caret line="48" column="7" selection-start-line="48" selection-start-column="7" selection-end-line="48" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/admin/admImport_s.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.25" vertical-offset="303" max-vertical-offset="750">
+          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/handlers/user/panelView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53571427" vertical-offset="615" max-vertical-offset="3390">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/model/connector.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="1590">
+          <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/model/import.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1545">
+          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/admin/admImport_c.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.898734" vertical-offset="442" max-vertical-offset="990">
+          <caret line="50" column="79" selection-start-line="50" selection-start-column="79" selection-end-line="50" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bnblink.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2403" max-vertical-offset="2850">
+          <caret line="184" column="1" selection-start-line="184" selection-start-column="1" selection-end-line="184" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/handlers/admin/admImports.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1125" max-vertical-offset="1650">
+          <caret line="99" column="15" selection-start-line="99" selection-start-column="15" selection-end-line="99" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/handlers/connectors/peoplesoftQuery854.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/template/connectors/peoplesoftQuery854.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="315">
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7315436" vertical-offset="3573" max-vertical-offset="4020">
+          <caret line="260" column="3" selection-start-line="260" selection-start-column="3" selection-end-line="260" selection-end-column="3" />
           <folding />
         </state>
       </provider>

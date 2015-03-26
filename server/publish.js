@@ -23,6 +23,30 @@ if (Meteor.isServer) {
         }
     });
 
+    Meteor.publish("connectors", function (envID) {
+        var userId = this.userId;
+        var user;
+
+        if (userId) {
+            user = BNBLink.utils.getUserAttributes(userId);
+            return BNBLink.Connectors.find({orgID: user.orgID, envID: envID});
+        } else {
+            this.ready();
+        }
+    });
+
+    Meteor.publish("imports", function (envID) {
+        var userId = this.userId;
+        var user;
+
+        if (userId) {
+            user = BNBLink.utils.getUserAttributes(userId);
+            return BNBLink.Imports.find({orgID: user.orgID, envID: envID});
+        } else {
+            this.ready();
+        }
+    });
+
     Meteor.publish('comments', function () {
         return BNBLink.Comments.find({});
     });

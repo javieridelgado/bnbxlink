@@ -1,0 +1,80 @@
+<template name="connInsert">
+    {{#contentFor "menu"}}
+        {{> menudetail}}
+    {{/contentFor}}
+    <div class="container">
+        {{#autoForm connector="Connectors" doc=this id="admConnectorForm" type="insert"}}
+            {{> connectorCRUDbody}}
+            <button type="submit" class="btn btn-primary">Add</button>
+        {{/autoForm}}
+    </div>
+</template>
+
+<template name="connUpdate">
+    {{#contentFor "menu"}}
+        {{> menudetail}}
+    {{/contentFor}}
+    <div class="container">
+        {{#autoForm connector="Connectors" doc=this id="admConnectorForm" type="update"}}
+            {{> connectorCRUDbody}}
+            <button type="submit" class="btn btn-primary">Update</button>
+        {{/autoForm}}
+    </div>
+</template>
+
+<template name="connectorCRUDbody">
+    <fieldset id="main">
+        <legend>Definition</legend>
+        {{> afQuickField name="name" id="connName"}}
+        {{> afQuickField name="envID" type="hidden" defaultValue=envID}}
+        {{> afQuickField name="description" rows=3}}
+        <!--
+        {{> afQuickField name="expirationTime"}}
+            {{> afQuickField name="lastRefreshDttm"}}
+-->
+        {{> afQuickField name="availableOffline"}}
+        {{> afQuickField name="readOnly"}}
+        {{> afQuickField name="socialEnabled"}}
+        <!--{{> afQuickField name="sourceType" type="select" options="allowed"}}-->
+    </fieldset>
+    <fieldset>
+        <legend>Schema <button class="btn btn-xs btn-warning pull-right">Retrieve Schema</button></legend>
+        <div class="form-group">
+            <textarea name="schemaText" rows="3" id="schemaTextFld" class="form-control"
+                      style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 74px;"></textarea>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Statistics</legend>
+        {{> afQuickField name="lastUpdateDttm" readonly=true}}
+    </fieldset>
+    <!--
+    <fieldset id="sourceExcel" class="bnbsource">
+        {{> afQuickField name="dataInput" rows=3}}
+        <div class="form-group">
+            <label for="outputJSON">JSON Output</label>
+            <textarea rows="3" class="form-control" id="outputJSONExcel"></textarea>
+        </div>
+    </fieldset>
+    <fieldset id="sourceCSV" class="bnbsource">
+        {{> afQuickField name="dataInput" rows=3}}
+        <div class="form-group">
+            <label for="outputJSON">JSON Output</label>
+            <textarea rows="3" class="form-control" id="outputJSONCSV"></textarea>
+        </div>
+    </fieldset>
+    <fieldset id="sourcePeopleSoftQuery" class="bnbsource">
+        {{> afQuickField name="psURL" id="psURLQuery"}}
+        {{> afQuickField name="psUser" id="psUserQuery"}}
+        {{> afQuickField name="psPassword" type="password" id="psPasswordQuery"}}
+        <button type="button" class="btn btn-warning" id="psGetQueries">Get Queries</button>
+        {{> afQuickField name="psQuery" options=psQueries id="psQuery"}}
+        <textarea rows="3" class="form-control" id="outputJSONPeopleSoftQuery"></textarea>
+    </fieldset>
+    <fieldset id="sourceGoogleSheet" class="bnbsource">
+        {{> afQuickField name="gsServiceEmail"}}
+        {{> afQuickField name="gsSheetName"}}
+        {{> afQuickField name="gsRange"}}
+    </fieldset>
+-->
+</template>

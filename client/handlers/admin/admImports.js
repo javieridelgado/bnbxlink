@@ -87,14 +87,13 @@ if (Meteor.isClient) {
 
             // retrieve configuration
             importObj = BNBLink.Imports.findOne(template.data._id);
-            BNBLink.debug1 = importObj;
             if (importObj) {
                 configData = importObj.configuration;
             }
 
             // invoke config web service passing the existing config data and the callback url
             console.log(connObj.urlConfig);
-            Meteor.http.get(connObj.urlConfig, {data: configData}, function (error, result) {
+            Meteor.http.post(connObj.urlConfig, {data: configData}, function (error, result) {
                 var cfg;
 
                 if (error)
@@ -104,6 +103,7 @@ if (Meteor.isClient) {
                     return;
 
                 cfg = JSON.parse(result.content);
+                BNBLink.debug1 = cfg;
 
                 template.$("iframe").attr("src", cfg.urlView).load(function () {
                     $(this).removeClass("iframe-hide");

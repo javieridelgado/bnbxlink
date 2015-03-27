@@ -2,26 +2,28 @@ if (Meteor.isClient) {
 
     Template.cPeopleSoftQuery854.helpers({
         c_peoplesoftQuery854Schema: function () {
-            BNBLink.debug1 = this;
             return new SimpleSchema({
                 urlRESTListeningConnector: {
                     type: String,
                     label: "REST Listening Connector URL",
                     max: 50,
-                    defaultValue: "hola"
+                    defaultValue: this.urlRESTListeningConnector
                 },
                 user: {
                     type: String,
-                    label: "User"
+                    label: "User",
+                    defaultValue: this.user
                 },
                 password: {
                     type: String,
-                    label: "Password"
+                    label: "Password",
+                    defaultValue: this.password
                 },
                 query: {
                     type: String,
                     label: "Query",
-                    max: 50 /*,
+                    max: 50,
+                    defaultValue: this.query /*,
                      custom: function () {
                      if (this.value !== this.field("password").value) {
                      return "passwordMismatch";

@@ -222,15 +222,17 @@ if (Meteor.isServer) {
         // Maps to: /api/connector/config/psQuery854
         // TODO: separate them into different programs
         Restivus.addRoute("connector/config/psQuery854", {authRequired: false}, {
-            get: function () {
+            post: function () {
                 var configData, urlData, id;
 
                 BNBLink.debug1 = this;
                 configData = this.bodyParams;
+                console.log(JSON.stringify(configData));
                 urlData = "";
                 if (configData) {
                     urlData = "?" + BNBLink.utils.objectToHash(configData);
                 }
+                console.log(urlData);
 
                 return {status: "success", urlView: "http://localhost:3000/connector/view/psQuery854" + urlData};
             }

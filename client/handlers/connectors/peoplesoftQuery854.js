@@ -2,11 +2,13 @@ if (Meteor.isClient) {
 
     Template.cPeopleSoftQuery854.helpers({
         c_peoplesoftQuery854Schema: function () {
+            BNBLink.debug1 = this;
             return new SimpleSchema({
                 urlRESTListeningConnector: {
                     type: String,
                     label: "REST Listening Connector URL",
-                    max: 50
+                    max: 50,
+                    defaultValue: "hola"
                 },
                 user: {
                     type: String,

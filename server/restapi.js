@@ -4,8 +4,7 @@ if (Meteor.isServer) {
 
         // Global configuration
         Restivus.configure({
-            useAuth: false,      // TODO let's disable authentication for testing purposes
-            prettyJson: true
+            useAuth: false     // TODO let's disable authentication for testing purposes
         });
 
         // Maps to: /api/rest/:org/:env/:coll/:id
@@ -202,27 +201,12 @@ if (Meteor.isServer) {
                 var impObj;
                 var count;
 
-                console.log("got into the REST api");
                 data = this.bodyParams;
                 id = this.urlParams.id;
 
-                console.log(data.user);
-                console.log("calling!");
-                BNBLink.debug1 = JSON.stringify(data);
-                console.log(data);
-
                 // update connector
-                impObj = BNBLink.Imports.findOne({_id: id});
-                if (!impObj) {
-                    return {
-                        statusCode: 404,
-                        body: {status: "fail", message: "Invalid REST service locator"}
-                    };
-                }
-                impObj.configuration = data;
-                count = BNBLink.Imports.update({_id: id}, impObj);
+                count = BNBLink.Imports.update({_id: id}, {$set: {configuration: data}});
 
-                console.log("updated configuration: " + count);
                 if (!count) {
                     return {
                         statusCode: 404,
@@ -233,5 +217,24 @@ if (Meteor.isServer) {
                 return {status: "success", data: data};
             }
         });
+
+        // Internal connectors
+        // Maps to: /api/connector/config/psQuery854
+        // TODO: separate them into different programs
+        Restivus.addRoute("connector/config/psQuery854", {authRequired: false}, {
+            get: function () {
+                var configData, urlData, id;
+
+                BNBLink.debug1 = this;
+                configData = this.bodyParams;
+                urlData = "";
+                if (configData) {
+                    urlData = "?" + BNBLink.utils.objectToHash(configData);
+                }
+
+                return {status: "success", urlView: "http://localhost:3000/connector/view/psQuery854" + urlData};
+            }
+        });
+
     });
 }

@@ -77,7 +77,7 @@ if (Meteor.isClient) {
 
     Template.importCRUDbody.events({
         "show.bs.modal #configModal": function (event, template) {
-            var connObj, connID;
+            var connObj, connID, importObj;
             var configData;
             var loaded;
 
@@ -85,20 +85,30 @@ if (Meteor.isClient) {
             connID = AutoForm.getFieldValue("connectorID");
             connObj = BNBLink.Connectors.findOne(connID);
 
-            // initialize configuration
-            configData = this.configuration || {};
+            // retrieve configuration
+            importObj = BNBLink.Imports.findOne(template.data._id);
+            BNBLink.debug1 = importObj;
+            if (importObj) {
+                configData = importObj.configuration;
+            }
 
             // invoke config web service passing the existing config data and the callback url
+            console.log(connObj.urlConfig);
             Meteor.http.get(connObj.urlConfig, {data: configData}, function (error, result) {
+                var cfg;
+
                 if (error)
                     return;
 
-                if (result) {
-                    template.$("iframe").attr("src", "http://localhost:3000/connector/view/psQuery854/dd").load(function() {
-                        $(this).removeClass("iframe-hide");
-                        template.iFrameLoaded.set(true);
-                        });
-                }
+                if (!result || !result.content)
+                    return;
+
+                cfg = JSON.parse(result.content);
+
+                template.$("iframe").attr("src", cfg.urlView).load(function () {
+                    $(this).removeClass("iframe-hide");
+                    template.iFrameLoaded.set(true);
+                });
             });
         }
     });

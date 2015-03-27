@@ -94,8 +94,10 @@ if (Meteor.isClient) {
                     return;
 
                 if (result) {
-                    template.$("iframe").attr("src", result).removeClass("iframe-hide");
-                    template.iFrameLoaded.set(true);
+                    template.$("iframe").attr("src", "http://localhost:3000/connector/view/psQuery854/dd").load(function() {
+                        $(this).removeClass("iframe-hide");
+                        template.iFrameLoaded.set(true);
+                        });
                 }
             });
         }

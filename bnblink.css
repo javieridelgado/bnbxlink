@@ -177,7 +177,9 @@ label.bnbminilabel {
 
 
 /* iframes */
-.iframe-display {
+
+iframe {
+    width: 100%;
 }
 
 .iframe-hide {

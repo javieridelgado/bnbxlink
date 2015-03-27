@@ -194,5 +194,44 @@ if (Meteor.isServer) {
             }
         });
 
+        // Maps to: /api/int/:org/:env/:coll/:id
+        // Import configuration update
+        Restivus.addRoute("int/importCfg/:id", {authRequired: false}, {
+            put: function () {
+                var id, data;
+                var impObj;
+                var count;
+
+                console.log("got into the REST api");
+                data = this.bodyParams;
+                id = this.urlParams.id;
+
+                console.log(data.user);
+                console.log("calling!");
+                BNBLink.debug1 = JSON.stringify(data);
+                console.log(data);
+
+                // update connector
+                impObj = BNBLink.Imports.findOne({_id: id});
+                if (!impObj) {
+                    return {
+                        statusCode: 404,
+                        body: {status: "fail", message: "Invalid REST service locator"}
+                    };
+                }
+                impObj.configuration = data;
+                count = BNBLink.Imports.update({_id: id}, impObj);
+
+                console.log("updated configuration: " + count);
+                if (!count) {
+                    return {
+                        statusCode: 404,
+                        body: {status: "fail", message: "Invalid REST service locator"}
+                    };
+                }
+
+                return {status: "success", data: data};
+            }
+        });
     });
 }

@@ -48,7 +48,7 @@ if (Meteor.isClient) {
 
             // retrieve the current form data
             data = {};
-            formArray = $("form.bnbform").serializeArray();
+            formArray = template.$("form.bnbform").serializeArray();
             formArray.forEach(function(item) {
                 data[item.name] = item.value;
             });

@@ -79,7 +79,7 @@ if (Meteor.isClient) {
         "show.bs.modal #configModal": function (event, template) {
             var connObj, connID, importObj;
             var configData;
-            var loaded;
+            var url;
 
             // retrieve connector information
             connID = AutoForm.getFieldValue("connectorID");
@@ -88,13 +88,14 @@ if (Meteor.isClient) {
             // retrieve configuration
             importObj = BNBLink.Imports.findOne(template.data._id);
             if (importObj) {
-                configData = importObj.configuration;
+                configData = importObj.configuration || {};
+                configData.connectorID = importObj._id;
             }
 
             // invoke config web service passing the existing config data and the callback url
-            console.log(connObj.urlConfig);
             Meteor.http.post(connObj.urlConfig, {data: configData}, function (error, result) {
                 var cfg;
+                var $iframe;
 
                 if (error)
                     return;
@@ -103,10 +104,14 @@ if (Meteor.isClient) {
                     return;
 
                 cfg = JSON.parse(result.content);
-                BNBLink.debug1 = cfg;
 
-                template.$("iframe").attr("src", cfg.urlView).load(function () {
-                    $(this).removeClass("iframe-hide");
+                $iframe = template.$("iframe");
+                $iframe.attr("src", cfg.urlView);
+                if (cfg.modalHeight)
+                    $iframe.attr("height", cfg.modalHeight);
+
+                $iframe.load(function () {
+                    $iframe.removeClass("iframe-hide");
                     template.iFrameLoaded.set(true);
                 });
             });

@@ -1,6 +1,6 @@
 Meteor.methods({
     pullAllSteps: function () {
-        var Steps = new Mongo.Collection("gdrivetest")
+/*        var Steps = new Mongo.Collection("gdrivetest")
         var spreadsheetName = "PSoft - Pipeline 2015 - BNBLink";
         var serviceEmail = '339090873438-nmtkgs3lrehnkmht22c4h9vrlah3v53s@developer.gserviceaccount.com';
 
@@ -26,7 +26,7 @@ Meteor.methods({
             if (+rowNum > 1) {
                 Steps.insert(doc);
             }
-        });
+        });*/
     },
 
     psrDemo: function () {

@@ -1,40 +1,41 @@
 if (Meteor.isClient) {
 
-    Template.cPeopleSoftQuery854.helpers({
-        c_peoplesoftQuery854Schema: function () {
+    Template.cGoogleSheets.helpers({
+        c_googleSheetsSchema: function () {
             return new SimpleSchema({
-                urlRESTListeningConnector: {
+                spreadsheetName: {
                     type: String,
-                    label: "REST Listening Connector URL",
+                    label: "Spreadsheet Name",
+                    max: 200,
+                    defaultValue: this.spreadsheetName
+                },
+                serviceEmail: {
+                    type: String,
+                    label: "Service Email",
+                    max: 200,
+                    defaultValue: this.serviceEmail
+                },
+                worksheetId: {
+                    type: String,
+                    label: "Worksheet ID",
+                    defaultValue: this.worksheetId
+                },
+                range: {
+                    type: String,
+                    label: "Range",
                     max: 50,
-                    defaultValue: this.urlRESTListeningConnector
+                    defaultValue: this.range
                 },
-                user: {
-                    type: String,
-                    label: "User",
-                    defaultValue: this.user
-                },
-                password: {
-                    type: String,
-                    label: "Password",
-                    defaultValue: this.password
-                },
-                query: {
-                    type: String,
-                    label: "Query",
-                    max: 50,
-                    defaultValue: this.query /*,
-                     custom: function () {
-                     if (this.value !== this.field("password").value) {
-                     return "passwordMismatch";
-                     }
-                     }*/
+                containsHeader: {
+                    type: Boolean,
+                    label: "Contains Header",
+                    defaultValue: this.containsHeader
                 }
             });
         }
     });
 
-    Template.cPeopleSoftQuery854.events({
+    Template.cGoogleSheets.events({
         "submit form": function (event, template) {
             var a, o;
 

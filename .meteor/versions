@@ -66,7 +66,6 @@ mrt:moment@2.8.1
 nimble:restivus@0.6.2
 npm-bcrypt@0.7.8_1
 observe-sequence@1.0.5
-ongoworks:google-spreadsheets@0.1.0
 ordered-dict@1.0.3
 peerlibrary:blocking@0.5.2
 peerlibrary:xml2js@0.4.5_2

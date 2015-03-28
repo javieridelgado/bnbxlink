@@ -1,0 +1,16 @@
+<template name="cGoogleSheets">
+    <div class="container">
+        {{#autoForm schema=c_googleSheetsSchema id="connector_googleSheetsForm"}}
+            <fieldset>
+                {{> afQuickField name="spreadsheetName"}}
+                {{> afQuickField name="serviceEmail"}}
+                {{> afQuickField name="worksheetId"}}
+                {{> afQuickField name="range"}}
+                {{> afQuickField name="containsHeader"}}
+                <div>
+                    <button type="submit" class="btn btn-primary">Accept</button>
+                </div>
+            </fieldset>
+        {{/autoForm}}
+    </div>
+</template>

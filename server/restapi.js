@@ -204,6 +204,8 @@ if (Meteor.isServer) {
                 data = this.bodyParams;
                 id = this.urlParams.id;
 
+                console.log("updating connector " + id);
+
                 // update connector
                 count = BNBLink.Imports.update({_id: id}, {$set: {configuration: data}});
 
@@ -223,18 +225,66 @@ if (Meteor.isServer) {
         // TODO: separate them into different programs
         Restivus.addRoute("connector/config/psQuery854", {authRequired: false}, {
             post: function () {
-                var configData, urlData, id;
+                var configData, urlData;
 
-                BNBLink.debug1 = this;
                 configData = this.bodyParams;
-                console.log(JSON.stringify(configData));
                 urlData = "";
                 if (configData) {
                     urlData = "?" + BNBLink.utils.objectToHash(configData);
                 }
-                console.log(urlData);
 
-                return {status: "success", urlView: "http://localhost:3000/connector/view/psQuery854" + urlData};
+                return {status: "success", urlView: "http://localhost:3000/connector/view/psQuery854" + urlData, modalHeight: 380};
+            }
+        });
+
+        // Maps to: /api/connector/config/googleSheets
+        // TODO: separate them into different programs
+        Restivus.addRoute("connector/config/googleSheets", {authRequired: false}, {
+            post: function () {
+                var configData, urlData;
+
+                configData = this.bodyParams;
+                urlData = "";
+                if (configData) {
+                    urlData = "?" + BNBLink.utils.objectToHash(configData);
+                }
+
+                return {status: "success", urlView: "http://localhost:3000/connector/view/googleSheets" + urlData};
+            }
+        });
+
+        // Maps to: /api/connector/config/googleSheets
+        // TODO: separate them into different programs
+        Restivus.addRoute("connector/import/googleSheets", {authRequired: false}, {
+            post: function () {
+                var configData, urlCallback;
+
+                // obtain configuration
+                configData = this.bodyParams;
+
+                var result = Meteor.call("spreadsheet/fetch2", configData.spreadsheetName, configData.worksheetId, {email: configData.serviceEmail});
+
+                // Gather property names
+                var propNames = {};
+                _.each(result.rows, function (rowCells, rowNum) {
+                    var doc = {};
+                    _.each(rowCells, function (val, colNum) {
+                        if (+rowNum === 1) {
+                            propNames[colNum] = val;
+                        } else {
+                            var propName = propNames[colNum];
+                            if (propName) {
+                                doc[propName] = val;
+                            }
+                        }
+                    });
+                    if (+rowNum > 1) {
+                        Steps.insert(doc);
+                    }
+                });
+
+
+                return {status: "success", urlView: "http://localhost:3000/connector/view/googleSheets" + urlData};
             }
         });
 

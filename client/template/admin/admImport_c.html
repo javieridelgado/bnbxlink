@@ -3,7 +3,7 @@
         {{> menudetail}}
     {{/contentFor}}
     <div class="container">
-        {{#autoForm collection="Imports" doc=this id="admImportForm" type="insert"}}
+        {{#autoForm collection="Imports" id="admImportForm" type="insert"}}
             {{> importCRUDbody}}
             <button type="submit" class="btn btn-primary">Add</button>
         {{/autoForm}}

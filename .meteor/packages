@@ -10,11 +10,9 @@ matteodem:easy-search
 sacha:spin
 aldeed:autoform
 aldeed:collection2
-ground:db
 http
 peerlibrary:xml2js
 miro:json2html
-maazalik:highcharts
 copleykj:jquery-autosize
 reactive-var
 email
@@ -28,3 +26,4 @@ accounts-password
 alanning:roles
 mizzao:autocomplete
 nimble:restivus
+jidelgado:edit-google-sheets

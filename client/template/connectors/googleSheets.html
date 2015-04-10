@@ -2,9 +2,17 @@
     <div class="container">
         {{#autoForm schema=c_googleSheetsSchema id="connector_googleSheetsForm"}}
             <fieldset>
+                {{> afQuickField name="authenticationMethod"}}
+                {{#if afFieldValueIs name="authenticationMethod" value="user"}}
+                    {{> afQuickField name="userEmail"}}
+                    {{> afQuickField type="password" name="userPassword"}}
+                {{/if}}
+                {{#if afFieldValueIs name="authenticationMethod" value="service"}}
+                    {{> afQuickField name="serviceEmail"}}
+                    {{> afQuickField name="pemFile"}}
+                {{/if}}
                 {{> afQuickField name="spreadsheetName"}}
-                {{> afQuickField name="serviceEmail"}}
-                {{> afQuickField name="worksheetId"}}
+                {{> afQuickField name="worksheetName"}}
                 {{> afQuickField name="range"}}
                 {{> afQuickField name="containsHeader"}}
                 <div>

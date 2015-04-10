@@ -21,7 +21,7 @@ if (Meteor.isServer) {
 
                 return {
                     status: "success",
-                    urlView: "http://localhost:5000/connector/view/psQuery854" + urlData,
+                    urlView: process.env.ROOT_URL + "/connector/view/psQuery854" + urlData,
                     modalHeight: 330
                 };
             }
@@ -40,7 +40,7 @@ if (Meteor.isServer) {
 
                 return {
                     status: "success",
-                    urlView: "http://localhost:5000/connector/view/googleSheets" + urlData,
+                    urlView: process.env.ROOT_URL + "/connector/view/googleSheets" + urlData,
                     modalHeight: 513
                 };
             }

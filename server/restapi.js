@@ -12,6 +12,10 @@ if (Meteor.isServer) {
         Restivus.addRoute("connector/config/psQuery854", {authRequired: false}, {
             post: function () {
                 var configData, urlData;
+                var rootURL = process.env.ROOT_URL;
+
+                if (rootURL.charAt(rootURL.length - 1) == "/")
+                    rootURL = rootURL.substring(0, rootURL.length - 1);
 
                 configData = this.bodyParams;
                 urlData = "";
@@ -21,7 +25,7 @@ if (Meteor.isServer) {
 
                 return {
                     status: "success",
-                    urlView: process.env.ROOT_URL + "/connector/view/psQuery854" + urlData,
+                    urlView: rootURL + "/connector/view/psQuery854" + urlData,
                     modalHeight: 330
                 };
             }
@@ -31,6 +35,10 @@ if (Meteor.isServer) {
         Restivus.addRoute("connector/config/googleSheets", {authRequired: false}, {
             post: function () {
                 var configData, urlData;
+                var rootURL = process.env.ROOT_URL;
+
+                if (rootURL.charAt(rootURL.length - 1) == "/")
+                    rootURL = rootURL.substring(0, rootURL.length - 1);
 
                 configData = this.bodyParams;
                 urlData = "";
@@ -40,7 +48,7 @@ if (Meteor.isServer) {
 
                 return {
                     status: "success",
-                    urlView: process.env.ROOT_URL + "/connector/view/googleSheets" + urlData,
+                    urlView: rootURL + "/connector/view/googleSheets" + urlData,
                     modalHeight: 513
                 };
             }
@@ -54,7 +62,7 @@ if (Meteor.isServer) {
                 var columns = {};
                 var configData, spreadsheet;
                 var options;
-                var err;
+                var firstRow;
 
                 // obtain configuration
                 configData = this.bodyParams;
@@ -70,21 +78,29 @@ if (Meteor.isServer) {
                 // read spreadsheet
                 if (spreadsheet) {
                     options = {};
+                    firstRow = 1;
                     if (configData.range) {
                         options.params = GoogleSheet.convertRangeToParams(configData.range);
+                        firstRow = options.params["min-row"];
                     }
+
+                    // convert firstRow to char
+                    firstRow = firstRow.toString();
 
                     rows = spreadsheet.receiveSync(options);
 
                     // retrieve headers
-                    if (configData.containsHeader && rows["1"]) {
-                        columns = rows["1"];
+                    console.log("configData: " + JSON.stringify(configData));
+                    console.log("par1: " + configData.containsHeader);
+                    console.log("par2: " + rows[firstRow]);
+                    if (configData.containsHeader && rows[firstRow]) {
+                        columns = rows[firstRow];
                     }
 
                     _.each(rows, function (value, key) {
                         var item = {};
 
-                        if (configData.containsHeader && key == "1")
+                        if (configData.containsHeader && key == firstRow)
                             return;
 
                         _.each(value, function (v, k) {
